@@ -1,0 +1,37 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getMeetings } from "../../lib/data";
+
+export function getStaticPaths() {
+  return getMeetings().map((m) => ({ params: { id: m.id }, props: { meeting: m } }));
+}
+
+const { meeting } = Astro.props;
+---
+<Base title={`Meeting — ${meeting.date}`}>
+  <h1>{meeting.date}</h1>
+  <p>
+    {meeting.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
+    <span class={`tag tag-${meeting.status}`}>{meeting.status}</span>
+  </p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Agenda</h2>
+    {meeting.agenda.length > 0 ? (
+      <ul class="agenda">
+        {meeting.agenda.map((item: string) => <li>{item}</li>)}
+      </ul>
+    ) : (
+      <p class="notice">No agenda items entered yet.</p>
+    )}
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Minutes</h2>
+    {meeting.hasMinutes ? (
+      <p>Minutes recorded — kept in the private, not-publicly-committed file for this meeting.</p>
+    ) : (
+      <p class="notice">No minutes recorded yet.</p>
+    )}
+  </div>
+</Base>

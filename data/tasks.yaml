@@ -1,0 +1,16 @@
+tasks:
+  - id: 1
+    title: Fill in tonight's (2026-07-28) meeting agenda from Brady's notes/documents
+    notes: Placeholder created 2026-07-28 — Brady is sending over existing notes/documents to populate this.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 2
+    title: Upload HOA irrigation system zone/controller map (4 controllers) and link to sprinkler-system tracking in home-log
+    notes: Referenced from home-log's sprinkler-system item — see that repo's data/items/sprinkler-system/tasks.yaml.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 3
+    title: Fill in real contract, expense, and budget data
+    notes: Site scaffolded 2026-07-28 with no real financial data yet — everything is a placeholder until Brady provides actual figures/vendor details for data/private/*.yaml.
+    status: open
+    createdDate: '2026-07-28'

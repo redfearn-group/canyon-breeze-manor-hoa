@@ -1,0 +1,3 @@
+# Public metadata only — dollar amounts and vendor names live in
+# data/private/expenses.yaml, which is gitignored.
+expenses: []

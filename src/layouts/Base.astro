@@ -1,0 +1,47 @@
+---
+import "../styles/main.css";
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+
+const withBase = (p: string) => `${import.meta.env.BASE_URL}${p}`.replace(/\/+/g, "/");
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isDashboard = currentPath === (withBase("/").replace(/\/$/, "") || "/");
+const isMeetings = currentPath.startsWith(withBase("/meetings").replace(/\/$/, ""));
+const isContracts = currentPath.startsWith(withBase("/contracts").replace(/\/$/, ""));
+const isExpenses = currentPath.startsWith(withBase("/expenses").replace(/\/$/, ""));
+const isBudget = currentPath.startsWith(withBase("/budget").replace(/\/$/, ""));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} · Canyon Breeze Manor HOA</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="site-brand" href={withBase("/")}>
+          Canyon Breeze Manor
+          <small>HOA board tracker</small>
+        </a>
+        <nav class="site-nav">
+          <a href={withBase("/")} aria-current={isDashboard ? "page" : undefined}>Dashboard</a>
+          <a href={withBase("/meetings")} aria-current={isMeetings ? "page" : undefined}>Meetings</a>
+          <a href={withBase("/contracts")} aria-current={isContracts ? "page" : undefined}>Contracts</a>
+          <a href={withBase("/expenses")} aria-current={isExpenses ? "page" : undefined}>Expenses</a>
+          <a href={withBase("/budget")} aria-current={isBudget ? "page" : undefined}>Budget</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      Internal HOA board tracker — financial figures, vendor terms, and meeting minutes are kept in a private, not-publicly-committed file.
+    </footer>
+  </body>
+</html>

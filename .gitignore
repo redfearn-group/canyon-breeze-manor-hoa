@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+
+# Financial figures, vendor names/rates, contract terms, and meeting
+# minutes live here instead of the public data/ files. See CLAUDE.md.
+data/private/

@@ -1,0 +1,13 @@
+# Public metadata only. Full minutes text (and any agenda notes that name
+# a specific resident, unit, or dispute) live in data/private/meetings.yaml,
+# which is gitignored — see CLAUDE.md.
+#
+# Monthly board meetings, plus one annual all-homeowner meeting each April,
+# per Brady.
+meetings:
+  - id: 2026-07-28-board
+    date: '2026-07-28'
+    type: monthly-board
+    status: upcoming
+    agenda: []
+    hasMinutes: false

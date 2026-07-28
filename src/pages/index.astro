@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import { getMeetings, getUpcomingMeeting, getContracts, getTasks } from "../lib/data";
+import { withBase } from "../lib/base";
+
+const upcoming = getUpcomingMeeting();
+const meetings = getMeetings();
+const contracts = getContracts();
+const openTasks = getTasks().filter((t) => t.status === "open");
+
+const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
+---
+<Base title="Dashboard">
+  <h1>Canyon Breeze Manor HOA</h1>
+  <p>Board tracker — meetings, contracts, expenses, and budget.</p>
+
+  {upcoming && (
+    <div class="card">
+      <h2 style="margin-top:0">Next meeting</h2>
+      <p>
+        <strong>{upcoming.date}</strong> — {upcoming.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
+        <span class={`tag tag-${upcoming.status}`}>{upcoming.status}</span>
+      </p>
+      {upcoming.agenda.length > 0 ? (
+        <ul class="agenda">
+          {upcoming.agenda.map((item) => <li>{item}</li>)}
+        </ul>
+      ) : (
+        <p class="notice">No agenda items entered yet.</p>
+      )}
+      <p><a href={withBase(`/meetings/${upcoming.id}`)}>Full meeting page →</a></p>
+    </div>
+  )}
+
+  {renewalsSoon.length > 0 && (
+    <div class="card">
+      <h2 style="margin-top:0">Contracts up for renewal</h2>
+      <table>
+        <thead><tr><th>Contract</th><th>Category</th><th>Renewal date</th></tr></thead>
+        <tbody>
+          {renewalsSoon.map((c) => (
+            <tr><td>{c.name}</td><td>{c.category}</td><td>{c.renewalDate ?? "—"}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <div class="card">
+    <h2 style="margin-top:0">Open tasks</h2>
+    {openTasks.length > 0 ? (
+      <ul>
+        {openTasks.map((t) => <li>{t.title}</li>)}
+      </ul>
+    ) : <p>Nothing open.</p>}
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">All meetings</h2>
+    <table>
+      <thead><tr><th>Date</th><th>Type</th><th>Status</th></tr></thead>
+      <tbody>
+        {meetings.map((m) => (
+          <tr>
+            <td><a href={withBase(`/meetings/${m.id}`)}>{m.date}</a></td>
+            <td>{m.type === "annual-homeowners" ? "Annual (all homeowners)" : "Monthly board"}</td>
+            <td><span class={`tag tag-${m.status}`}>{m.status}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

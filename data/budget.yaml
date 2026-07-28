@@ -1,0 +1,3 @@
+# Public: fiscal year + category names only. Dollar figures (budgeted vs.
+# actual) live in data/private/budget.yaml, which is gitignored.
+budgets: []

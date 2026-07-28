@@ -1,0 +1,26 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getContracts } from "../../lib/data";
+
+const contracts = getContracts();
+---
+<Base title="Contracts">
+  <h1>Service contracts</h1>
+  <p>Public status/renewal metadata only. Vendor names, rates, and contract terms are kept in the private, not-publicly-committed file.</p>
+  {contracts.length > 0 ? (
+    <table>
+      <thead><tr><th>Contract</th><th>Category</th><th>Status</th><th>Renewal date</th><th>Notice required</th></tr></thead>
+      <tbody>
+        {contracts.map((c) => (
+          <tr>
+            <td>{c.name}</td>
+            <td>{c.category}</td>
+            <td><span class={`tag tag-${c.status}`}>{c.status}</span></td>
+            <td>{c.renewalDate ?? "—"}</td>
+            <td>{c.noticeRequiredDays ? `${c.noticeRequiredDays} days` : "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ) : <p class="notice">No contracts on file yet.</p>}
+</Base>

@@ -1,0 +1,3 @@
+# Public metadata only — vendor names, dollar amounts, and contract terms
+# live in data/private/contracts.yaml, which is gitignored.
+contracts: []
