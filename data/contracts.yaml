@@ -1,3 +1,23 @@
 # Public metadata only — vendor names, dollar amounts, and contract terms
 # live in data/private/contracts.yaml, which is gitignored.
-contracts: []
+contracts:
+  - slug: property-management-tpm
+    name: Property management
+    category: Property management
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+  - slug: landscaping-cutters
+    name: Landscaping & lawn care
+    category: Landscaping
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: Seasonal, Mar-Nov
+  - slug: snow-removal-redfearn-group
+    name: Snow removal
+    category: Snow removal
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: Seasonal, Dec-Feb. Related-party vendor relationship — see board disclosure note.

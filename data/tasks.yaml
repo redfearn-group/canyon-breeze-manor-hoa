@@ -11,6 +11,39 @@ tasks:
     createdDate: '2026-07-28'
   - id: 3
     title: Fill in real contract, expense, and budget data
-    notes: Site scaffolded 2026-07-28 with no real financial data yet — everything is a placeholder until Brady provides actual figures/vendor details for data/private/*.yaml.
+    notes: >-
+      Site scaffolded 2026-07-28 with no real financial data yet.
+      PARTIALLY RESOLVED 2026-07-28: read CC&Rs, PUD plat, and 4
+      invoices/estimates from R:\My Drive\HOA — populated contracts
+      (TPM property management, Cutters landscaping, Redfearn Group snow
+      removal) and 3 expense entries (2 invoices + 1 estimate, all
+      Redfearn Group). Budget still has nothing — no annual budget
+      document found yet, only the $90/mo dues figure mentioned in
+      HOA Notes.txt (implies ~$37,800/yr total across the association).
+    status: open
+    createdDate: '2026-07-28'
+  - id: 4
+    title: Document board disclosure/vote for the Redfearn Group snow-removal and tree-work invoices
+    notes: >-
+      Added 2026-07-28 — Brady's own business (Redfearn Group) is billing
+      the HOA (via TPM) for snow removal and tree work (Estimate #180,
+      Invoices #181/#182). This is a related-party transaction since
+      Brady is HOA president. Not necessarily improper, but should be
+      documented as disclosed and approved in board minutes rather than
+      billed as routine vendor work, to avoid it looking irregular later.
+      No such disclosure found in the notes/minutes read so far.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 5
+    title: Get the .gdoc files' real content (Minutes, Cover Memo, policy drafts)
+    notes: >-
+      Added 2026-07-28 — R:\My Drive\HOA has several Google Docs
+      shortcuts (Canyon Breeze Manor HOA Minutes.gdoc, Cover Memo to HOA
+      Board.gdoc, Exterior Alterations & Landscaping Policy Memo.gdoc,
+      Fence & Exterior Structure Policy Memo.gdoc, draft Community
+      Cleanup Notice.gdoc, Draft Document 1_ Community Cleanliness &
+      Outdoor Storage.gdoc) that can't be read directly — Google Drive
+      streams them, they're not real local files. Brady needs to export/
+      paste the content in, or share the Drive links directly.
     status: open
     createdDate: '2026-07-28'
