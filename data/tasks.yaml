@@ -28,12 +28,18 @@ tasks:
       Added 2026-07-28 — Brady's own business (Redfearn Group) is billing
       the HOA (via TPM) for snow removal and tree work (Estimate #180,
       Invoices #181/#182). This is a related-party transaction since
-      Brady is HOA president. Not necessarily improper, but should be
-      documented as disclosed and approved in board minutes rather than
-      billed as routine vendor work, to avoid it looking irregular later.
-      No such disclosure found in the notes/minutes read so far.
-    status: open
+      Brady is HOA president.
+
+      RESOLVED 2026-07-28, per Brady: confirmed directly with Corey at
+      TPM — the conflict-of-interest rule is that Brady cannot be the one
+      approving invoices or requesting the work himself. As long as
+      someone else at TPM/the board approves and requests it, the
+      arrangement is fine. No further board-minutes disclosure required
+      beyond that. Still worth confirming, next time work is requested,
+      that Brady is not the one initiating or approving it.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
   - id: 5
     title: Get the .gdoc files' real content (Minutes, Cover Memo, policy drafts)
     notes: >-
