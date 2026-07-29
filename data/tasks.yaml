@@ -272,3 +272,8 @@ tasks:
       was ever formally fixed.
     status: open
     createdDate: '2026-07-28'
+  - id: 21
+    title: Get minutes from the 2026-07-28 board meeting
+    notes: Meeting was held per Brady (2026-07-29 check-in), but minutes aren't available yet — likely from Craig, same pattern as prior meetings. Update data/meetings.yaml's 2026-07-28-board entry and data/private/meeting-minutes.yaml once received.
+    status: open
+    createdDate: '2026-07-29'

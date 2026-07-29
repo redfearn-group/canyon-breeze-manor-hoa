@@ -109,7 +109,7 @@ meetings:
   - id: 2026-07-28-board
     date: '2026-07-28'
     type: monthly-board
-    status: upcoming
+    status: held
     agenda:
       - Finances
       - Lawn watering
@@ -118,3 +118,4 @@ meetings:
       - Next set of rules to clarify
       - Dog waste enforcement follow-up (see private notes)
     hasMinutes: false
+    notes: Meeting held 2026-07-28 — minutes not yet available.
