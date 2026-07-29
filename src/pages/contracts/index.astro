@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getContracts } from "../../lib/data";
+import { statusTagClass } from "../../lib/status-tag";
 
 const contracts = getContracts();
 ---
@@ -15,7 +16,7 @@ const contracts = getContracts();
           <tr>
             <td>{c.name}</td>
             <td>{c.category}</td>
-            <td><span class={`tag tag-${c.status}`}>{c.status}</span></td>
+            <td><span class={`tag ${statusTagClass(c.status)}`}>{c.status}</span></td>
             <td>{c.renewalDate ?? "—"}</td>
             <td>{c.noticeRequiredDays ? `${c.noticeRequiredDays} days` : "—"}</td>
           </tr>

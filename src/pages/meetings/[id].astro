@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getMeetings } from "../../lib/data";
+import { statusTagClass } from "../../lib/status-tag";
 
 export function getStaticPaths() {
   return getMeetings().map((m) => ({ params: { id: m.id }, props: { meeting: m } }));
@@ -8,11 +9,11 @@ export function getStaticPaths() {
 
 const { meeting } = Astro.props;
 ---
-<Base title={`Meeting — ${meeting.date}`}>
+<Base title={`Meeting: ${meeting.date}`}>
   <h1>{meeting.date}</h1>
   <p>
     {meeting.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
-    <span class={`tag tag-${meeting.status}`}>{meeting.status}</span>
+    <span class={`tag ${statusTagClass(meeting.status)}`}>{meeting.status}</span>
   </p>
 
   <div class="card">
@@ -29,7 +30,7 @@ const { meeting } = Astro.props;
   <div class="card">
     <h2 style="margin-top:0">Minutes</h2>
     {meeting.hasMinutes ? (
-      <p>Minutes recorded — kept in the private, not-publicly-committed file for this meeting.</p>
+      <p>Minutes recorded: kept in the private, not-publicly-committed file for this meeting.</p>
     ) : (
       <p class="notice">No minutes recorded yet.</p>
     )}

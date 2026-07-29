@@ -46,7 +46,7 @@ export interface Contract {
   slug: string;
   name: string;
   category: string;
-  status: "active" | "expired" | "pending-renewal";
+  status: "active" | "expired" | "pending-renewal" | "unclear" | "not-renewed";
   renewalDate: string | null;
   noticeRequiredDays: number | null;
   notes?: string;

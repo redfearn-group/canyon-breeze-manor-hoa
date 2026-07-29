@@ -1,4 +1,4 @@
-# Public — these are DRAFT enforcement notices the board intends to send
+# Public: these are DRAFT enforcement notices the board intends to send
 # to all homeowners once finalized, so by design they contain no resident
 # names or unit-specific detail. Full text as received 2026-07-28 from
 # Brady's Draft Document 1/2/3.
@@ -26,7 +26,7 @@ policies:
       violations.
     history: >-
       Confirmed 2026-07-29, per Brady, as exactly 2 emails plus 1
-      physical mailer — sent to homeowners by TPM 2026-05-13 (initial
+      physical mailer, sent to homeowners by TPM 2026-05-13 (initial
       notice), then again 2026-07-21 as a "Final Cleanup" notice with the
       deadline updated to 2026-08-03, alongside a physical mailer copy.
       Door-tag notices to follow giving violators 72 hours to cure before
@@ -38,7 +38,7 @@ policies:
     ccrBasis:
       - 'Approval Required (Article 6): no fence/wall/structure without prior written Board/ACC approval.'
       - 'Planting/Gardening (Article 9.9): no fences/hedges/walls except original construction or ACC-approved.'
-      - 'Common Area (Article 1.4, 2.1): all land outside unit walls is Association-owned Common Area — fences built there privatize Common Area and require approval (confirmed via Utah County Parcel Map, serial 655830036).'
+      - 'Common Area (Article 1.4, 2.1): all land outside unit walls is Association-owned Common Area. Fences built there privatize Common Area and require approval (confirmed via Utah County Parcel Map, serial 655830036).'
     rules:
       - 'Existing fences: owners must submit retroactive ACC applications; community-standard fences may be grandfathered, noncompliant ones may need modification/removal.'
       - 'Future fences: no new fence without written ACC approval.'
@@ -55,7 +55,7 @@ policies:
     ccrBasis:
       - 'Approval Required (Article 6): no exterior addition/change without prior written Board/ACC approval.'
       - 'Planting/Gardening (Article 9.9): no planting/gardening/fence/hedge/wall alteration except ACC-approved.'
-      - 'Exterior Maintenance (Article 7): Association maintains grass/trees/shrubs/sprinklers/edging — owners may not alter or remove without approval.'
+      - 'Exterior Maintenance (Article 7): Association maintains grass/trees/shrubs/sprinklers/edging. Owners may not alter or remove without approval.'
       - 'Temporary Structures (Article 9.2): outbuildings/sheds/temporary structures prohibited.'
       - 'Common Area (Article 1.4, 2.1): all land outside unit walls is HOA-owned Common Area (confirmed via Utah County Parcel Map, serial 655830036).'
     rules:
@@ -69,7 +69,7 @@ policies:
       continuing violations); the Association may restore altered areas
       at the owner's expense if not corrected.
 
-# Resident notices — shorter, standalone communications (not phased
+# Resident notices: shorter, standalone communications (not phased
 # enforcement policies). Drafted by Craig 2026-06-18, "for your feedback";
 # later correspondence (residents replying about grass types) suggests
 # these were sent out. Neither notice names any resident or unit.
@@ -93,5 +93,5 @@ notices:
       waste, but called it a last resort given the cost/burden it would
       add. Simply hiring cleanup crews was also discussed, but would
       require raising dues. Residents are asked to help identify
-      non-compliant neighbors — info/photos can be emailed to the
+      non-compliant neighbors. Info/photos can be emailed to the
       property manager so fines may be assessed.

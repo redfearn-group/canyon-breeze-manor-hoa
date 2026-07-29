@@ -3,7 +3,7 @@ tasks:
     title: Fill in tonight's (2026-07-28) meeting agenda from Brady's notes/documents
     notes: >-
       Placeholder created 2026-07-28. RESOLVED 2026-07-28: found Craig's
-      real agenda attachment in Redfearn Group Gmail — Finances, Lawn
+      real agenda attachment in Redfearn Group Gmail: Finances, Lawn
       watering, a homeowner complaint, Cleanliness letter, next set of
       rules to clarify, and a dog-waste enforcement item (unit-specific
       detail kept in data/private/watchlist.yaml).
@@ -12,7 +12,7 @@ tasks:
     completedDate: '2026-07-28'
   - id: 2
     title: Upload HOA irrigation system zone/controller map (4 controllers) and link to sprinkler-system tracking in home-log
-    notes: Referenced from home-log's sprinkler-system item — see that repo's data/items/sprinkler-system/tasks.yaml.
+    notes: Referenced from home-log's sprinkler-system item, see that repo's data/items/sprinkler-system/tasks.yaml.
     status: open
     createdDate: '2026-07-28'
   - id: 3
@@ -25,13 +25,13 @@ tasks:
       C&C, LD Property Maintenance snow removal, curbing bid, 3 tree
       vendors, USAA), expenses (invoices #181/#182, Joe Jensen tree
       fertilizer, LD billing error), and a real June 2026 budget snapshot
-      with categories, actuals, and a full expense-detail ledger — see
+      with categories, actuals, and a full expense-detail ledger, see
       data/private/budget.yaml. CORRECTED 2026-07-28: "Estimate #180" was
       initially misattributed here as a real Redfearn Group snow-removal
-      service — Brady confirmed he never provided that service, and it's
+      service. Brady confirmed he never provided that service, and it's
       been removed from the site entirely (see task #4). No board-adopted
       ANNUAL budget document found at the time (dues are set at $90/mo
-      per the 2025-03-25 minutes, not a formal line-item budget) — since
+      per the 2025-03-25 minutes, not a formal line-item budget), since
       resolved, see task #13. A May 2026 report set exists (see task
       re: transcribing it) but wasn't fully read this session.
     status: done
@@ -40,7 +40,7 @@ tasks:
   - id: 13
     title: Transcribe the May 2026 Owner Statement/Expense Detail/Delinquency PDFs
     notes: >-
-      Added 2026-07-28 — these were emailed 2026-05-26 (in the
+      Added 2026-07-28.these were emailed 2026-05-26 (in the
       confusingly-labeled "Canyon Breeze Manor Monthly Reports April"
       thread) but only Corey's cover-note summary was read, not the PDFs
       themselves ("overpayment to insurance that was reversed"; 2
@@ -51,7 +51,7 @@ tasks:
       ADDITIONALLY RESOLVED 2026-07-28 (bigger find): a real
       board-ADOPTED annual budget for FY 2024-25 (Mar 2025-Feb 2026) was
       found in Brady's personal Gmail ("Canyon Breeze Manor Dues increase
-      notice W/ budget," 2025AnnualBudget Draft.pdf) — a proper breakeven
+      notice W/ budget," 2025AnnualBudget Draft.pdf), a proper breakeven
       budget at $90/mo dues with a dedicated $632.50/mo capital reserve
       contribution. This is the document that was missing; see
       data/private/budget.yaml's 2024-25 entry. Worth asking Corey
@@ -61,18 +61,18 @@ tasks:
   - id: 4
     title: Document board disclosure/vote for the Redfearn Group tree-work invoices
     notes: >-
-      Added 2026-07-28 — Brady's own business (Redfearn Group) is billing
+      Added 2026-07-28.Brady's own business (Redfearn Group) is billing
       the HOA (via TPM) for tree materials/planting (Invoices #181/#182).
       This is a related-party transaction, more so now that Brady is HOA
       President (as of 2026-05-26; was VP when this was billed).
       CORRECTED 2026-07-28, per Brady: he did NOT provide any snow
-      removal services — "Estimate #180" was never a real Redfearn Group
+      removal services. "Estimate #180" was never a real Redfearn Group
       service and has been removed from the site entirely (see
       data/private/watchlist.yaml's snow-removal-ld-vs-redfearn-pricing
       entry). This task now covers only the tree invoices.
 
       RESOLVED 2026-07-28, per Brady: confirmed directly with Corey at
-      TPM — the conflict-of-interest rule is that Brady cannot be the one
+      TPM: the conflict-of-interest rule is that Brady cannot be the one
       approving invoices or requesting the work himself. As long as
       someone else at TPM/the board approves and requests it, the
       arrangement is fine. No further board-minutes disclosure required
@@ -84,7 +84,7 @@ tasks:
   - id: 5
     title: Get the .gdoc files' real content (Minutes, Cover Memo, policy drafts)
     notes: >-
-      Added 2026-07-28 — R:\My Drive\HOA has several Google Docs
+      Added 2026-07-28.R:\My Drive\HOA has several Google Docs
       shortcuts that can't be read directly (Google Drive streams them,
       they're not real local files). Brady pasted content in directly
       instead.
@@ -92,18 +92,18 @@ tasks:
       RESOLVED 2026-07-28: received and logged the Cover Memo (10 Nov
       2025), full HOA Minutes (Mar 2025 through Jun 2026), and all three
       draft enforcement policies (Cleanliness, Fences, Exterior
-      Alterations) — see data/governance.yaml, data/policies.yaml,
+      Alterations), see data/governance.yaml, data/policies.yaml,
       data/meetings.yaml, and their private counterparts. Officer roles
-      corrected twice as new minutes came in — current as of 2026-05-26:
+      corrected twice as new minutes came in. Current as of 2026-05-26:
       Brady President, Hunter VP, Greg Treasurer, Craig Secretary.
 
       RESOLVED 2026-07-29, per Brady: the "draft Community Cleanup
-      Notice - redline.gdoc" isn't needed — the actual sent letter was
+      Notice - redline.gdoc" isn't needed. The actual sent letter was
       already captured via the Gmail sweeps (sent from the Redfearn Group
       account, received in the personal Gmail account). Confirmed exact
       send history: 2 emails to homeowners (2026-05-13 initial,
       2026-07-21 final "Cleanup" notice) plus 1 physical mailer alongside
-      the second email — see data/policies.yaml's phase-1-cleanliness
+      the second email, see data/policies.yaml's phase-1-cleanliness
       history field, updated to match.
     status: done
     createdDate: '2026-07-28'
@@ -111,12 +111,12 @@ tasks:
   - id: 6
     title: Confirm which vendor is providing 2026-27 winter snow removal
     notes: >-
-      Added 2026-07-28 — raised as an open question in both the
+      Added 2026-07-28.raised as an open question in both the
       2025-09-30 minutes ("Cutters or LD") and 2026-05-26 minutes ("did
       we approve LD?"). LD Property Maintenance provided the service for
       2025-26.
 
-      RESOLVED 2026-07-29, per Brady: no vendor for 2026-27 — the board
+      RESOLVED 2026-07-29, per Brady: no vendor for 2026-27. The board
       plans to handle snow removal themselves (self-managed, DIY) rather
       than hiring anyone.
     status: done
@@ -128,13 +128,13 @@ tasks:
       STRENGTHENED 2026-07-28: June 2026 Owner Expense Detail explicitly
       bills "C&C Grounds Maintenance" for both lawn care and sprinkler
       repair on the same unit reference (4005) that Cutters would
-      handle — assumed to be the same vendor.
+      handle, assumed to be the same vendor.
 
-      CORRECTED 2026-07-29, per Brady: C&C is NOT Cutters — two distinct
+      CORRECTED 2026-07-29, per Brady: C&C is NOT Cutters. Two distinct
       vendors, see data/private/contracts.yaml (split into separate
       entries). Open question now: is Cutters still under contract at
       all, or did C&C fully replace them at some point? The June 2026
-      lawn care/sprinkler invoice was billed to C&C, not Cutters — worth
+      lawn care/sprinkler invoice was billed to C&C, not Cutters. Worth
       confirming with Craig/Corey when that changeover happened and
       whether Cutters' 2026 bid ($1,218/mo) was ever actually accepted.
     status: open
@@ -142,7 +142,7 @@ tasks:
   - id: 8
     title: Resolve State HOA Advisory Board registration requirement
     notes: >-
-      Added 2026-07-28 from 2025-09-30 minutes — a separate registration
+      Added 2026-07-28 from 2025-09-30 minutes. A separate registration
       beyond the Association's current State registration was flagged as
       required. Craig was going to look into the complexity and decide
       who handles it; no resolution found in later minutes on file.
@@ -152,18 +152,18 @@ tasks:
     title: Decide when to finalize and send Phase 2 (Fences) and Phase 3 (Exterior Alterations)
     notes: >-
       Added 2026-07-28. PARTIALLY RESOLVED: Phase 1 (Cleanliness) has
-      actually been sent — confirmed 2026-07-29 as exactly 2 emails
+      actually been sent, confirmed 2026-07-29 as exactly 2 emails
       (2026-05-13, 2026-07-21) plus 1 physical mailer, with door-tag
       notices to follow (see data/policies.yaml's phase-1-cleanliness
       history field). Phase 2 (Fences) and Phase 3 (Exterior Alterations)
       are still draft-only per the phased plan in the 2025-11-10 Cover
-      Memo — no send/adoption date found for either.
+      Memo. No send/adoption date found for either.
     status: open
     createdDate: '2026-07-28'
   - id: 22
     title: Draft and send a parking rules/restrictions notice
     notes: >-
-      Added 2026-07-29, per Brady — wants to send this out after the
+      Added 2026-07-29, per Brady: wants to send this out after the
       cleanliness-letter enforcement (Phase 1) plays out, not before.
       CC&Rs basis already on file: Article 9.8 (no inoperable vehicles;
       72-hour notice before HOA-initiated towing; RV/boat/trailer parking
@@ -171,9 +171,9 @@ tasks:
       allowed at all; parking spaces are for personal vehicles, not
       commercial use). Real precedent found in personal Gmail (Aug 2025,
       "Canyon Breeze Manor HOA cars eligible for towing"): the board's
-      actual practice already matches the CC&Rs — 72-hour notice, then
+      actual practice already matches the CC&Rs: 72-hour notice, then
       the local tow company is called if the vehicle isn't
-      removed/updated. No draft notice text exists yet — don't invent
+      removed/updated. No draft notice text exists yet, don't invent
       it, wait for Brady's direction on what specifically needs
       clarifying (his agenda language was "next set of rules to
       clarify").
@@ -184,7 +184,7 @@ tasks:
     notes: >-
       Added 2026-07-28 from Corey's 2026-07-20 email and tonight's
       agenda. Contact detail in data/private/watchlist.yaml
-      (complaint-steve-wright) — currently trying to sell their unit and
+      (complaint-steve-wright), currently trying to sell their unit and
       specifically asked to speak to Brady directly as president.
       RESOLVED 2026-07-29, per Brady: called Steve on Monday night,
       before the meeting.
@@ -195,7 +195,7 @@ tasks:
     title: Clarify the LD vs. Redfearn Group snow-removal pricing question with Craig/the board
     notes: >-
       Added 2026-07-28. CLOSED 2026-07-28, per Brady: he did not provide
-      any snow removal services to the HOA at all — LD Property
+      any snow removal services to the HOA at all. LD Property
       Maintenance is and was the only real vendor. "Estimate #180" was
       never an actual Redfearn Group service; it's been removed from
       contracts/expenses entirely. No related-party pricing question
@@ -208,7 +208,7 @@ tasks:
   - id: 12
     title: Read all remaining board emails from the Craig/Corey/Hunter/Greg Gmail sweep
     notes: >-
-      Added 2026-07-28 — a Gmail search across Craig/Corey/Hunter/Greg
+      Added 2026-07-28.a Gmail search across Craig/Corey/Hunter/Greg
       turned up 20 threads. RESOLVED 2026-07-28, per Brady ("pull
       everything, don't skip anything"): opened all 19 HOA-related
       threads (1 was an unrelated personal "Resume" email, skipped) plus
@@ -222,7 +222,7 @@ tasks:
       board-meeting Zoom bridge. All sensitive detail routed to
       data/private/*.yaml; verified via grep against the built dist/
       output that nothing leaked into the public site. Personal Gmail
-      still not searched — per Brady's own "I'll also want you to open
+      still not searched, per Brady's own "I'll also want you to open
       my personal Gmail later" note, that's a separate future task.
     status: done
     createdDate: '2026-07-28'
@@ -230,7 +230,7 @@ tasks:
   - id: 14
     title: Formalize an ACC (exterior-alteration request) intake process
     notes: >-
-      Added 2026-07-28 — confirmed governance gap, in a board member's
+      Added 2026-07-28.confirmed governance gap, in a board member's
       own words: "we don't have a process for this at all right now"
       (Holly Osborn's deck-replacement request, handled ad hoc by email
       Jan-Mar 2026). Craig's suggestion at the time: route intake through
@@ -240,14 +240,14 @@ tasks:
   - id: 15
     title: Decide on the deferred curbing project (~$5,000 bid)
     notes: >-
-      Added 2026-07-28 — deferred in favor of tree fertilizing in spring
+      Added 2026-07-28.deferred in favor of tree fertilizing in spring
       2026 due to cost. Contractor (see private contracts) offered a
       scaled-down option (front sections only, or just the park area) to
       reduce cost. RESOLVED 2026-07-29, per Brady: the board decided
-      months ago that curbing is too expensive for the HOA to afford —
+      months ago that curbing is too expensive for the HOA to afford,
       not a live decision, closed. The separate concrete-crack-sealing
       bid from the 2026-06-30 minutes may still be worth pursuing on its
-      own (smaller-scope repair, not full curbing replacement) — see
+      own (smaller-scope repair, not full curbing replacement), see
       task re: the concrete complaint at private watchlist entry
       complaint-concrete-3208.
     status: done
@@ -256,7 +256,7 @@ tasks:
   - id: 16
     title: Confirm the actual HOA insurance carrier and D&O coverage status
     notes: >-
-      Added 2026-07-28 — a "USAA Document" thread turned out to be about
+      Added 2026-07-28.a "USAA Document" thread turned out to be about
       an unrelated returned reimbursement check, not confirmed proof USAA
       is the HOA's carrier. The D&O-vs-structures-only coverage question
       from the 2025-03-25 minutes has never been confirmed resolved in
@@ -265,7 +265,7 @@ tasks:
     createdDate: '2026-07-28'
   - id: 17
     title: Follow up on the pending community newsletter
-    notes: Added 2026-07-28 — discussed since ~Feb 2026 ("corrected verbiage"), still not confirmed sent as of the last record reviewed (Apr 28, 2026).
+    notes: Added 2026-07-28.discussed since ~Feb 2026 ("corrected verbiage"), still not confirmed sent as of the last record reviewed (Apr 28, 2026).
     status: open
     createdDate: '2026-07-28'
   - id: 18
@@ -274,7 +274,7 @@ tasks:
       Added 2026-07-28, per Brady's explicit instruction to also sweep
       his personal Gmail after the Redfearn Group one. Same search across
       Craig/Corey/Hunter/Greg returned 70 conversations going back to
-      2021 — reveals board history well beyond what the Redfearn Group
+      2021, revealing board history well beyond what the Redfearn Group
       account showed (formed via a Jan 2024 election notice; Brady
       confirmed as VP as far back as Jun 2024; a prior TPM portfolio
       manager, Rich Wells, active 2023-2025 before Corey).
@@ -297,7 +297,7 @@ tasks:
   - id: 19
     title: Track down the builder-provided written fence policy TPM has on file
     notes: >-
-      Added 2026-07-28 — referenced in the 2024 Keyes fence-enforcement
+      Added 2026-07-28.referenced in the 2024 Keyes fence-enforcement
       thread ("attached is the fence policy the builder had us use for
       any owner who requested a fence"). Worth comparing against the
       still-unsent Phase 2 (Fences) draft policy to make sure they're
@@ -307,19 +307,19 @@ tasks:
   - id: 20
     title: Confirm whether the association's legal name discrepancy (Bylaws/Articles vs. actual registered name) was ever corrected
     notes: >-
-      Added 2026-07-28 — raised with the original declarant's principal
+      Added 2026-07-28.raised with the original declarant's principal
       as early as May 2024 (see data/governance.yaml's openComplianceItems),
       resurfaced again in Apr 2025 minutes, no confirmation found that it
       was ever formally fixed.
 
       UPDATED 2026-07-29, per Brady: believes this should have been
-      fixed already, but has no details on hand — flagged as a good item
+      fixed already, but has no details on hand. Flagged as a good item
       to go back and confirm with Craig in detail (Craig was the one
       driving this issue originally).
     status: open
     createdDate: '2026-07-28'
   - id: 21
     title: Get minutes from the 2026-07-28 board meeting
-    notes: Meeting was held per Brady (2026-07-29 check-in), but minutes aren't available yet — likely from Craig, same pattern as prior meetings. Update data/meetings.yaml's 2026-07-28-board entry and data/private/meeting-minutes.yaml once received.
+    notes: Meeting was held per Brady (2026-07-29 check-in), but minutes aren't available yet. Likely from Craig, same pattern as prior meetings. Update data/meetings.yaml's 2026-07-28-board entry and data/private/meeting-minutes.yaml once received.
     status: open
     createdDate: '2026-07-29'

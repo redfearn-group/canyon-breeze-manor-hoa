@@ -1,4 +1,7 @@
 ---
+// brand.css must load first: it defines the tokens main.css consumes.
+// It is vendored from redfearn-group/redfearn-brand and CI fails on drift.
+import "../styles/brand.css";
 import "../styles/main.css";
 
 interface Props {
@@ -15,19 +18,34 @@ const isExpenses = currentPath.startsWith(withBase("/expenses").replace(/\/$/, "
 const isBudget = currentPath.startsWith(withBase("/budget").replace(/\/$/, ""));
 const isGovernance = currentPath.startsWith(withBase("/governance").replace(/\/$/, ""));
 ---
-<!doctype html>
-<html lang="en">
+<html lang="en" class="app-layer">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} · Canyon Breeze Manor HOA</title>
+    <link rel="icon" href={withBase("/favicon.svg")} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body>
-    <header class="site-header">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="site-header no-print">
       <div class="container">
         <a class="site-brand" href={withBase("/")}>
-          Canyon Breeze Manor
-          <small>HOA board tracker</small>
+          <img src={withBase("/logo-wide-dark.svg")} alt="Redfearn Group" width="180" height="30" />
+          <span class="site-brand__app">Canyon Breeze Manor HOA</span>
         </a>
         <nav class="site-nav">
           <a href={withBase("/")} aria-current={isDashboard ? "page" : undefined}>Dashboard</a>
@@ -39,11 +57,22 @@ const isGovernance = currentPath.startsWith(withBase("/governance").replace(/\/$
         </nav>
       </div>
     </header>
-    <main class="container">
+    <main class="container" id="main">
       <slot />
     </main>
-    <footer class="site-footer">
-      Internal HOA board tracker — financial figures, vendor terms, and meeting minutes are kept in a private, not-publicly-committed file.
+    <footer class="site-footer no-print">
+      <div class="container">
+        <a href="https://redfearn.group" class="site-footer__brand" target="_blank" rel="noopener">
+          <img src={withBase("/logo-lockup-dark.svg")} alt="Redfearn Group" width="200" height="46" />
+        </a>
+        <p class="site-footer__meta">
+          Built by <a href="https://redfearn.group" target="_blank" rel="noopener">Redfearn Group</a>. Financial figures, vendor terms, and meeting minutes are kept in a private, not-publicly-committed file.
+        </p>
+        <div class="site-footer__bottom">
+          <span>REDFEARN GROUP &middot; EST. 2014 &middot; SPANISH FORK, UT</span>
+          <span>&copy; {new Date().getFullYear()} Brady Redfearn</span>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

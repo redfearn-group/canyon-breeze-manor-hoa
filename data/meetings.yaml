@@ -1,11 +1,11 @@
 # Public metadata only. Full minutes text (and anything naming a specific
 # resident, unit, or dispute) lives in data/private/meeting-minutes.yaml,
-# which is gitignored — see CLAUDE.md.
+# which is gitignored, see CLAUDE.md.
 #
 # Monthly board meetings. Brady recalled the annual all-homeowner meeting
 # as traditionally April, but the actual 2026 annual meeting was held
 # 2026-03-31, and the April 2026 monthly meeting was skipped as a result
-# (see task list) — going by the real minutes, not the traditional
+# (see task list). Going by the real minutes, not the traditional
 # expectation.
 meetings:
   - id: 2025-03-25-board
@@ -105,7 +105,7 @@ meetings:
       - Landscaping
       - Exceptions to clutter rules
     hasMinutes: true
-    notes: Minutes on file are just the topic outline above — no detailed notes recorded yet.
+    notes: Minutes on file are just the topic outline above, no detailed notes recorded yet.
   - id: 2026-07-28-board
     date: '2026-07-28'
     type: monthly-board
@@ -118,4 +118,4 @@ meetings:
       - Next set of rules to clarify
       - Dog waste enforcement follow-up (see private notes)
     hasMinutes: false
-    notes: Meeting held 2026-07-28 — minutes not yet available.
+    notes: Meeting held 2026-07-28. Minutes not yet available.

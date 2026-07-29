@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getExpenses } from "../../lib/data";
+import { statusTagClass } from "../../lib/status-tag";
 
 const expenses = getExpenses().slice().sort((a, b) => b.date.localeCompare(a.date));
 ---
@@ -15,7 +16,7 @@ const expenses = getExpenses().slice().sort((a, b) => b.date.localeCompare(a.dat
           <tr>
             <td>{e.date}</td>
             <td>{e.category}</td>
-            <td><span class={`tag tag-${e.status}`}>{e.status}</span></td>
+            <td><span class={`tag ${statusTagClass(e.status)}`}>{e.status}</span></td>
             <td>{e.note ?? "—"}</td>
           </tr>
         ))}

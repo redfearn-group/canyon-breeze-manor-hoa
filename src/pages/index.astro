@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { getMeetings, getUpcomingMeeting, getContracts, getTasks } from "../lib/data";
 import { withBase } from "../lib/base";
+import { statusTagClass } from "../lib/status-tag";
 
 const upcoming = getUpcomingMeeting();
 const meetings = getMeetings();
@@ -12,14 +13,14 @@ const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
 ---
 <Base title="Dashboard">
   <h1>Canyon Breeze Manor HOA</h1>
-  <p>Board tracker — meetings, contracts, expenses, and budget.</p>
+  <p>Board tracker: meetings, contracts, expenses, and budget.</p>
 
   {upcoming && (
     <div class="card">
       <h2 style="margin-top:0">Next meeting</h2>
       <p>
-        <strong>{upcoming.date}</strong> — {upcoming.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
-        <span class={`tag tag-${upcoming.status}`}>{upcoming.status}</span>
+        <strong>{upcoming.date}:</strong> {upcoming.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
+        <span class={`tag ${statusTagClass(upcoming.status)}`}>{upcoming.status}</span>
       </p>
       {upcoming.agenda.length > 0 ? (
         <ul class="agenda">
@@ -64,7 +65,7 @@ const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
           <tr>
             <td><a href={withBase(`/meetings/${m.id}`)}>{m.date}</a></td>
             <td>{m.type === "annual-homeowners" ? "Annual (all homeowners)" : "Monthly board"}</td>
-            <td><span class={`tag tag-${m.status}`}>{m.status}</span></td>
+            <td><span class={`tag ${statusTagClass(m.status)}`}>{m.status}</span></td>
           </tr>
         ))}
       </tbody>

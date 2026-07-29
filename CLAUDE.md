@@ -10,14 +10,21 @@ roles have changed at least twice on record — use the MOST RECENT
 meeting minutes as the source of truth, not an earlier memo:
 - As of 2025-11-10 (Cover Memo): Brady VP, Craig Jorgensen President, Greg Robbins Secretary.
 - As of 2026-05-26 (Officers for 2026, most recent): **Brady Redfearn President**, Hunter Behling VP, Greg Robbins Treasurer, Craig Jorgensen Secretary.
-Built 2026-07-28 as a sibling of garage-log/home-log but
-**deliberately not branded as Redfearn Group** — this represents the HOA
-as an organization, not Brady's personal brand, so it does not vendor
-`redfearn-brand`'s brand.css.
+Built 2026-07-28 as a sibling of garage-log/home-log. Initially shipped
+unbranded to get it live before a board meeting, but as of 2026-07-29
+this **is** a Redfearn Group property: Brady built it himself, on his
+own tools and his own time, with no HOA funding or involvement in
+building it, so it's a legitimate RG portfolio piece the same way
+garage-log and home-log are. It vendors `redfearn-brand`'s brand.css
+(app-layer, dark, same as the other two trackers) and follows the
+redfearn-group-style skill's voice rules (no em-dashes, no AI-tropes)
+throughout, including in the YAML data files. Board officer names in
+`data/governance.yaml` are first-name only, since this is an internal
+board/task-tracking tool, not a public-transparency document.
 
 Deployed at `https://redfearn-group.github.io/canyon-breeze-manor-hoa/`
-(same GitHub account as the other properties — there was no separate org
-to create it under).
+(same GitHub account as the other properties, since there was no
+separate org to create it under).
 
 ## Commands
 

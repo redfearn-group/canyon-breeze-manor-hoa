@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { getGovernance, getPolicies, getNotices } from "../lib/data";
+import { statusTagClass } from "../lib/status-tag";
 
 const gov = getGovernance();
 const policies = getPolicies().slice().sort((a, b) => a.phase - b.phase);
@@ -12,7 +13,7 @@ const notices = getNotices();
   {gov && (
     <div class="card">
       <h2 style="margin-top:0">Entity status</h2>
-      <p><strong>{gov.entityName}</strong> — {gov.entityType}</p>
+      <p><strong>{gov.entityName}</strong>: {gov.entityType}</p>
       <p>{gov.entityStatusNotes}</p>
       {gov.openComplianceItems.length > 0 && (
         <>
@@ -46,10 +47,10 @@ const notices = getNotices();
   )}
 
   <h2>Enforcement policies</h2>
-  <p>Phased CC&Rs enforcement notices — draft until sent to homeowners.</p>
+  <p>Phased CC&Rs enforcement notices, draft until sent to homeowners.</p>
   {policies.map((p) => (
     <div class="card">
-      <h3 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag tag-${p.status}`}>{p.status}</span></h3>
+      <h3 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag ${statusTagClass(p.status)}`}>{p.status}</span></h3>
       <p><strong>CC&Rs basis:</strong></p>
       <ul>
         {p.ccrBasis.map((b) => <li>{b}</li>)}
@@ -68,7 +69,7 @@ const notices = getNotices();
       <h2>Resident notices</h2>
       {notices.map((n) => (
         <div class="card">
-          <h3 style="margin-top:0">{n.title} <span class={`tag tag-${n.status}`}>{n.status}</span></h3>
+          <h3 style="margin-top:0">{n.title} <span class={`tag ${statusTagClass(n.status)}`}>{n.status}</span></h3>
           <p>{n.text}</p>
         </div>
       ))}

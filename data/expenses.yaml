@@ -1,4 +1,4 @@
-# Public metadata only — dollar amounts and vendor names live in
+# Public metadata only. Dollar amounts and vendor names live in
 # data/private/expenses.yaml, which is gitignored.
 expenses:
   - id: invoice-181
@@ -20,4 +20,4 @@ expenses:
     date: '2026-03-03'
     category: Snow removal
     status: disputed
-    note: 'Cross-HOA billing error, since reimbursed — see governance notes'
+    note: 'Cross-HOA billing error, since reimbursed, see governance notes'

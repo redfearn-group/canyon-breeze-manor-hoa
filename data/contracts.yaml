@@ -1,4 +1,4 @@
-# Public metadata only — vendor names, dollar amounts, and contract terms
+# Public metadata only. Vendor names, dollar amounts, and contract terms
 # live in data/private/contracts.yaml, which is gitignored.
 contracts:
   - slug: property-management-tpm
@@ -26,7 +26,7 @@ contracts:
     noticeRequiredDays: null
     notes: >-
       Provided the 2025-26 season (no other company would service the
-      area). No vendor contracted for 2026-27 — board will self-manage
+      area). No vendor contracted for 2026-27, board will self-manage
       snow removal this season.
   - slug: hardscape-curbing-bid
     name: Curbing repair (community-wide)
@@ -48,7 +48,7 @@ contracts:
     status: active
     renewalDate: null
     noticeRequiredDays: null
-    notes: Same contact as the Olson's Garden Shoppe invoice (#181) below — Brady's contact for new tree options/pricing.
+    notes: Same contact as the Olson's Garden Shoppe invoice (#181) below. Brady's contact for new tree options/pricing.
   - slug: tree-fertilizer-vendor
     name: Tree fertilizer treatment
     category: Landscaping
@@ -63,7 +63,7 @@ contracts:
     renewalDate: null
     noticeRequiredDays: null
     notes: >-
-      Carrier not fully confirmed — a Mar 2026 document referencing this
+      Carrier not fully confirmed. A Mar 2026 document referencing this
       carrier turned out to be about an unrelated matter. D&O vs.
       structures-only coverage remains an open question from the
       2025-03-25 minutes.
