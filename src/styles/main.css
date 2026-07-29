@@ -105,6 +105,8 @@ th { color: var(--text-muted); font-weight: 600; font-size: 0.78rem; text-transf
 .tag-sent { background: rgba(47,111,78,0.12); color: var(--status-active); }
 .tag-pending { background: rgba(154,107,31,0.12); color: var(--status-pending); }
 .tag-disputed { background: rgba(161,61,61,0.12); color: var(--status-expired); }
+.tag-unclear { background: rgba(154,107,31,0.12); color: var(--status-pending); }
+.tag-not-renewed { background: rgba(91,101,96,0.12); color: var(--status-held); }
 
 .notice {
   background: #fdf6ec;

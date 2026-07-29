@@ -11,20 +11,23 @@ contracts:
   - slug: landscaping-cutters
     name: Landscaping & lawn care
     category: Landscaping
-    status: active
+    status: unclear
     renewalDate: null
     noticeRequiredDays: null
-    notes: Seasonal, Mar-Nov. Confirmed June 2026 actuals — lawn care + sprinkler repair.
+    notes: >-
+      Seasonal, Mar-Nov. Two distinct vendors have handled this work at
+      different points; current active-contract status is being
+      confirmed with the board (see open task).
   - slug: snow-removal-ld
     name: Snow removal
     category: Snow removal
-    status: active
+    status: not-renewed
     renewalDate: null
     noticeRequiredDays: null
     notes: >-
       Provided the 2025-26 season (no other company would service the
-      area). Whether they're providing 2026-27 service is not yet
-      confirmed.
+      area). No vendor contracted for 2026-27 — board will self-manage
+      snow removal this season.
   - slug: hardscape-curbing-bid
     name: Curbing repair (community-wide)
     category: Hardscape

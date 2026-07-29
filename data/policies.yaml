@@ -25,10 +25,12 @@ policies:
       fines under Article 16.1, including daily fines for continuing
       violations.
     history: >-
-      First sent by TPM 2026-05-13. Re-sent 2026-07-01 with a 2026-07-15
-      cleanup deadline; deadline later moved to 2026-08-03 (email +
-      mailer), with door-tag notices to follow giving violators 72 hours
-      to cure before fines.
+      Confirmed 2026-07-29, per Brady, as exactly 2 emails plus 1
+      physical mailer — sent to homeowners by TPM 2026-05-13 (initial
+      notice), then again 2026-07-21 as a "Final Cleanup" notice with the
+      deadline updated to 2026-08-03, alongside a physical mailer copy.
+      Door-tag notices to follow giving violators 72 hours to cure before
+      fines.
   - id: phase-2-fences
     phase: 2
     title: Fence & Exterior Structure Compliance

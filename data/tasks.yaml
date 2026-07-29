@@ -96,31 +96,48 @@ tasks:
       data/meetings.yaml, and their private counterparts. Officer roles
       corrected twice as new minutes came in — current as of 2026-05-26:
       Brady President, Hunter Behling VP, Greg Robbins Treasurer, Craig
-      Jorgensen Secretary. Still outstanding: "draft Community Cleanup
-      Notice - redline.gdoc" specifically — may just be an earlier
-      redline draft of Draft Document 1 (Cleanliness), unclear if it adds
-      anything new. Ask Brady if it's still needed.
-    status: open
+      Jorgensen Secretary.
+
+      RESOLVED 2026-07-29, per Brady: the "draft Community Cleanup
+      Notice - redline.gdoc" isn't needed — the actual sent letter was
+      already captured via the Gmail sweeps (sent from the Redfearn Group
+      account, received in the personal Gmail account). Confirmed exact
+      send history: 2 emails to homeowners (2026-05-13 initial,
+      2026-07-21 final "Cleanup" notice) plus 1 physical mailer alongside
+      the second email — see data/policies.yaml's phase-1-cleanliness
+      history field, updated to match.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-29'
   - id: 6
     title: Confirm which vendor is providing 2026-27 winter snow removal
     notes: >-
       Added 2026-07-28 — raised as an open question in both the
       2025-09-30 minutes ("Cutters or LD") and 2026-05-26 minutes ("did
       we approve LD?"). LD Property Maintenance provided the service for
-      2025-26 (CORRECTED 2026-07-28, per Brady: he did not personally
-      provide any snow removal — see task #4); still unconfirmed who's
-      doing 2026-27.
-    status: open
+      2025-26.
+
+      RESOLVED 2026-07-29, per Brady: no vendor for 2026-27 — the board
+      plans to handle snow removal themselves (self-managed, DIY) rather
+      than hiring anyone.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-29'
   - id: 7
-    title: 'Clarify: is "C&C Grounds Maintenance" (June 2026 expense detail) the same vendor as Cutters?'
+    title: 'Determine who "C&C Grounds Maintenance" actually is, and the current status of the Cutters contract'
     notes: >-
       STRENGTHENED 2026-07-28: June 2026 Owner Expense Detail explicitly
       bills "C&C Grounds Maintenance" for both lawn care and sprinkler
       repair on the same unit reference (4005) that Cutters would
-      handle. Strong circumstantial match, not a documented confirmation
-      — still worth a direct one-line confirmation from Craig or Corey.
+      handle — assumed to be the same vendor.
+
+      CORRECTED 2026-07-29, per Brady: C&C is NOT Cutters — two distinct
+      vendors, see data/private/contracts.yaml (split into separate
+      entries). Open question now: is Cutters still under contract at
+      all, or did C&C fully replace them at some point? The June 2026
+      lawn care/sprinkler invoice was billed to C&C, not Cutters — worth
+      confirming with Craig/Corey when that changeover happened and
+      whether Cutters' 2026 bid ($1,218/mo) was ever actually accepted.
     status: open
     createdDate: '2026-07-28'
   - id: 8
@@ -136,24 +153,45 @@ tasks:
     title: Decide when to finalize and send Phase 2 (Fences) and Phase 3 (Exterior Alterations)
     notes: >-
       Added 2026-07-28. PARTIALLY RESOLVED: Phase 1 (Cleanliness) has
-      actually been sent — first 2026-05-13, re-sent 2026-07-01, deadline
-      moved to 2026-08-03, with door-tag notices to follow (see
-      data/policies.yaml's phase-1-cleanliness history field). Phase 2
-      (Fences) and Phase 3 (Exterior Alterations) are still draft-only
-      per the phased plan in the 2025-11-10 Cover Memo — no send/adoption
-      date found for either.
+      actually been sent — confirmed 2026-07-29 as exactly 2 emails
+      (2026-05-13, 2026-07-21) plus 1 physical mailer, with door-tag
+      notices to follow (see data/policies.yaml's phase-1-cleanliness
+      history field). Phase 2 (Fences) and Phase 3 (Exterior Alterations)
+      are still draft-only per the phased plan in the 2025-11-10 Cover
+      Memo — no send/adoption date found for either.
     status: open
     createdDate: '2026-07-28'
+  - id: 22
+    title: Draft and send a parking rules/restrictions notice
+    notes: >-
+      Added 2026-07-29, per Brady — wants to send this out after the
+      cleanliness-letter enforcement (Phase 1) plays out, not before.
+      CC&Rs basis already on file: Article 9.8 (no inoperable vehicles;
+      72-hour notice before HOA-initiated towing; RV/boat/trailer parking
+      restricted to a designated area if one exists, otherwise none
+      allowed at all; parking spaces are for personal vehicles, not
+      commercial use). Real precedent found in personal Gmail (Aug 2025,
+      "Canyon Breeze Manor HOA cars eligible for towing"): the board's
+      actual practice already matches the CC&Rs — 72-hour notice, then
+      the local tow company is called if the vehicle isn't
+      removed/updated. No draft notice text exists yet — don't invent
+      it, wait for Brady's direction on what specifically needs
+      clarifying (his agenda language was "next set of rules to
+      clarify").
+    status: open
+    createdDate: '2026-07-29'
   - id: 10
-    priority: critical
     title: Call back the concerned homeowner from tonight's agenda
     notes: >-
       Added 2026-07-28 from Corey's 2026-07-20 email and tonight's
       agenda. Contact detail in data/private/watchlist.yaml
       (complaint-steve-wright) — currently trying to sell their unit and
       specifically asked to speak to Brady directly as president.
-    status: open
+      RESOLVED 2026-07-29, per Brady: called Steve on Monday night,
+      before the meeting.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-29'
   - id: 11
     title: Clarify the LD vs. Redfearn Group snow-removal pricing question with Craig/the board
     notes: >-
@@ -206,12 +244,16 @@ tasks:
       Added 2026-07-28 — deferred in favor of tree fertilizing in spring
       2026 due to cost. Contractor (see private contracts) offered a
       scaled-down option (front sections only, or just the park area) to
-      reduce cost. May overlap with a
-      separate concrete-crack-sealing bid the board was pursuing per the
-      2026-06-30 minutes — worth clarifying whether these are the same
-      project before getting two sets of bids.
-    status: open
+      reduce cost. RESOLVED 2026-07-29, per Brady: the board decided
+      months ago that curbing is too expensive for the HOA to afford —
+      not a live decision, closed. The separate concrete-crack-sealing
+      bid from the 2026-06-30 minutes may still be worth pursuing on its
+      own (smaller-scope repair, not full curbing replacement) — see
+      task re: the concrete complaint at private watchlist entry
+      complaint-concrete-3208.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-29'
   - id: 16
     title: Confirm the actual HOA insurance carrier and D&O coverage status
     notes: >-
@@ -270,6 +312,11 @@ tasks:
       as early as May 2024 (see data/governance.yaml's openComplianceItems),
       resurfaced again in Apr 2025 minutes, no confirmation found that it
       was ever formally fixed.
+
+      UPDATED 2026-07-29, per Brady: believes this should have been
+      fixed already, but has no details on hand — flagged as a good item
+      to go back and confirm with Craig in detail (Craig was the one
+      driving this issue originally).
     status: open
     createdDate: '2026-07-28'
   - id: 21
