@@ -5,6 +5,33 @@ export interface Meeting {
   status: "upcoming" | "held" | "cancelled";
   agenda: string[];
   hasMinutes: boolean;
+  notes?: string;
+}
+
+export interface GovernanceOfficer {
+  name: string;
+  role: string;
+  since: string;
+  priorRole?: string;
+}
+
+export interface Governance {
+  entityName: string;
+  entityType: string;
+  entityStatusNotes: string;
+  openComplianceItems: string[];
+  officers: GovernanceOfficer[];
+  boardTermNotes: string;
+}
+
+export interface Policy {
+  id: string;
+  phase: number;
+  title: string;
+  status: "draft" | "adopted";
+  ccrBasis: string[];
+  rules: string[];
+  enforcement: string;
 }
 
 export interface Contract {

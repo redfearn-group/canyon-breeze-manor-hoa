@@ -1,0 +1,39 @@
+# Public — board officer roster and entity status are standard HOA
+# governance transparency (already distributed to all homeowners via
+# minutes), not sensitive the way delinquency/violation specifics are.
+entityName: Canyon Breeze Manor Owners Association
+entityType: Non-profit corporation (Utah)
+entityStatusNotes: >-
+  Properly organized as a non-profit with the State Department of
+  Corporations as of the 2025-06-24 meeting. Prior to that, there was
+  confusion/discrepancy between the CC&Rs, Articles of Incorporation, and
+  state filings (LLC vs. Inc) noted as far back as 2025-04-29, and the
+  Association was not registered with the State HOA Registry at that
+  time.
+openComplianceItems:
+  - The State HOA Advisory Board reportedly requires a separate
+    registration in addition to the Association's current State
+    registration (raised 2025-09-30) — status as of the last minutes on
+    file is still "Craig looking into the complexity," not resolved.
+officers:
+  - name: Brady Redfearn
+    role: President
+    since: '2026-05-26'
+    priorRole: Vice President (through at least 2025-11-10)
+  - name: Hunter Behling
+    role: Vice President
+    since: '2026-05-26'
+  - name: Greg Robbins
+    role: Treasurer
+    since: '2026-05-26'
+    priorRole: Secretary (through at least 2025-11-10)
+  - name: Craig Jorgensen
+    role: Secretary
+    since: '2026-05-26'
+    priorRole: President (through at least 2025-11-10)
+boardTermNotes: >-
+  Per 2025-03-25 minutes: Craig had one year left on his term, Greg had
+  two. Per the 2026-03-31 annual meeting: one board seat was up for
+  election; Craig was re-elected over a Hunter Behling nomination, 4
+  ayes. Officer roles (President/VP/Treasurer/Secretary) are reassigned
+  separately from board-seat elections, per the 2026-05-26 minutes above.

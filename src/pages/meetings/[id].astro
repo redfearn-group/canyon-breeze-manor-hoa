@@ -33,5 +33,6 @@ const { meeting } = Astro.props;
     ) : (
       <p class="notice">No minutes recorded yet.</p>
     )}
+    {meeting.notes && <p>{meeting.notes}</p>}
   </div>
 </Base>

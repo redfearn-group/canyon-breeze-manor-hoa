@@ -1,10 +1,111 @@
-# Public metadata only. Full minutes text (and any agenda notes that name
-# a specific resident, unit, or dispute) live in data/private/meetings.yaml,
+# Public metadata only. Full minutes text (and anything naming a specific
+# resident, unit, or dispute) lives in data/private/meeting-minutes.yaml,
 # which is gitignored — see CLAUDE.md.
 #
-# Monthly board meetings, plus one annual all-homeowner meeting each April,
-# per Brady.
+# Monthly board meetings. Brady recalled the annual all-homeowner meeting
+# as traditionally April, but the actual 2026 annual meeting was held
+# 2026-03-31, and the April 2026 monthly meeting was skipped as a result
+# (see task list) — going by the real minutes, not the traditional
+# expectation.
 meetings:
+  - id: 2025-03-25-board
+    date: '2025-03-25'
+    type: monthly-board
+    status: held
+    agenda:
+      - Budget/finance (dues increase)
+      - D&O insurance discussion
+      - Landscaping/contractors
+      - Tree strategy
+    hasMinutes: true
+  - id: 2025-04-29-board
+    date: '2025-04-29'
+    type: monthly-board
+    status: held
+    agenda:
+      - Approve prior minutes
+      - Tree/yard care
+      - Incorporation documents discussion
+    hasMinutes: true
+  - id: 2025-05-27-board
+    date: '2025-05-27'
+    type: monthly-board
+    status: held
+    agenda:
+      - Tree/yard care
+      - HOA registry status
+      - Financials
+    hasMinutes: true
+  - id: 2025-06-24-board
+    date: '2025-06-24'
+    type: monthly-board
+    status: held
+    agenda:
+      - HOA entity/registration status
+      - Finances (delinquencies)
+      - Landscaping
+      - Parking & Common Areas
+    hasMinutes: true
+  - id: 2025-08-26-board
+    date: '2025-08-26'
+    type: monthly-board
+    status: cancelled
+    agenda: []
+    hasMinutes: false
+  - id: 2025-09-30-board
+    date: '2025-09-30'
+    type: monthly-board
+    status: held
+    agenda:
+      - Billing correction follow-up
+      - Community cleanliness enforcement approach
+      - Delinquencies
+      - Trees
+      - Grass
+      - Winter/snow removal planning
+      - State HOA registry status
+    hasMinutes: true
+  - id: 2025-10-28-board
+    date: '2025-10-28'
+    type: monthly-board
+    status: held
+    agenda: []
+    hasMinutes: false
+    notes: No notes recorded for this meeting.
+  - id: 2026-03-31-annual
+    date: '2026-03-31'
+    type: annual-homeowners
+    status: held
+    agenda:
+      - Welcome
+      - Approve 2025 annual meeting minutes
+      - Financial report (income/expense, dues evaluation, reserves)
+      - Board member election
+      - HOA Common Area cleanliness
+      - Open forum
+      - Adjourn
+    hasMinutes: true
+  - id: 2026-05-26-board
+    date: '2026-05-26'
+    type: monthly-board
+    status: held
+    agenda:
+      - Finances
+      - Yard clutter enforcement letter
+      - Dog waste enforcement
+      - Landscaping (watering schedule, contractor schedule)
+      - Officer elections for 2026
+    hasMinutes: true
+  - id: 2026-06-30-board
+    date: '2026-06-30'
+    type: monthly-board
+    status: held
+    agenda:
+      - Finances
+      - Landscaping
+      - Exceptions to clutter rules
+    hasMinutes: true
+    notes: Minutes on file are just the topic outline above — no detailed notes recorded yet.
   - id: 2026-07-28-board
     date: '2026-07-28'
     type: monthly-board

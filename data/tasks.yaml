@@ -27,9 +27,9 @@ tasks:
     notes: >-
       Added 2026-07-28 — Brady's own business (Redfearn Group) is billing
       the HOA (via TPM) for snow removal and tree work (Estimate #180,
-      Invoices #181/#182). This is a related-party transaction since
-      Brady is HOA Vice President (Craig Jorgensen is President, Greg
-      Robbins is Secretary, per the 2025-11-10 Cover Memo).
+      Invoices #181/#182). This is a related-party transaction, more so
+      now that Brady is HOA President (as of 2026-05-26; was VP when this
+      was billed).
 
       RESOLVED 2026-07-28, per Brady: confirmed directly with Corey at
       TPM — the conflict-of-interest rule is that Brady cannot be the one
@@ -45,20 +45,52 @@ tasks:
     title: Get the .gdoc files' real content (Minutes, Cover Memo, policy drafts)
     notes: >-
       Added 2026-07-28 — R:\My Drive\HOA has several Google Docs
-      shortcuts (Canyon Breeze Manor HOA Minutes.gdoc, Cover Memo to HOA
-      Board.gdoc, Exterior Alterations & Landscaping Policy Memo.gdoc,
-      Fence & Exterior Structure Policy Memo.gdoc, draft Community
-      Cleanup Notice.gdoc, Draft Document 1_ Community Cleanliness &
-      Outdoor Storage.gdoc) that can't be read directly — Google Drive
-      streams them, they're not real local files. Brady is pasting
-      content in directly.
+      shortcuts that can't be read directly (Google Drive streams them,
+      they're not real local files). Brady pasted content in directly
+      instead.
 
-      PARTIALLY RESOLVED 2026-07-28: Cover Memo (10 Nov 2025) received
-      and logged in data/private/board-memos.yaml — corrected Brady's
-      role to Vice President (Craig Jorgensen is President, Greg Robbins
-      is Secretary) throughout the site. Still need: HOA Minutes,
-      Exterior Alterations & Landscaping Policy Memo, Fence & Exterior
-      Structure Policy Memo, draft Community Cleanup Notice, Draft
-      Document 1 (Community Cleanliness & Outdoor Storage Phase 1).
+      RESOLVED 2026-07-28: received and logged the Cover Memo (10 Nov
+      2025), full HOA Minutes (Mar 2025 through Jun 2026), and all three
+      draft enforcement policies (Cleanliness, Fences, Exterior
+      Alterations) — see data/governance.yaml, data/policies.yaml,
+      data/meetings.yaml, and their private counterparts. Officer roles
+      corrected twice as new minutes came in — current as of 2026-05-26:
+      Brady President, Hunter Behling VP, Greg Robbins Treasurer, Craig
+      Jorgensen Secretary. Still outstanding: "draft Community Cleanup
+      Notice - redline.gdoc" specifically — may just be an earlier
+      redline draft of Draft Document 1 (Cleanliness), unclear if it adds
+      anything new. Ask Brady if it's still needed.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 6
+    title: Confirm which vendor is providing 2026-27 winter snow removal
+    notes: >-
+      Added 2026-07-28 — raised as an open question in both the
+      2025-09-30 minutes ("Cutters or LD") and 2026-05-26 minutes ("did
+      we approve LD?"). Redfearn Group did the 2025-26 season (Estimate
+      #180); unclear who's doing 2026-27.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 7
+    title: 'Clarify: is "C&C" in the 2026-05-26 minutes the same vendor as Cutters?'
+    notes: Assumed same vendor for now (see data/private/contracts.yaml) but not confirmed.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 8
+    title: Resolve State HOA Advisory Board registration requirement
+    notes: >-
+      Added 2026-07-28 from 2025-09-30 minutes — a separate registration
+      beyond the Association's current State registration was flagged as
+      required. Craig was going to look into the complexity and decide
+      who handles it; no resolution found in later minutes on file.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 9
+    title: Decide when to finalize and send the three draft enforcement policies
+    notes: >-
+      Added 2026-07-28 — Phase 1 (Cleanliness), Phase 2 (Fences), and
+      Phase 3 (Exterior Alterations) drafts are all written (see
+      data/policies.yaml) per the phased plan in the 2025-11-10 Cover
+      Memo, but none have a send/adoption date yet.
     status: open
     createdDate: '2026-07-28'

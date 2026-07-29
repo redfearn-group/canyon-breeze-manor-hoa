@@ -15,9 +15,35 @@ contracts:
     noticeRequiredDays: null
     notes: Seasonal, Mar-Nov
   - slug: snow-removal-redfearn-group
-    name: Snow removal
+    name: Snow removal (2025-26 season)
     category: Snow removal
+    status: expired
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: >-
+      Seasonal, Dec-Feb, 2025-26 season only. Related-party vendor
+      relationship (board president) — cleared with property manager,
+      work requested/approved by others. A different vendor (LD) is
+      under consideration for the 2026-27 season per May/Sep 2025 board
+      minutes — not yet confirmed which vendor is providing this season.
+  - slug: snow-removal-ld
+    name: Snow removal (2026-27 season, under consideration)
+    category: Snow removal
+    status: pending-renewal
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: Raised as an alternative to Cutters/Redfearn Group in Sep 2025 and May 2026 minutes — approval status unclear from notes on file.
+  - slug: tree-care-utah-county-trees
+    name: Tree care & bracing
+    category: Landscaping
     status: active
     renewalDate: null
     noticeRequiredDays: null
-    notes: Seasonal, Dec-Feb. Related-party vendor relationship (board VP) — cleared with property manager, work requested/approved by others.
+    notes: Handles tree bracing/repair; billed by invoice (#39 seen in Apr 2025 minutes, amount not on file).
+  - slug: tree-supplier-chris-olson
+    name: Tree supply & pricing consult
+    category: Landscaping
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: Same contact as the Olson's Garden Shoppe invoice (#181) below — Brady's contact for new tree options/pricing.

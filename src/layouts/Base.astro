@@ -13,6 +13,7 @@ const isMeetings = currentPath.startsWith(withBase("/meetings").replace(/\/$/, "
 const isContracts = currentPath.startsWith(withBase("/contracts").replace(/\/$/, ""));
 const isExpenses = currentPath.startsWith(withBase("/expenses").replace(/\/$/, ""));
 const isBudget = currentPath.startsWith(withBase("/budget").replace(/\/$/, ""));
+const isGovernance = currentPath.startsWith(withBase("/governance").replace(/\/$/, ""));
 ---
 <!doctype html>
 <html lang="en">
@@ -34,6 +35,7 @@ const isBudget = currentPath.startsWith(withBase("/budget").replace(/\/$/, ""));
           <a href={withBase("/contracts")} aria-current={isContracts ? "page" : undefined}>Contracts</a>
           <a href={withBase("/expenses")} aria-current={isExpenses ? "page" : undefined}>Expenses</a>
           <a href={withBase("/budget")} aria-current={isBudget ? "page" : undefined}>Budget</a>
+          <a href={withBase("/governance")} aria-current={isGovernance ? "page" : undefined}>Governance</a>
         </nav>
       </div>
     </header>

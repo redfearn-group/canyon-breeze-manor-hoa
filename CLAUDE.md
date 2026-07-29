@@ -5,10 +5,12 @@ This file provides guidance to Claude Code when working in this repository.
 ## What this is
 
 Board tracker for the Canyon Breeze Manor HOA — meetings (agenda/minutes),
-service contracts, expenses, and budget. Brady is HOA Vice President
-(Craig Jorgensen is President, Greg Robbins is Secretary, per the
-2025-11-10 Cover Memo to the Board); built 2026-07-28 as a sibling of
-garage-log/home-log but
+service contracts, expenses, budget, and governance/policy docs. Officer
+roles have changed at least twice on record — use the MOST RECENT
+meeting minutes as the source of truth, not an earlier memo:
+- As of 2025-11-10 (Cover Memo): Brady VP, Craig Jorgensen President, Greg Robbins Secretary.
+- As of 2026-05-26 (Officers for 2026, most recent): **Brady Redfearn President**, Hunter Behling VP, Greg Robbins Treasurer, Craig Jorgensen Secretary.
+Built 2026-07-28 as a sibling of garage-log/home-log but
 **deliberately not branded as Redfearn Group** — this represents the HOA
 as an organization, not Brady's personal brand, so it does not vendor
 `redfearn-brand`'s brand.css.

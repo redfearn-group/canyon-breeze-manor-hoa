@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import { getGovernance, getPolicies } from "../lib/data";
+
+const gov = getGovernance();
+const policies = getPolicies().slice().sort((a, b) => a.phase - b.phase);
+---
+<Base title="Governance & Policies">
+  <h1>Governance & Policies</h1>
+
+  {gov && (
+    <div class="card">
+      <h2 style="margin-top:0">Entity status</h2>
+      <p><strong>{gov.entityName}</strong> — {gov.entityType}</p>
+      <p>{gov.entityStatusNotes}</p>
+      {gov.openComplianceItems.length > 0 && (
+        <>
+          <p><strong>Open compliance items:</strong></p>
+          <ul>
+            {gov.openComplianceItems.map((item) => <li>{item}</li>)}
+          </ul>
+        </>
+      )}
+    </div>
+  )}
+
+  {gov && (
+    <div class="card">
+      <h2 style="margin-top:0">Board officers</h2>
+      <table>
+        <thead><tr><th>Name</th><th>Role</th><th>Since</th><th>Prior role</th></tr></thead>
+        <tbody>
+          {gov.officers.map((o) => (
+            <tr>
+              <td>{o.name}</td>
+              <td>{o.role}</td>
+              <td>{o.since}</td>
+              <td>{o.priorRole ?? "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p>{gov.boardTermNotes}</p>
+    </div>
+  )}
+
+  <h2>Enforcement policies (draft)</h2>
+  <p>Draft notices intended for distribution to all homeowners once finalized by the board. Not yet sent.</p>
+  {policies.map((p) => (
+    <div class="card">
+      <h3 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag tag-${p.status}`}>{p.status}</span></h3>
+      <p><strong>CC&Rs basis:</strong></p>
+      <ul>
+        {p.ccrBasis.map((b) => <li>{b}</li>)}
+      </ul>
+      <p><strong>Rules:</strong></p>
+      <ul>
+        {p.rules.map((r) => <li>{r}</li>)}
+      </ul>
+      <p><strong>Enforcement:</strong> {p.enforcement}</p>
+    </div>
+  ))}
+</Base>

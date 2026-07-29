@@ -1,0 +1,63 @@
+# Public — these are DRAFT enforcement notices the board intends to send
+# to all homeowners once finalized, so by design they contain no resident
+# names or unit-specific detail. Full text as received 2026-07-28 from
+# Brady's Draft Document 1/2/3.
+policies:
+  - id: phase-1-cleanliness
+    phase: 1
+    title: Community Cleanliness & Outdoor Storage
+    status: draft
+    ccrBasis:
+      - 'Common Area Use (Article 1.4, 2.1): all land outside unit walls is Common Area owned by the Association, not for personal storage.'
+      - 'Nuisance (Article 9.4): no owner may permit anything that becomes an annoyance/nuisance.'
+      - 'Garbage (Article 9.12): garbage must not accumulate, must be in proper containers.'
+      - 'Pets (Article 9.5): max 2 pets/household, leashed in Common Areas, droppings removed promptly.'
+    rules:
+      - 'Allowed outdoors: one BBQ/smoker per household; tidy municipal trash/recycling containers.'
+      - 'Not allowed: bikes, toys, furniture, equipment, or clutter stored outdoors in Common Areas.'
+      - 'No riding bikes on lawns (landscaping damage).'
+      - 'No removing rocks from rock beds or throwing them into the street.'
+    enforcement: >-
+      21-day grace period from notice date, then items found in Common
+      Areas get a written tag with 72 hours to remove. If not removed,
+      the Board/authorized rep removes them and charges removal/storage/
+      disposal costs to the Owner as an assessment. Violations may draw
+      fines under Article 16.1, including daily fines for continuing
+      violations.
+  - id: phase-2-fences
+    phase: 2
+    title: Fence & Exterior Structure Compliance
+    status: draft
+    ccrBasis:
+      - 'Approval Required (Article 6): no fence/wall/structure without prior written Board/ACC approval.'
+      - 'Planting/Gardening (Article 9.9): no fences/hedges/walls except original construction or ACC-approved.'
+      - 'Common Area (Article 1.4, 2.1): all land outside unit walls is Association-owned Common Area — fences built there privatize Common Area and require approval (confirmed via Utah County Parcel Map, serial 655830036).'
+    rules:
+      - 'Existing fences: owners must submit retroactive ACC applications; community-standard fences may be grandfathered, noncompliant ones may need modification/removal.'
+      - 'Future fences: no new fence without written ACC approval.'
+      - 'Transfer of ownership: any unapproved fence must be removed or retroactively approved before sale/rental/transfer.'
+    enforcement: >-
+      Written notice + 30-day cure period to apply for retroactive
+      approval or remove the fence. Non-compliance draws fines under
+      Article 16.1 (collectible as assessments, including daily fines
+      for continuing violations).
+  - id: phase-3-exterior-alterations
+    phase: 3
+    title: Exterior Alterations & Landscaping Compliance
+    status: draft
+    ccrBasis:
+      - 'Approval Required (Article 6): no exterior addition/change without prior written Board/ACC approval.'
+      - 'Planting/Gardening (Article 9.9): no planting/gardening/fence/hedge/wall alteration except ACC-approved.'
+      - 'Exterior Maintenance (Article 7): Association maintains grass/trees/shrubs/sprinklers/edging — owners may not alter or remove without approval.'
+      - 'Temporary Structures (Article 9.2): outbuildings/sheds/temporary structures prohibited.'
+      - 'Common Area (Article 1.4, 2.1): all land outside unit walls is HOA-owned Common Area (confirmed via Utah County Parcel Map, serial 655830036).'
+    rules:
+      - 'Concrete decks/patios must be removed and restored to original condition unless ACC-approved.'
+      - 'Owners may not remove/replace grass, rocks, sprinklers, trees, edging, or other originally-installed materials without approval.'
+      - 'Transfer of ownership: any unapproved exterior alteration must be removed/restored before sale/rental/transfer.'
+    enforcement: >-
+      Written notice + 30-day cure period to restore or apply for
+      retroactive approval. Non-compliance draws fines under Article
+      16.1 (collectible as assessments, including daily fines for
+      continuing violations); the Association may restore altered areas
+      at the owner's expense if not corrected.
