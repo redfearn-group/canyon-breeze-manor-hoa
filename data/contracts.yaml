@@ -15,25 +15,14 @@ contracts:
     renewalDate: null
     noticeRequiredDays: null
     notes: Seasonal, Mar-Nov. Confirmed June 2026 actuals — lawn care + sprinkler repair.
-  - slug: snow-removal-redfearn-group
-    name: Snow removal — hand shoveling (2025-26 season)
-    category: Snow removal
-    status: expired
-    renewalDate: null
-    noticeRequiredDays: null
-    notes: >-
-      Seasonal, Dec-Feb, 2025-26 season only. Related-party vendor
-      relationship (board president) — cleared with property manager,
-      work requested/approved by others. Covered hand shoveling only; a
-      separate vendor handled plowing the same season (see below).
   - slug: snow-removal-ld
-    name: Snow removal — plowing
+    name: Snow removal
     category: Snow removal
     status: active
     renewalDate: null
     noticeRequiredDays: null
     notes: >-
-      Plowed the 2025-26 season (no other company would service the
+      Provided the 2025-26 season (no other company would service the
       area). Whether they're providing 2026-27 service is not yet
       confirmed.
   - slug: hardscape-curbing-bid

@@ -11,11 +11,6 @@ expenses:
     category: Landscaping
     status: paid
     note: Tree planting/trimming disposal expenses (invoice #182)
-  - id: estimate-180
-    date: '2025-11-25'
-    category: Snow removal
-    status: paid
-    note: 2025-26 winter season shoveling/ice melt (estimate #180)
   - id: tree-fertilizer-2026-04
     date: '2026-04-22'
     category: Landscaping

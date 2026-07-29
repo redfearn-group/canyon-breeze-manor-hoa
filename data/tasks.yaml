@@ -22,14 +22,17 @@ tasks:
       RESOLVED 2026-07-28: read CC&Rs, PUD plat, invoices from
       R:\My Drive\HOA, and a full Redfearn Group Gmail sweep (20 threads
       + 3 downloaded financial PDFs). Populated contracts (TPM, Cutters/
-      C&C, Redfearn Group + LD Property Maintenance snow removal, Chad
-      Knebel curbing bid, 3 tree vendors, USAA), expenses (invoices
-      #181/#182, estimate #180, Joe Jensen tree fertilizer, LD billing
-      error), and a real June 2026 budget snapshot with categories,
-      actuals, and a full expense-detail ledger — see
-      data/private/budget.yaml. No board-adopted ANNUAL budget document
-      found (dues are set at $90/mo per the 2025-03-25 minutes, not a
-      formal line-item budget). A May 2026 report set exists (see task
+      C&C, LD Property Maintenance snow removal, curbing bid, 3 tree
+      vendors, USAA), expenses (invoices #181/#182, Joe Jensen tree
+      fertilizer, LD billing error), and a real June 2026 budget snapshot
+      with categories, actuals, and a full expense-detail ledger — see
+      data/private/budget.yaml. CORRECTED 2026-07-28: "Estimate #180" was
+      initially misattributed here as a real Redfearn Group snow-removal
+      service — Brady confirmed he never provided that service, and it's
+      been removed from the site entirely (see task #4). No board-adopted
+      ANNUAL budget document found at the time (dues are set at $90/mo
+      per the 2025-03-25 minutes, not a formal line-item budget) — since
+      resolved, see task #13. A May 2026 report set exists (see task
       re: transcribing it) but wasn't fully read this session.
     status: done
     createdDate: '2026-07-28'
@@ -56,13 +59,17 @@ tasks:
     status: open
     createdDate: '2026-07-28'
   - id: 4
-    title: Document board disclosure/vote for the Redfearn Group snow-removal and tree-work invoices
+    title: Document board disclosure/vote for the Redfearn Group tree-work invoices
     notes: >-
       Added 2026-07-28 — Brady's own business (Redfearn Group) is billing
-      the HOA (via TPM) for snow removal and tree work (Estimate #180,
-      Invoices #181/#182). This is a related-party transaction, more so
-      now that Brady is HOA President (as of 2026-05-26; was VP when this
-      was billed).
+      the HOA (via TPM) for tree materials/planting (Invoices #181/#182).
+      This is a related-party transaction, more so now that Brady is HOA
+      President (as of 2026-05-26; was VP when this was billed).
+      CORRECTED 2026-07-28, per Brady: he did NOT provide any snow
+      removal services — "Estimate #180" was never a real Redfearn Group
+      service and has been removed from the site entirely (see
+      data/private/watchlist.yaml's snow-removal-ld-vs-redfearn-pricing
+      entry). This task now covers only the tree invoices.
 
       RESOLVED 2026-07-28, per Brady: confirmed directly with Corey at
       TPM — the conflict-of-interest rule is that Brady cannot be the one
@@ -100,9 +107,10 @@ tasks:
     notes: >-
       Added 2026-07-28 — raised as an open question in both the
       2025-09-30 minutes ("Cutters or LD") and 2026-05-26 minutes ("did
-      we approve LD?"). Redfearn Group did shoveling and LD Property
-      Maintenance did plowing for 2025-26; still unconfirmed who's doing
-      2026-27, or whether it's the same split.
+      we approve LD?"). LD Property Maintenance provided the service for
+      2025-26 (CORRECTED 2026-07-28, per Brady: he did not personally
+      provide any snow removal — see task #4); still unconfirmed who's
+      doing 2026-27.
     status: open
     createdDate: '2026-07-28'
   - id: 7
@@ -149,19 +157,14 @@ tasks:
   - id: 11
     title: Clarify the LD vs. Redfearn Group snow-removal pricing question with Craig/the board
     notes: >-
-      Added 2026-07-28. RESOLVED, DOWNGRADED 2026-07-28: full context
-      found in the "Canyon Breeze Manor Monthly Reports April" thread —
-      LD Property Maintenance genuinely plowed Canyon Breeze in Feb 2026
-      (no other company would service the area, and LD already served
-      neighboring Somerset), and the $195 March charge Craig flagged was
-      a cross-HOA TPM billing mixup, since reimbursed. Brady's ice-melt
-      pricing reference to "LD's original estimate" reads as normal rate
-      shopping for a different task (hand shoveling vs. plowing), not
-      pass-through billing. See
+      Added 2026-07-28. CLOSED 2026-07-28, per Brady: he did not provide
+      any snow removal services to the HOA at all — LD Property
+      Maintenance is and was the only real vendor. "Estimate #180" was
+      never an actual Redfearn Group service; it's been removed from
+      contracts/expenses entirely. No related-party pricing question
+      exists here. See
       data/private/watchlist.yaml's snow-removal-ld-vs-redfearn-pricing
-      entry for full detail. No longer flagged as urgent, though still
-      worth Brady's own gut-check on Craig's "outrageous"/"stuck"
-      language if he wants full peace of mind.
+      entry for full detail.
     status: done
     createdDate: '2026-07-28'
     completedDate: '2026-07-28'
