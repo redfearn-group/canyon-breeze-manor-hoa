@@ -110,5 +110,11 @@ meetings:
     date: '2026-07-28'
     type: monthly-board
     status: upcoming
-    agenda: []
+    agenda:
+      - Finances
+      - Lawn watering
+      - Homeowner complaint (see private notes)
+      - Cleanliness letter
+      - Next set of rules to clarify
+      - Dog waste enforcement follow-up (see private notes)
     hasMinutes: false

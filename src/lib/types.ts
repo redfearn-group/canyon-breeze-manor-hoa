@@ -34,6 +34,13 @@ export interface Policy {
   enforcement: string;
 }
 
+export interface Notice {
+  id: string;
+  title: string;
+  status: "draft" | "sent";
+  text: string;
+}
+
 export interface Contract {
   slug: string;
   name: string;

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import * as yaml from "js-yaml";
-import type { Meeting, Contract, Expense, BudgetYear, TaskItem, Governance, Policy } from "./types";
+import type { Meeting, Contract, Expense, BudgetYear, TaskItem, Governance, Policy, Notice } from "./types";
 
 const DATA_DIR = path.resolve(process.cwd(), "data");
 
@@ -65,4 +65,11 @@ export function getPolicies(): Policy[] {
     path.join(DATA_DIR, "policies.yaml"),
     { policies: [] }
   ).policies;
+}
+
+export function getNotices(): Notice[] {
+  return readYaml<{ notices: Notice[] }>(
+    path.join(DATA_DIR, "policies.yaml"),
+    { notices: [] }
+  ).notices;
 }

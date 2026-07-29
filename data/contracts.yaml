@@ -26,6 +26,8 @@ contracts:
       work requested/approved by others. A different vendor (LD) is
       under consideration for the 2026-27 season per May/Sep 2025 board
       minutes — not yet confirmed which vendor is providing this season.
+      Board has separately expressed concern about the sidewalk-clearing
+      price feeling "outrageous" — see private notes, flagged for Brady.
   - slug: snow-removal-ld
     name: Snow removal (2026-27 season, under consideration)
     category: Snow removal
@@ -47,3 +49,10 @@ contracts:
     renewalDate: null
     noticeRequiredDays: null
     notes: Same contact as the Olson's Garden Shoppe invoice (#181) below — Brady's contact for new tree options/pricing.
+  - slug: insurance-usaa
+    name: HOA insurance
+    category: Insurance
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: Carrier confirmed via a Mar 2026 billing document; D&O vs. structures-only coverage was still an open question as of the 2025-03-25 minutes.

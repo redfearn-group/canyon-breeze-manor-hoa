@@ -1,9 +1,15 @@
 tasks:
   - id: 1
     title: Fill in tonight's (2026-07-28) meeting agenda from Brady's notes/documents
-    notes: Placeholder created 2026-07-28 — Brady is sending over existing notes/documents to populate this.
-    status: open
+    notes: >-
+      Placeholder created 2026-07-28. RESOLVED 2026-07-28: found Craig's
+      real agenda attachment in Redfearn Group Gmail — Finances, Lawn
+      watering, a homeowner complaint, Cleanliness letter, next set of
+      rules to clarify, and a dog-waste enforcement item (unit-specific
+      detail kept in data/private/watchlist.yaml).
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
   - id: 2
     title: Upload HOA irrigation system zone/controller map (4 controllers) and link to sprinkler-system tracking in home-log
     notes: Referenced from home-log's sprinkler-system item — see that repo's data/items/sprinkler-system/tasks.yaml.
@@ -92,5 +98,44 @@ tasks:
       Phase 3 (Exterior Alterations) drafts are all written (see
       data/policies.yaml) per the phased plan in the 2025-11-10 Cover
       Memo, but none have a send/adoption date yet.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 10
+    priority: critical
+    title: Call back the concerned homeowner from tonight's agenda
+    notes: >-
+      Added 2026-07-28 from Corey's 2026-07-20 email and tonight's
+      agenda. Contact detail in data/private/watchlist.yaml
+      (complaint-steve-wright) — currently trying to sell their unit and
+      specifically asked to speak to Brady directly as president.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 11
+    title: Clarify the LD vs. Redfearn Group snow-removal pricing question with Craig/the board
+    notes: >-
+      Added 2026-07-28 — see data/private/watchlist.yaml's
+      snow-removal-ld-vs-redfearn-pricing entry. Brady's own 2026-02-02
+      email says Estimate #180's ice-melt line was copied from "LD's
+      original estimate," and Craig separately said the board feels
+      "stuck" paying an "outrageous price" for sidewalk clearing. Worth
+      resolving directly given Brady's related-party position, beyond
+      the general disclosure already cleared with TPM.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 12
+    title: Read remaining unopened board emails (Owner monthly reports, April board meeting, cleanliness-letter iterations, a homeowner sidewalk/concrete complaint)
+    notes: >-
+      Added 2026-07-28 — a Gmail search across Craig/Corey/Hunter/Greg
+      turned up 20 threads; only a handful were opened in full (tonight's
+      agenda, snow removal bids, the June sprinkler/animal-waste
+      notices). Still unopened: the recurring "Canyon Breeze Manor
+      Monthly Reports" threads (Corey sends financial PDFs monthly —
+      Owner Statement, OwnerExpenseDetail, Delinquency — these likely
+      have the real budget figures still missing from data/budget.yaml),
+      the April board meeting thread, several cleanliness-letter
+      iteration threads, and a homeowner sidewalk/concrete complaint (see
+      data/private/watchlist.yaml for the address). Personal Gmail not
+      yet searched at all, per Brady's own "I'll also want you to open my
+      personal Gmail later" note.
     status: open
     createdDate: '2026-07-28'

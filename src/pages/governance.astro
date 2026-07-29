@@ -1,9 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import { getGovernance, getPolicies } from "../lib/data";
+import { getGovernance, getPolicies, getNotices } from "../lib/data";
 
 const gov = getGovernance();
 const policies = getPolicies().slice().sort((a, b) => a.phase - b.phase);
+const notices = getNotices();
 ---
 <Base title="Governance & Policies">
   <h1>Governance & Policies</h1>
@@ -60,4 +61,16 @@ const policies = getPolicies().slice().sort((a, b) => a.phase - b.phase);
       <p><strong>Enforcement:</strong> {p.enforcement}</p>
     </div>
   ))}
+
+  {notices.length > 0 && (
+    <>
+      <h2>Resident notices</h2>
+      {notices.map((n) => (
+        <div class="card">
+          <h3 style="margin-top:0">{n.title} <span class={`tag tag-${n.status}`}>{n.status}</span></h3>
+          <p>{n.text}</p>
+        </div>
+      ))}
+    </>
+  )}
 </Base>

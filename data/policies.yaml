@@ -61,3 +61,30 @@ policies:
       16.1 (collectible as assessments, including daily fines for
       continuing violations); the Association may restore altered areas
       at the owner's expense if not corrected.
+
+# Resident notices — shorter, standalone communications (not phased
+# enforcement policies). Drafted by Craig 2026-06-18, "for your feedback";
+# later correspondence (residents replying about grass types) suggests
+# these were sent out. Neither notice names any resident or unit.
+notices:
+  - id: notice-sprinklers-2026-06
+    title: Sprinkler Watering
+    status: sent
+    text: >-
+      Please help with making good use of our sprinklers. If you see a
+      fountain of water instead of a functioning sprinkler head, please
+      call TPM ASAP. If you notice sprinklers aimed improperly or other
+      malfunctions, please email TPM with photos so the problem may be
+      addressed.
+  - id: notice-animal-waste-2026-06
+    title: Animal Waste
+    status: sent
+    text: >-
+      Ongoing problem with animal waste not being cleaned up. The board
+      discussed a DNA testing service (Pooprints) at the March annual
+      meeting to identify responsible pet owners by sampling uncollected
+      waste, but called it a last resort given the cost/burden it would
+      add. Simply hiring cleanup crews was also discussed, but would
+      require raising dues. Residents are asked to help identify
+      non-compliant neighbors — info/photos can be emailed to the
+      property manager so fines may be assessed.
