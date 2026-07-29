@@ -9,16 +9,28 @@ entityStatusNotes: >-
   confusion/discrepancy between the CC&Rs, Articles of Incorporation, and
   state filings (LLC vs. Inc) noted as far back as 2025-04-29, and the
   Association was not registered with the State HOA Registry at that
-  time.
+  time. This traces back further than 2025: a board member raised a list
+  of formation-document issues directly with the original declarant's
+  principal as early as May 2024, including that the By-Laws/Articles of
+  Incorporation reference the association by a name that doesn't quite
+  match its actual registered name.
 openComplianceItems:
+  - The By-Laws and Articles of Incorporation reportedly refer to the
+    association by a name that doesn't precisely match "Canyon Breeze
+    Manor Owners Association" (a "Home"/"Homeowners" wording
+    discrepancy) — raised with the original declarant's principal in
+    May 2024, unclear if ever formally corrected.
   - The State HOA Advisory Board reportedly requires a separate
     registration in addition to the Association's current State
     registration (raised 2025-09-30) — status as of the last minutes on
     file is still "Craig looking into the complexity," not resolved.
-  - There is no formal process for reviewing/approving exterior
+  - There is no formal WRITTEN process for reviewing/approving exterior
     alteration (ACC) requests — confirmed directly by a board member's
     own words in Mar 2026 ("we don't have a process for this at all
-    right now"). Requests have been handled ad hoc by email so far.
+    right now"). In practice, real enforcement has happened before (an
+    unauthorized fence was required to be brought into compliance or
+    removed in 2024, following a documented notice-and-cure process),
+    it just isn't written down as a standing policy.
   - D&O vs. structures-only insurance coverage was raised as an open
     question in the 2025-03-25 minutes and hasn't been confirmed
     resolved in any later record.
@@ -29,7 +41,7 @@ officers:
   - name: Brady Redfearn
     role: President
     since: '2026-05-26'
-    priorRole: Vice President (through at least 2025-11-10)
+    priorRole: Vice President (confirmed as far back as Jun 2024; through at least 2025-11-10)
   - name: Hunter Behling
     role: Vice President
     since: '2026-05-26'
@@ -47,3 +59,12 @@ boardTermNotes: >-
   election; Craig was re-elected over a Hunter Behling nomination, 4
   ayes. Officer roles (President/VP/Treasurer/Secretary) are reassigned
   separately from board-seat elections, per the 2026-05-26 minutes above.
+  Board history goes back further than the 2025-26 record: the board was
+  originally formed via a Jan 2024 election notice to all homeowners
+  (Canyon Breeze had no board before that). Brady has been continuously
+  involved since at least 2022 (per an old sign-removal dispute thread)
+  and was confirmed as VP as far back as Jun 2024. At the 2025-03-12
+  annual meeting, Craig indicated the board needed to "elect someone to
+  replace Brady" — Brady's exact status/reasoning at that moment isn't
+  fully clear from the record, but he was still active on the board
+  immediately after and has been continuously since.

@@ -44,6 +44,15 @@ tasks:
       accounts above $700 in collections; 3303E1350S and 3316E1350S
       caught up and exited collections). Would let data/private/budget.yaml
       track month-over-month trends instead of just the June snapshot.
+
+      ADDITIONALLY RESOLVED 2026-07-28 (bigger find): a real
+      board-ADOPTED annual budget for FY 2024-25 (Mar 2025-Feb 2026) was
+      found in Brady's personal Gmail ("Canyon Breeze Manor Dues increase
+      notice W/ budget," 2025AnnualBudget Draft.pdf) — a proper breakeven
+      budget at $90/mo dues with a dedicated $632.50/mo capital reserve
+      contribution. This is the document that was missing; see
+      data/private/budget.yaml's 2024-25 entry. Worth asking Corey
+      whether a 2026-27 budget has been drafted yet.
     status: open
     createdDate: '2026-07-28'
   - id: 4
@@ -213,5 +222,50 @@ tasks:
   - id: 17
     title: Follow up on the pending community newsletter
     notes: Added 2026-07-28 — discussed since ~Feb 2026 ("corrected verbiage"), still not confirmed sent as of the last record reviewed (Apr 28, 2026).
+    status: open
+    createdDate: '2026-07-28'
+  - id: 18
+    title: Read Brady's personal Gmail HOA history (2021-2026, 70 threads)
+    notes: >-
+      Added 2026-07-28, per Brady's explicit instruction to also sweep
+      his personal Gmail after the Redfearn Group one. Same search across
+      Craig/Corey/Hunter/Greg returned 70 conversations going back to
+      2021 — reveals board history well beyond what the Redfearn Group
+      account showed (formed via a Jan 2024 election notice; Brady
+      confirmed as VP as far back as Jun 2024; a prior TPM portfolio
+      manager, Rich Wells, active 2023-2025 before Corey).
+
+      RESOLVED, WITH SAMPLING: given the volume (5 years, many routine
+      monthly "here are the financials"/"meeting tonight" emails),
+      opened the highest-value distinct threads rather than all 70:
+      the real 2024-25 annual budget (see task #13), the full
+      snow-removal-bids chronology back to Oct 2025, a 2024 fence
+      enforcement precedent (Keyes), Cutters' actual 2025→2026 pricing
+      history and contact (Jared Fry), a 2022-2024 sign dispute, and the
+      formation-documents/entity-naming issue traced to May 2024. Not
+      individually opened: ~50 routine monthly meeting-reminder/financial
+      report cover emails and a handful of unrelated personal/church
+      threads that also matched the sender search. Ask Brady if any
+      specific older thread needs a closer look.
+    status: done
+    createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
+  - id: 19
+    title: Track down the builder-provided written fence policy TPM has on file
+    notes: >-
+      Added 2026-07-28 — referenced in the 2024 Keyes fence-enforcement
+      thread ("attached is the fence policy the builder had us use for
+      any owner who requested a fence"). Worth comparing against the
+      still-unsent Phase 2 (Fences) draft policy to make sure they're
+      consistent before finalizing.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 20
+    title: Confirm whether the association's legal name discrepancy (Bylaws/Articles vs. actual registered name) was ever corrected
+    notes: >-
+      Added 2026-07-28 — raised with the original declarant's principal
+      as early as May 2024 (see data/governance.yaml's openComplianceItems),
+      resurfaced again in Apr 2025 minutes, no confirmation found that it
+      was ever formally fixed.
     status: open
     createdDate: '2026-07-28'

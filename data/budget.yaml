@@ -1,6 +1,23 @@
 # Public: fiscal year + category names only. Dollar figures (budgeted vs.
 # actual) live in data/private/budget.yaml, which is gitignored.
 budgets:
+  - fiscalYear: '2024-25'
+    categories:
+      - Dues / Transfer Fees / Late Fees / NSF Fees (income)
+      - Lawn Care
+      - Trees
+      - Sprinkler Repair
+      - Snow Removal
+      - Maintenance
+      - Water
+      - Management Fees
+      - Insurance
+      - Capital Repair Reserves Funding
+      - Misc. Fees/Software Charges
+    notes: >-
+      Real board-adopted annual budget (period 2025-03-01 to 2026-02-28),
+      designed to break even at $90/mo dues, with a dedicated monthly
+      contribution to capital repair reserves.
   - fiscalYear: '2026'
     categories:
       - Dues / Prepaid HOA Dues (income)
@@ -17,6 +34,5 @@ budgets:
       - Lien Filed
     notes: >-
       Categories sourced from TPM's monthly Owner Statement (rentmanager.com
-      report format). No board-adopted annual budget document found in
-      correspondence read so far — dues are set at $90/mo per the
-      2025-03-25 minutes.
+      report format) — actuals only, not a distinct adopted budget from
+      the 2024-25 one above.
