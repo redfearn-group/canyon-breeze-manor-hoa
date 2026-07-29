@@ -1,3 +1,22 @@
 # Public: fiscal year + category names only. Dollar figures (budgeted vs.
 # actual) live in data/private/budget.yaml, which is gitignored.
-budgets: []
+budgets:
+  - fiscalYear: '2026'
+    categories:
+      - Dues / Prepaid HOA Dues (income)
+      - Late Fees (income)
+      - Lawn Care
+      - Sprinkler Repair
+      - Snow Removal
+      - Trees
+      - Water
+      - License
+      - Management Fees
+      - Insurance
+      - Misc. Fees/Software Charges
+      - Lien Filed
+    notes: >-
+      Categories sourced from TPM's monthly Owner Statement (rentmanager.com
+      report format). No board-adopted annual budget document found in
+      correspondence read so far — dues are set at $90/mo per the
+      2025-03-25 minutes.

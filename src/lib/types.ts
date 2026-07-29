@@ -32,6 +32,7 @@ export interface Policy {
   ccrBasis: string[];
   rules: string[];
   enforcement: string;
+  history?: string;
 }
 
 export interface Notice {

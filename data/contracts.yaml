@@ -7,15 +7,16 @@ contracts:
     status: active
     renewalDate: null
     noticeRequiredDays: null
+    notes: '$400/month management fee (confirmed via June 2026 actuals)'
   - slug: landscaping-cutters
     name: Landscaping & lawn care
     category: Landscaping
     status: active
     renewalDate: null
     noticeRequiredDays: null
-    notes: Seasonal, Mar-Nov
+    notes: Seasonal, Mar-Nov. Confirmed June 2026 actuals — lawn care + sprinkler repair.
   - slug: snow-removal-redfearn-group
-    name: Snow removal (2025-26 season)
+    name: Snow removal — hand shoveling (2025-26 season)
     category: Snow removal
     status: expired
     renewalDate: null
@@ -23,18 +24,25 @@ contracts:
     notes: >-
       Seasonal, Dec-Feb, 2025-26 season only. Related-party vendor
       relationship (board president) — cleared with property manager,
-      work requested/approved by others. A different vendor (LD) is
-      under consideration for the 2026-27 season per May/Sep 2025 board
-      minutes — not yet confirmed which vendor is providing this season.
-      Board has separately expressed concern about the sidewalk-clearing
-      price feeling "outrageous" — see private notes, flagged for Brady.
+      work requested/approved by others. Covered hand shoveling only; a
+      separate vendor handled plowing the same season (see below).
   - slug: snow-removal-ld
-    name: Snow removal (2026-27 season, under consideration)
+    name: Snow removal — plowing
     category: Snow removal
+    status: active
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: >-
+      Plowed the 2025-26 season (no other company would service the
+      area). Whether they're providing 2026-27 service is not yet
+      confirmed.
+  - slug: hardscape-curbing-bid
+    name: Curbing repair (community-wide)
+    category: Hardscape
     status: pending-renewal
     renewalDate: null
     noticeRequiredDays: null
-    notes: Raised as an alternative to Cutters/Redfearn Group in Sep 2025 and May 2026 minutes — approval status unclear from notes on file.
+    notes: '~$5,000 bid received, deferred in favor of tree fertilizing due to cost. A scaled-down option was offered.'
   - slug: tree-care-utah-county-trees
     name: Tree care & bracing
     category: Landscaping
@@ -49,10 +57,21 @@ contracts:
     renewalDate: null
     noticeRequiredDays: null
     notes: Same contact as the Olson's Garden Shoppe invoice (#181) below — Brady's contact for new tree options/pricing.
-  - slug: insurance-usaa
-    name: HOA insurance
-    category: Insurance
+  - slug: tree-fertilizer-vendor
+    name: Tree fertilizer treatment
+    category: Landscaping
     status: active
     renewalDate: null
     noticeRequiredDays: null
-    notes: Carrier confirmed via a Mar 2026 billing document; D&O vs. structures-only coverage was still an open question as of the 2025-03-25 minutes.
+    notes: 'One-time (spring 2026), $1,300, maple trees.'
+  - slug: insurance-usaa
+    name: HOA insurance
+    category: Insurance
+    status: pending-renewal
+    renewalDate: null
+    noticeRequiredDays: null
+    notes: >-
+      Carrier not fully confirmed — a Mar 2026 document referencing this
+      carrier turned out to be about an unrelated matter. D&O vs.
+      structures-only coverage remains an open question from the
+      2025-03-25 minutes.

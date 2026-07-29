@@ -19,13 +19,31 @@ tasks:
     title: Fill in real contract, expense, and budget data
     notes: >-
       Site scaffolded 2026-07-28 with no real financial data yet.
-      PARTIALLY RESOLVED 2026-07-28: read CC&Rs, PUD plat, and 4
-      invoices/estimates from R:\My Drive\HOA — populated contracts
-      (TPM property management, Cutters landscaping, Redfearn Group snow
-      removal) and 3 expense entries (2 invoices + 1 estimate, all
-      Redfearn Group). Budget still has nothing — no annual budget
-      document found yet, only the $90/mo dues figure mentioned in
-      HOA Notes.txt (implies ~$37,800/yr total across the association).
+      RESOLVED 2026-07-28: read CC&Rs, PUD plat, invoices from
+      R:\My Drive\HOA, and a full Redfearn Group Gmail sweep (20 threads
+      + 3 downloaded financial PDFs). Populated contracts (TPM, Cutters/
+      C&C, Redfearn Group + LD Property Maintenance snow removal, Chad
+      Knebel curbing bid, 3 tree vendors, USAA), expenses (invoices
+      #181/#182, estimate #180, Joe Jensen tree fertilizer, LD billing
+      error), and a real June 2026 budget snapshot with categories,
+      actuals, and a full expense-detail ledger — see
+      data/private/budget.yaml. No board-adopted ANNUAL budget document
+      found (dues are set at $90/mo per the 2025-03-25 minutes, not a
+      formal line-item budget). A May 2026 report set exists (see task
+      re: transcribing it) but wasn't fully read this session.
+    status: done
+    createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
+  - id: 13
+    title: Transcribe the May 2026 Owner Statement/Expense Detail/Delinquency PDFs
+    notes: >-
+      Added 2026-07-28 — these were emailed 2026-05-26 (in the
+      confusingly-labeled "Canyon Breeze Manor Monthly Reports April"
+      thread) but only Corey's cover-note summary was read, not the PDFs
+      themselves ("overpayment to insurance that was reversed"; 2
+      accounts above $700 in collections; 3303E1350S and 3316E1350S
+      caught up and exited collections). Would let data/private/budget.yaml
+      track month-over-month trends instead of just the June snapshot.
     status: open
     createdDate: '2026-07-28'
   - id: 4
@@ -73,13 +91,19 @@ tasks:
     notes: >-
       Added 2026-07-28 — raised as an open question in both the
       2025-09-30 minutes ("Cutters or LD") and 2026-05-26 minutes ("did
-      we approve LD?"). Redfearn Group did the 2025-26 season (Estimate
-      #180); unclear who's doing 2026-27.
+      we approve LD?"). Redfearn Group did shoveling and LD Property
+      Maintenance did plowing for 2025-26; still unconfirmed who's doing
+      2026-27, or whether it's the same split.
     status: open
     createdDate: '2026-07-28'
   - id: 7
-    title: 'Clarify: is "C&C" in the 2026-05-26 minutes the same vendor as Cutters?'
-    notes: Assumed same vendor for now (see data/private/contracts.yaml) but not confirmed.
+    title: 'Clarify: is "C&C Grounds Maintenance" (June 2026 expense detail) the same vendor as Cutters?'
+    notes: >-
+      STRENGTHENED 2026-07-28: June 2026 Owner Expense Detail explicitly
+      bills "C&C Grounds Maintenance" for both lawn care and sprinkler
+      repair on the same unit reference (4005) that Cutters would
+      handle. Strong circumstantial match, not a documented confirmation
+      — still worth a direct one-line confirmation from Craig or Corey.
     status: open
     createdDate: '2026-07-28'
   - id: 8
@@ -92,12 +116,15 @@ tasks:
     status: open
     createdDate: '2026-07-28'
   - id: 9
-    title: Decide when to finalize and send the three draft enforcement policies
+    title: Decide when to finalize and send Phase 2 (Fences) and Phase 3 (Exterior Alterations)
     notes: >-
-      Added 2026-07-28 — Phase 1 (Cleanliness), Phase 2 (Fences), and
-      Phase 3 (Exterior Alterations) drafts are all written (see
-      data/policies.yaml) per the phased plan in the 2025-11-10 Cover
-      Memo, but none have a send/adoption date yet.
+      Added 2026-07-28. PARTIALLY RESOLVED: Phase 1 (Cleanliness) has
+      actually been sent — first 2026-05-13, re-sent 2026-07-01, deadline
+      moved to 2026-08-03, with door-tag notices to follow (see
+      data/policies.yaml's phase-1-cleanliness history field). Phase 2
+      (Fences) and Phase 3 (Exterior Alterations) are still draft-only
+      per the phased plan in the 2025-11-10 Cover Memo — no send/adoption
+      date found for either.
     status: open
     createdDate: '2026-07-28'
   - id: 10
@@ -113,29 +140,78 @@ tasks:
   - id: 11
     title: Clarify the LD vs. Redfearn Group snow-removal pricing question with Craig/the board
     notes: >-
-      Added 2026-07-28 — see data/private/watchlist.yaml's
-      snow-removal-ld-vs-redfearn-pricing entry. Brady's own 2026-02-02
-      email says Estimate #180's ice-melt line was copied from "LD's
-      original estimate," and Craig separately said the board feels
-      "stuck" paying an "outrageous price" for sidewalk clearing. Worth
-      resolving directly given Brady's related-party position, beyond
-      the general disclosure already cleared with TPM.
-    status: open
+      Added 2026-07-28. RESOLVED, DOWNGRADED 2026-07-28: full context
+      found in the "Canyon Breeze Manor Monthly Reports April" thread —
+      LD Property Maintenance genuinely plowed Canyon Breeze in Feb 2026
+      (no other company would service the area, and LD already served
+      neighboring Somerset), and the $195 March charge Craig flagged was
+      a cross-HOA TPM billing mixup, since reimbursed. Brady's ice-melt
+      pricing reference to "LD's original estimate" reads as normal rate
+      shopping for a different task (hand shoveling vs. plowing), not
+      pass-through billing. See
+      data/private/watchlist.yaml's snow-removal-ld-vs-redfearn-pricing
+      entry for full detail. No longer flagged as urgent, though still
+      worth Brady's own gut-check on Craig's "outrageous"/"stuck"
+      language if he wants full peace of mind.
+    status: done
     createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
   - id: 12
-    title: Read remaining unopened board emails (Owner monthly reports, April board meeting, cleanliness-letter iterations, a homeowner sidewalk/concrete complaint)
+    title: Read all remaining board emails from the Craig/Corey/Hunter/Greg Gmail sweep
     notes: >-
       Added 2026-07-28 — a Gmail search across Craig/Corey/Hunter/Greg
-      turned up 20 threads; only a handful were opened in full (tonight's
-      agenda, snow removal bids, the June sprinkler/animal-waste
-      notices). Still unopened: the recurring "Canyon Breeze Manor
-      Monthly Reports" threads (Corey sends financial PDFs monthly —
-      Owner Statement, OwnerExpenseDetail, Delinquency — these likely
-      have the real budget figures still missing from data/budget.yaml),
-      the April board meeting thread, several cleanliness-letter
-      iteration threads, and a homeowner sidewalk/concrete complaint (see
-      data/private/watchlist.yaml for the address). Personal Gmail not
-      yet searched at all, per Brady's own "I'll also want you to open my
-      personal Gmail later" note.
+      turned up 20 threads. RESOLVED 2026-07-28, per Brady ("pull
+      everything, don't skip anything"): opened all 19 HOA-related
+      threads (1 was an unrelated personal "Resume" email, skipped) plus
+      downloaded and read all 3 financial PDF attachments from the most
+      recent monthly report email. Found: tonight's real agenda, the full
+      snow-removal-bids resolution, two June resident notices, the real
+      June 2026 budget figures and full delinquency roster, 4 distinct
+      tree vendors, a $5,000 curbing bid (deferred), a governance gap
+      (no formal ACC process), a pending newsletter, several
+      resident-specific complaints/watch items, and the permanent
+      board-meeting Zoom bridge. All sensitive detail routed to
+      data/private/*.yaml; verified via grep against the built dist/
+      output that nothing leaked into the public site. Personal Gmail
+      still not searched — per Brady's own "I'll also want you to open
+      my personal Gmail later" note, that's a separate future task.
+    status: done
+    createdDate: '2026-07-28'
+    completedDate: '2026-07-28'
+  - id: 14
+    title: Formalize an ACC (exterior-alteration request) intake process
+    notes: >-
+      Added 2026-07-28 — confirmed governance gap, in a board member's
+      own words: "we don't have a process for this at all right now"
+      (Holly Osborn's deck-replacement request, handled ad hoc by email
+      Jan-Mar 2026). Craig's suggestion at the time: route intake through
+      TPM, since they're better positioned to gather the right info.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 15
+    title: Decide on the deferred curbing project (~$5,000 bid)
+    notes: >-
+      Added 2026-07-28 — deferred in favor of tree fertilizing in spring
+      2026 due to cost. Contractor (see private contracts) offered a
+      scaled-down option (front sections only, or just the park area) to
+      reduce cost. May overlap with a
+      separate concrete-crack-sealing bid the board was pursuing per the
+      2026-06-30 minutes — worth clarifying whether these are the same
+      project before getting two sets of bids.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 16
+    title: Confirm the actual HOA insurance carrier and D&O coverage status
+    notes: >-
+      Added 2026-07-28 — a "USAA Document" thread turned out to be about
+      an unrelated returned reimbursement check, not confirmed proof USAA
+      is the HOA's carrier. The D&O-vs-structures-only coverage question
+      from the 2025-03-25 minutes has never been confirmed resolved in
+      any later record.
+    status: open
+    createdDate: '2026-07-28'
+  - id: 17
+    title: Follow up on the pending community newsletter
+    notes: Added 2026-07-28 — discussed since ~Feb 2026 ("corrected verbiage"), still not confirmed sent as of the last record reviewed (Apr 28, 2026).
     status: open
     createdDate: '2026-07-28'

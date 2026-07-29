@@ -6,7 +6,7 @@ policies:
   - id: phase-1-cleanliness
     phase: 1
     title: Community Cleanliness & Outdoor Storage
-    status: draft
+    status: adopted
     ccrBasis:
       - 'Common Area Use (Article 1.4, 2.1): all land outside unit walls is Common Area owned by the Association, not for personal storage.'
       - 'Nuisance (Article 9.4): no owner may permit anything that becomes an annoyance/nuisance.'
@@ -24,6 +24,11 @@ policies:
       disposal costs to the Owner as an assessment. Violations may draw
       fines under Article 16.1, including daily fines for continuing
       violations.
+    history: >-
+      First sent by TPM 2026-05-13. Re-sent 2026-07-01 with a 2026-07-15
+      cleanup deadline; deadline later moved to 2026-08-03 (email +
+      mailer), with door-tag notices to follow giving violators 72 hours
+      to cure before fines.
   - id: phase-2-fences
     phase: 2
     title: Fence & Exterior Structure Compliance

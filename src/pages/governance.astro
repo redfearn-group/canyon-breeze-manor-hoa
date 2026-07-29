@@ -45,8 +45,8 @@ const notices = getNotices();
     </div>
   )}
 
-  <h2>Enforcement policies (draft)</h2>
-  <p>Draft notices intended for distribution to all homeowners once finalized by the board. Not yet sent.</p>
+  <h2>Enforcement policies</h2>
+  <p>Phased CC&Rs enforcement notices — draft until sent to homeowners.</p>
   {policies.map((p) => (
     <div class="card">
       <h3 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag tag-${p.status}`}>{p.status}</span></h3>
@@ -59,6 +59,7 @@ const notices = getNotices();
         {p.rules.map((r) => <li>{r}</li>)}
       </ul>
       <p><strong>Enforcement:</strong> {p.enforcement}</p>
+      {p.history && <p><strong>History:</strong> {p.history}</p>}
     </div>
   ))}
 

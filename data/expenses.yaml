@@ -16,3 +16,13 @@ expenses:
     category: Snow removal
     status: paid
     note: 2025-26 winter season shoveling/ice melt (estimate #180)
+  - id: tree-fertilizer-2026-04
+    date: '2026-04-22'
+    category: Landscaping
+    status: paid
+    note: Maple tree fertilizer treatment
+  - id: ld-march-2026-billing-error
+    date: '2026-03-03'
+    category: Snow removal
+    status: disputed
+    note: 'Cross-HOA billing error, since reimbursed — see governance notes'
