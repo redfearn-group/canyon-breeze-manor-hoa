@@ -8,11 +8,12 @@ const policies = getPolicies().slice().sort((a, b) => a.phase - b.phase);
 const notices = getNotices();
 ---
 <Base title="Governance & Policies">
-  <h1>Governance & Policies</h1>
+  <div class="eyebrow">Governance</div>
+  <h2>Governance & Policies</h2>
 
   {gov && (
     <div class="card">
-      <h2 style="margin-top:0">Entity status</h2>
+      <h3 style="margin-top:0">Entity status</h3>
       <p><strong>{gov.entityName}</strong>: {gov.entityType}</p>
       <p>{gov.entityStatusNotes}</p>
       {gov.openComplianceItems.length > 0 && (
@@ -28,7 +29,7 @@ const notices = getNotices();
 
   {gov && (
     <div class="card">
-      <h2 style="margin-top:0">Board officers</h2>
+      <h3 style="margin-top:0">Board officers</h3>
       <table>
         <thead><tr><th>Name</th><th>Role</th><th>Since</th><th>Prior role</th></tr></thead>
         <tbody>
@@ -46,11 +47,11 @@ const notices = getNotices();
     </div>
   )}
 
-  <h2>Enforcement policies</h2>
+  <h3>Enforcement policies</h3>
   <p>Phased CC&Rs enforcement notices, draft until sent to homeowners.</p>
   {policies.map((p) => (
     <div class="card">
-      <h3 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag ${statusTagClass(p.status)}`}>{p.status}</span></h3>
+      <h4 style="margin-top:0">Phase {p.phase}: {p.title} <span class={`tag ${statusTagClass(p.status)}`}>{p.status}</span></h4>
       <p><strong>CC&Rs basis:</strong></p>
       <ul>
         {p.ccrBasis.map((b) => <li>{b}</li>)}
@@ -66,10 +67,10 @@ const notices = getNotices();
 
   {notices.length > 0 && (
     <>
-      <h2>Resident notices</h2>
+      <h3>Resident notices</h3>
       {notices.map((n) => (
         <div class="card">
-          <h3 style="margin-top:0">{n.title} <span class={`tag ${statusTagClass(n.status)}`}>{n.status}</span></h3>
+          <h4 style="margin-top:0">{n.title} <span class={`tag ${statusTagClass(n.status)}`}>{n.status}</span></h4>
           <p>{n.text}</p>
         </div>
       ))}

@@ -6,7 +6,8 @@ import { statusTagClass } from "../../lib/status-tag";
 const expenses = getExpenses().slice().sort((a, b) => b.date.localeCompare(a.date));
 ---
 <Base title="Expenses">
-  <h1>Expenses</h1>
+  <div class="eyebrow">Expenses</div>
+  <h2>Expenses</h2>
   <p>Public category/status metadata only. Dollar amounts and vendor names are kept in the private, not-publicly-committed file.</p>
   {expenses.length > 0 ? (
     <table>

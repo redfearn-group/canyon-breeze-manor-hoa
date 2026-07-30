@@ -12,12 +12,13 @@ const openTasks = getTasks().filter((t) => t.status === "open");
 const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
 ---
 <Base title="Dashboard">
-  <h1>Canyon Breeze Manor HOA</h1>
+  <div class="eyebrow">Dashboard</div>
+  <h2>Canyon Breeze Manor HOA</h2>
   <p>Board tracker: meetings, contracts, expenses, and budget.</p>
 
   {upcoming && (
     <div class="card">
-      <h2 style="margin-top:0">Next meeting</h2>
+      <h3 style="margin-top:0">Next meeting</h3>
       <p>
         <strong>{upcoming.date}:</strong> {upcoming.type === "annual-homeowners" ? "Annual all-homeowner meeting" : "Monthly board meeting"}
         <span class={`tag ${statusTagClass(upcoming.status)}`}>{upcoming.status}</span>
@@ -35,7 +36,7 @@ const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
 
   {renewalsSoon.length > 0 && (
     <div class="card">
-      <h2 style="margin-top:0">Contracts up for renewal</h2>
+      <h3 style="margin-top:0">Contracts up for renewal</h3>
       <table>
         <thead><tr><th>Contract</th><th>Category</th><th>Renewal date</th></tr></thead>
         <tbody>
@@ -48,7 +49,7 @@ const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
   )}
 
   <div class="card">
-    <h2 style="margin-top:0">Open tasks</h2>
+    <h3 style="margin-top:0">Open tasks</h3>
     {openTasks.length > 0 ? (
       <ul>
         {openTasks.map((t) => <li>{t.title}</li>)}
@@ -57,7 +58,7 @@ const renewalsSoon = contracts.filter((c) => c.status === "pending-renewal");
   </div>
 
   <div class="card">
-    <h2 style="margin-top:0">All meetings</h2>
+    <h3 style="margin-top:0">All meetings</h3>
     <table>
       <thead><tr><th>Date</th><th>Type</th><th>Status</th></tr></thead>
       <tbody>

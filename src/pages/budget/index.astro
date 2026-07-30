@@ -5,11 +5,12 @@ import { getBudgets } from "../../lib/data";
 const budgets = getBudgets().slice().sort((a, b) => b.fiscalYear.localeCompare(a.fiscalYear));
 ---
 <Base title="Budget">
-  <h1>Budget</h1>
+  <div class="eyebrow">Budget</div>
+  <h2>Budget</h2>
   <p>Category names only. Budgeted/actual dollar figures are kept in the private, not-publicly-committed file.</p>
   {budgets.length > 0 ? budgets.map((b) => (
     <div class="card">
-      <h2 style="margin-top:0">{b.fiscalYear}</h2>
+      <h3 style="margin-top:0">{b.fiscalYear}</h3>
       <ul>
         {b.categories.map((cat) => <li>{cat}</li>)}
       </ul>

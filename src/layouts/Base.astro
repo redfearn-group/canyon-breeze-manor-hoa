@@ -43,10 +43,12 @@ const isGovernance = currentPath.startsWith(withBase("/governance").replace(/\/$
     <a href="#main" class="skip-link">Skip to content</a>
     <header class="site-header no-print">
       <div class="container">
-        <a class="site-brand" href={withBase("/")}>
-          <img src={withBase("/logo-wide-dark.svg")} alt="Redfearn Group" width="305" height="50" />
-          <span class="site-brand__app">Canyon Breeze Manor HOA</span>
-        </a>
+        <h1>
+          <a class="site-brand" href={withBase("/")}>
+            <img src={withBase("/logo-wide-dark.svg")} alt="Redfearn Group" width="305" height="50" />
+            <span class="site-brand__app">Canyon Breeze Manor HOA</span>
+          </a>
+        </h1>
         <nav class="site-nav">
           <a href={withBase("/")} aria-current={isDashboard ? "page" : undefined}>Dashboard</a>
           <a href={withBase("/meetings")} aria-current={isMeetings ? "page" : undefined}>Meetings</a>
