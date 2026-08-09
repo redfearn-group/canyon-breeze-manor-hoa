@@ -6,6 +6,15 @@ import { getMeetings } from "../../lib/data";
 import { formatDate } from "../../lib/kit/date";
 import { statusTagClass } from "../../lib/status-tag";
 
+// The YAML stores lowercase keys. Rendering them raw shipped "held" in a
+// tag next to properly cased text everywhere else on the site.
+const STATUS_LABEL: Record<string, string> = {
+  held: "Held",
+  upcoming: "Upcoming",
+  cancelled: "Cancelled",
+};
+const statusLabel = (s: string) => STATUS_LABEL[s] ?? s;
+
 const meetings = getMeetings()
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date));
@@ -41,7 +50,7 @@ const MEETING_TYPE: Record<string, string> = {
             <tr>
               <td>{formatDate(m.date)}</td>
               <td>{MEETING_TYPE[m.type] ?? m.type}</td>
-              <td><span class={`tag ${statusTagClass(m.status)}`}>{m.status}</span></td>
+              <td><span class={`tag ${statusTagClass(m.status)}`}>{statusLabel(m.status)}</span></td>
             </tr>
           ))}
         </tbody>

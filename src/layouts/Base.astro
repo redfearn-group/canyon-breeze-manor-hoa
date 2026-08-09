@@ -13,6 +13,16 @@ const { title } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isDashboard = currentPath === (withBase("/").replace(/\/$/, "") || "/");
 const section = (p: string) => currentPath.startsWith(withBase(p).replace(/\/$/, ""));
+
+// aria-current="page" means THIS IS the page. On a section link it is only
+// true at that section's index; on a child page (/landscaping/trees) the
+// section link is an ancestor, not the current page, and the correct value
+// is "true". Marking it "page" told a screen reader the reader was on the
+// map while they were on the trees page.
+const navCurrent = (p: string): "page" | "true" | undefined => {
+  if (!section(p)) return undefined;
+  return currentPath === withBase(p).replace(/\/$/, "") ? "page" : "true";
+};
 ---
 <html lang="en" class="app-layer">
   <head>
@@ -47,11 +57,11 @@ const section = (p: string) => currentPath.startsWith(withBase(p).replace(/\/$/,
         </h1>
         <nav class="site-nav">
           <a href={withBase("/")} aria-current={isDashboard ? "page" : undefined}>Home</a>
-          <a href={withBase("/landscaping")} aria-current={section("/landscaping") ? "page" : undefined}>Landscaping</a>
-          <a href={withBase("/meetings")} aria-current={section("/meetings") ? "page" : undefined}>Meetings</a>
-          <a href={withBase("/policies")} aria-current={section("/policies") ? "page" : undefined}>Policies</a>
-          <a href={withBase("/documents")} aria-current={section("/documents") ? "page" : undefined}>Documents</a>
-          <a href={withBase("/governance")} aria-current={section("/governance") ? "page" : undefined}>Governance</a>
+          <a href={withBase("/landscaping")} aria-current={navCurrent("/landscaping")}>Landscaping</a>
+          <a href={withBase("/meetings")} aria-current={navCurrent("/meetings")}>Meetings</a>
+          <a href={withBase("/policies")} aria-current={navCurrent("/policies")}>Policies</a>
+          <a href={withBase("/documents")} aria-current={navCurrent("/documents")}>Documents</a>
+          <a href={withBase("/governance")} aria-current={navCurrent("/governance")}>Governance</a>
         </nav>
       </div>
     </header>

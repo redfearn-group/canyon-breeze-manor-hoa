@@ -52,16 +52,51 @@ baseSvg = baseSvg
   .replace(/<svg[^>]*>/, "")
   .replace(/<\/svg>\s*$/, "");
 
+// The zone loop below splices values into a raw markup string that is
+// handed to `set:html`, so Astro's own escaping never sees them. Two
+// separate hazards, two separate escapes:
+//
+//   - Attribute values. A double quote in a label or an area ("the 24"
+//     main") would close the attribute early and the rest of the label
+//     would parse as markup. `<`, `>`, and `&` are escaped for the same
+//     reason.
+//   - The id inside the RegExp. A zone id carrying `.`, `+`, `(` or any
+//     other metacharacter would be compiled as a pattern rather than
+//     matched literally, so the shape either silently matches the wrong
+//     element or never matches at all.
+const escapeAttr = (value: unknown): string =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+const escapeRegExp = (value: unknown): string =>
+  String(value ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 // Apply a status class to each zone group the export gave us an id for.
 // A zone in the YAML with no matching shape simply has no shape: it still
 // appears in the table below, which is why the table is not optional.
+//
+// No `tabindex` and no `role="listitem"` here. The SVG is `role="img"`,
+// which makes everything inside it presentational, so a focus stop on a
+// shape was a tab stop with no announceable name and the listitem role
+// had no list to belong to. The `aria-label` stays as the authored name
+// of the shape and is escaped for the reason above; non-visual access to
+// the same facts comes from the tables on the page.
+let drawnZoneCount = 0;
 for (const zone of zones) {
   const worst = openIssuesByZone.get(zone.id)?.[0]?.severity;
   const cls = zoneStatusClass(zone.condition, worst);
+  const before = baseSvg;
+  const attrs = ` class="zone ${cls}" aria-label="${escapeAttr(zone.label)}, ${escapeAttr(zone.area)}"`;
   baseSvg = baseSvg.replace(
-    new RegExp(`(<(?:g|path)\\b[^>]*\\bid="zone-${zone.id}")`),
-    `$1 class="zone ${cls}" tabindex="0" role="listitem" aria-label="${zone.label}, ${zone.area}"`
+    new RegExp(`(<(?:g|path)\\b[^>]*\\bid="zone-${escapeRegExp(zone.id)}")`),
+    // Replacer function, not a template string: in a string replacement a
+    // `$&` or `$1` inside a zone label would be read as a backreference.
+    (match) => match + attrs
   );
+  if (baseSvg !== before) drawnZoneCount += 1;
 }
 
 const placedControllers = controllers.filter((c) => c.x != null && c.y != null);
@@ -69,9 +104,30 @@ const placedAssets = assets.filter((a) => a.x != null && a.y != null);
 const placedTrees = trees.filter((t) => t.x != null && t.y != null);
 
 const hasBaseMap = !baseSvg.includes("Neighborhood map not loaded yet");
+
+// The label describes what this SVG actually draws, counted rather than
+// asserted, so it stays true in the empty state and once the data lands.
+// Zones are counted by shapes matched above, not by rows in the YAML: a
+// zone the base map has no shape for is on the page only as a table row.
+const count = (n: number, one: string, many: string): string =>
+  `${n} ${n === 1 ? one : many}`;
+
+const drawn = [
+  count(drawnZoneCount, "watering zone shape", "watering zone shapes"),
+  count(placedControllers.length, "controller pin", "controller pins"),
+  count(placedAssets.length, "valve and backflow pin", "valve and backflow pins"),
+  count(placedTrees.length, "tree pin", "tree pins"),
+].join(", ");
+
+// Both variants point at the four tables on the page: zones, controllers,
+// valves and backflow, and trees. Keep that promise and the tables in
+// step with each other.
+const tablesNote =
+  "Every watering zone, controller, valve and backflow device, and tree is listed in full in the tables below this map.";
+
 const ariaLabel = hasBaseMap
-  ? `Map of Canyon Breeze Manor common areas showing ${zones.length} watering zones, ${placedControllers.length} irrigation controllers, and ${placedTrees.length} trees. The same information is listed in the tables below this map.`
-  : "Placeholder for the neighborhood map. The base map has not been loaded yet. All zone, controller, and tree information is listed in the tables below.";
+  ? `Map of Canyon Breeze Manor common areas, drawing ${drawn}. ${tablesNote}`
+  : `Placeholder for the neighborhood map. The base map artwork has not been loaded yet, so the diagram draws ${drawn}. ${tablesNote}`;
 ---
 
 <figure class="map-figure">

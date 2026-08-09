@@ -4,7 +4,7 @@
 // which is correct: there is nothing yet to link to from the map table.
 import Base from "../../../layouts/Base.astro";
 import { withBase } from "../../../lib/kit/base";
-import { formatDate } from "../../../lib/kit/date";
+import { formatDate, formatMonth } from "../../../lib/kit/date";
 import { statusTagClass } from "../../../lib/status-tag";
 import {
   getZones,
@@ -13,8 +13,24 @@ import {
   getIssues,
   getTrees,
 } from "../../../lib/data";
+import type { IssueCategory } from "../../../lib/types";
 
 export async function getStaticPaths() {
+  // Seasons read spring, summer, fall, the order they happen in. Sorting
+  // them alphabetically put fall first, which is the order nobody thinks
+  // in. Same order as the watering times page.
+  //
+  // Declared inside this function rather than beside the other helpers
+  // below on purpose: Astro extracts getStaticPaths into its own module,
+  // so a const declared in the frontmatter is not in scope here and the
+  // build dies with "SEASON_ORDER is not defined" the first time a zone
+  // exists to render.
+  const SEASON_ORDER: Record<string, number> = {
+    spring: 0,
+    summer: 1,
+    fall: 2,
+  };
+
   const controllers = getControllers();
   const schedule = getSchedule();
   const issues = getIssues();
@@ -27,7 +43,10 @@ export async function getStaticPaths() {
       controller: controllers.find((c) => c.id === zone.controllerId) ?? null,
       schedule: schedule
         .filter((s) => s.zoneId === zone.id)
-        .sort((a, b) => a.season.localeCompare(b.season)),
+        .sort(
+          (a, b) =>
+            (SEASON_ORDER[a.season] ?? 9) - (SEASON_ORDER[b.season] ?? 9)
+        ),
       openIssues: issues.filter(
         (i) => i.zoneId === zone.id && i.status !== "resolved"
       ),
@@ -42,16 +61,62 @@ export async function getStaticPaths() {
 const { zone, controller, schedule, openIssues, resolvedIssues, zoneTrees } =
   Astro.props;
 
-const humanize = (value: string): string => value.replace(/-/g, " ");
+// Same three helpers as the watering times page, and they have to stay
+// the same: a zone reached from the map and the same zone read off the
+// schedule table must not describe themselves differently.
+const titleCase = (value: string): string =>
+  value.charAt(0).toUpperCase() + value.slice(1);
+const humanize = (value: string): string => titleCase(value.replace(/-/g, " "));
 
-// Dates in these tables were rendered raw, so this page was the one place
-// on the site showing ISO strings. A missing date keeps the placeholder.
-const dateCell = (value?: string | null): string =>
-  value ? formatDate(value) : "—";
+// Controller clocks are programmed in 24-hour time. The watering times
+// page tells residents the site shows them in 12-hour, so this page owes
+// them the same form.
+function formatTime(value?: string): string {
+  if (!value) return "—";
+  const parts = /^(\d{1,2}):(\d{2})/.exec(value);
+  if (!parts) return value;
+  const hour24 = Number(parts[1]);
+  const suffix = hour24 < 12 ? "am" : "pm";
+  const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
+  return `${hour12}:${parts[2]} ${suffix}`;
+}
+
+// The issue vocabulary is written out the same way the issue log writes
+// it, so a category, a severity, and a status read identically whether a
+// resident lands here or on the log.
+const CATEGORY_LABELS: Record<IssueCategory, string> = {
+  "dead-spot": "Dead spots",
+  "schedule-timing": "Schedule and timing",
+  "equipment-failure": "Equipment failure",
+  "water-waste": "Water waste",
+};
+
+const SEVERITY_LABELS: Record<"high" | "medium" | "low", string> = {
+  high: "High",
+  medium: "Medium",
+  low: "Low",
+};
+
+const STATUS_LABELS: Record<"open" | "monitoring" | "resolved", string> = {
+  open: "Open",
+  monitoring: "Monitoring",
+  resolved: "Resolved",
+};
+
+// Planted dates arrive at day, month, or year precision. Same rule as the
+// trees page: render the precision that was recorded rather than invent a
+// day, and keep a full date from being flattened to a month.
+function formatPlanted(value?: string): string {
+  if (/^\d{4}-\d{2}$/.test(value ?? "")) return formatMonth(value);
+  return formatDate(value, { empty: "—" });
+}
 ---
 <Base title={zone.label}>
   <nav class="subnav" aria-label="Landscaping sections">
-    <a href={withBase("/landscaping")} aria-current="page">Map</a>
+    {/* No item is current here. A zone detail page is reached from the
+        map but is not the map, and marking Map as current made every
+        zone page announce itself as the map to a screen reader. */}
+    <a href={withBase("/landscaping")}>Map</a>
     <a href={withBase("/landscaping/watering")}>Watering times</a>
     <a href={withBase("/landscaping/trees")}>Trees</a>
     <a href={withBase("/landscaping/issues")}>Issues</a>
@@ -127,11 +192,11 @@ const dateCell = (value?: string | null): string =>
         <tbody>
           {schedule.map((entry) => (
             <tr>
-              <td>{entry.season}</td>
-              <td>{entry.days.join(", ")}</td>
-              <td>{entry.startTime}</td>
+              <td>{titleCase(entry.season)}</td>
+              <td>{entry.days.length > 0 ? entry.days.join(", ") : "—"}</td>
+              <td>{formatTime(entry.startTime)}</td>
               <td>{entry.runtimeMinutes} min</td>
-              <td>{dateCell(entry.effectiveDate)}</td>
+              <td>{formatDate(entry.effectiveDate, { empty: "—" })}</td>
             </tr>
           ))}
         </tbody>
@@ -157,13 +222,17 @@ const dateCell = (value?: string | null): string =>
         <tbody>
           {openIssues.map((issue) => (
             <tr>
-              <td>{dateCell(issue.openedDate)}</td>
-              <td>{humanize(issue.category)}</td>
+              <td>{formatDate(issue.openedDate, { empty: "—" })}</td>
+              <td>{CATEGORY_LABELS[issue.category] ?? humanize(issue.category)}</td>
               <td>
-                <span class={`tag ${statusTagClass(issue.severity)}`}>{issue.severity}</span>
+                <span class={`tag ${statusTagClass(issue.severity)}`}>
+                  {SEVERITY_LABELS[issue.severity]}
+                </span>
               </td>
               <td>
-                <span class={`tag ${statusTagClass(issue.status)}`}>{issue.status}</span>
+                <span class={`tag ${statusTagClass(issue.status)}`}>
+                  {STATUS_LABELS[issue.status]}
+                </span>
               </td>
               <td>{issue.summary}</td>
             </tr>
@@ -189,9 +258,9 @@ const dateCell = (value?: string | null): string =>
           <tbody>
             {resolvedIssues.map((issue) => (
               <tr>
-                <td>{dateCell(issue.openedDate)}</td>
-                <td>{dateCell(issue.resolvedDate)}</td>
-                <td>{humanize(issue.category)}</td>
+                <td>{formatDate(issue.openedDate, { empty: "—" })}</td>
+                <td>{formatDate(issue.resolvedDate, { empty: "—" })}</td>
+                <td>{CATEGORY_LABELS[issue.category] ?? humanize(issue.category)}</td>
                 <td>{issue.summary}</td>
               </tr>
             ))}
@@ -222,7 +291,7 @@ const dateCell = (value?: string | null): string =>
             <tr>
               <td>{tree.commonName}</td>
               <td>{tree.species}</td>
-              <td>{dateCell(tree.planted)}</td>
+              <td>{formatPlanted(tree.planted)}</td>
               <td>
                 <span class={`tag ${statusTagClass(tree.health)}`}>
                   {humanize(tree.health)}

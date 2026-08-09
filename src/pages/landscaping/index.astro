@@ -1,9 +1,14 @@
 ---
 // The landscaping map. This page is the reason the site exists: it turns
 // "the sprinkler by the mailboxes" into a zone number a contractor can act
-// on. The table below the map is not decoration. It is the accessible and
-// printable version of the same data, and it is the only view that works
-// when a zone has no shape in the base map yet.
+// on. The tables below the map are not decoration. They are the accessible
+// and printable version of the same data, and they are the only view that
+// works when a zone has no shape in the base map yet.
+//
+// One table per map layer, in the order the layer toggles list them:
+// zones, controllers, valves and backflow, trees. The map's aria-label
+// promises exactly that, so a layer added to the map needs a table here
+// and a fourth column of nothing is better than a missing table.
 import Base from "../../layouts/Base.astro";
 import NeighborhoodMap from "../../components/NeighborhoodMap.astro";
 import {
@@ -12,6 +17,7 @@ import {
   getIrrigationAssets,
   getTrees,
   getOpenIssuesByZone,
+  getIssues,
 } from "../../lib/data";
 import { withBase } from "../../lib/kit/base";
 import { statusTagClass } from "../../lib/status-tag";
@@ -21,16 +27,28 @@ const controllers = getControllers();
 const assets = getIrrigationAssets();
 const trees = getTrees();
 const openIssuesByZone = getOpenIssuesByZone();
+// Counted the same way as the home page and the issues page: every issue
+// that is not resolved, INCLUDING any that names no zone yet. Summing
+// openIssuesByZone instead would silently drop those, so the same label
+// would report a smaller number here than on the other two pages. The
+// map still colours by zone, which is a different question.
+const openIssueCountAll = getIssues().filter((i) => i.status !== "resolved").length;
 
-const openIssueCount = [...openIssuesByZone.values()].reduce(
-  (total, list) => total + list.length,
-  0
-);
 
-const controllerLabel = (id: string): string =>
-  controllers.find((c) => c.id === id)?.label ?? "—";
 
-const humanize = (value: string): string => value.replace(/-/g, " ");
+const controllerLabel = (id?: string): string =>
+  (id && controllers.find((c) => c.id === id)?.label) || "—";
+
+const zoneLabel = (id?: string): string =>
+  (id && zones.find((z) => z.id === id)?.label) || "—";
+
+// Title-cases as well as de-hyphenating, matching watering.astro and the
+// zone detail page. Without it the map page rendered "needs repair" in a
+// status tag while its siblings rendered "Needs repair".
+const humanize = (value: string): string => {
+  const spaced = value.replace(/-/g, " ");
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+};
 
 // One sentence, and it has to hold true before the zone data lands.
 const caption =
@@ -79,7 +97,7 @@ const caption =
       <span class="stat-label">Controllers</span>
     </div>
     <div>
-      <span class="stat-value">{openIssueCount}</span>
+      <span class="stat-value">{openIssueCountAll}</span>
       <span class="stat-label">Open issues</span>
     </div>
     <div>
@@ -184,6 +202,123 @@ const caption =
             </tr>
           );
         })}
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Every controller</h3>
+  <p>
+    The controller layer of the map, listed. Each controller runs a set of
+    zones, and the programmed watering times for those zones are on the
+    {" "}<a href={withBase("/landscaping/watering")}>watering times</a> page.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Controller</th>
+          <th>Area served</th>
+          <th>Zones</th>
+          <th>Condition</th>
+        </tr>
+      </thead>
+      <tbody>
+        {controllers.length === 0 && (
+          <tr>
+            <td colspan="4">No controllers recorded yet.</td>
+          </tr>
+        )}
+        {controllers.map((controller) => (
+          <tr>
+            <td>{controller.label}</td>
+            <td>{controller.areaServed}</td>
+            <td>{controller.zoneCount > 0 ? controller.zoneCount : "—"}</td>
+            <td>
+              <span class={`tag ${statusTagClass(controller.condition)}`}>
+                {humanize(controller.condition)}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Valves and backflow</h3>
+  <p>
+    The fixed equipment layer: backflow preventers, master valves, mainline
+    shutoffs, and valve boxes. What each one is and whether it works is
+    published here. Where it physically sits is not, because a public list
+    of every shutoff on the property helps no resident.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Device</th>
+          <th>Type</th>
+          <th>Controller</th>
+          <th>Condition</th>
+        </tr>
+      </thead>
+      <tbody>
+        {assets.length === 0 && (
+          <tr>
+            <td colspan="4">
+              No valves or backflow devices are recorded yet.
+            </td>
+          </tr>
+        )}
+        {assets.map((asset) => (
+          <tr>
+            <td>{asset.label}</td>
+            <td>{humanize(asset.type)}</td>
+            <td>{controllerLabel(asset.controllerId)}</td>
+            <td>
+              <span class={`tag ${statusTagClass(asset.condition)}`}>
+                {humanize(asset.condition)}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Trees</h3>
+  <p>
+    The tree layer, listed by the zone each tree stands in. Planting dates,
+    bracing, and replant priority are on the
+    {" "}<a href={withBase("/landscaping/trees")}>trees</a> page.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tree</th>
+          <th>Species</th>
+          <th>Zone</th>
+          <th>Health</th>
+        </tr>
+      </thead>
+      <tbody>
+        {trees.length === 0 && (
+          <tr>
+            <td colspan="4">No trees recorded yet.</td>
+          </tr>
+        )}
+        {trees.map((tree) => (
+          <tr>
+            <td>{tree.commonName}</td>
+            <td>{tree.species}</td>
+            <td>{zoneLabel(tree.zoneId)}</td>
+            <td>
+              <span class={`tag ${statusTagClass(tree.health)}`}>
+                {humanize(tree.health)}
+              </span>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>

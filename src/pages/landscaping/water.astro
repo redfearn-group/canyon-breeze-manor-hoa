@@ -16,8 +16,9 @@ import { formatDate, formatMonth } from "../../lib/kit/date";
 const usage = getWaterUsage();
 const budgets = getBudgets();
 
-// Newest adopted budget. Anything not adopted is a draft and drafts are
-// board records.
+// Newest adopted budget, chosen on periodStart, which is a real date.
+// The trees page picks the same budget the same way. Anything not adopted
+// is a draft and drafts are board records.
 const budget =
   budgets
     .filter((b) => b.adopted)
@@ -45,6 +46,13 @@ const landscapingTotal = landscapingExpenses.reduce(
 const waterLine =
   expenses.find((line) => line.category.trim().toLowerCase() === "water") ??
   null;
+
+// The biggest single expense line, read from the file rather than named
+// in prose. The four landscaping lines are the largest commitment only
+// when they are added together, and the page used to claim that of one
+// line, which no line in the budget supports.
+const largestLine =
+  expenses.slice().sort((a, b) => b.amount - a.amount)[0] ?? null;
 
 const usageByMonth = usage
   .slice()
@@ -114,10 +122,19 @@ const meters = [...new Set(usage.map((row) => row.meterLabel))];
       </div>
 
       <p>
-        Keeping the grass, the trees, and the sprinklers alive is the largest
-        single commitment in the budget. That is the context for the meter
-        readings further down: water that runs onto a sidewalk is money the
-        association planned to spend on something else.
+        Lawn care, water, trees, and sprinkler repair are four separate lines.
+        Added together they are the largest commitment in the budget, at
+        {" "}{share(landscapingTotal, totalPlanned)} of planned spending, which
+        is what the four rows below add up to.
+        {largestLine && (
+          <>
+            {" "}The largest single line is {largestLine.category.toLowerCase()},
+            at {money(largestLine.amount)}.
+          </>
+        )}
+        {" "}That is the context for the meter readings further down: water that
+        runs onto a sidewalk is money the association planned to spend on
+        something else.
       </p>
 
       <div class="table-wrap">

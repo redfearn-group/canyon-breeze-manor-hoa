@@ -13,7 +13,24 @@ const recent = getMeetings()
 
 const zones = getZones();
 const controllers = getControllers();
+// "Open issues" means every issue not resolved, whether or not it names a
+// zone. The issue log counts the same way, and the same number under the
+// same label on two pages has to come from the same rule. A per-zone
+// count is a different question and needs a different label.
 const openIssues = getIssues().filter((i) => i.status !== "resolved");
+
+// A meeting status is written lowercase in the YAML and was printed
+// straight into the tag. Nothing renders it today because no meeting is
+// marked upcoming, so it would have surfaced as "upcoming" on the day
+// someone posted the next date.
+const MEETING_STATUS_LABELS: Record<
+  "upcoming" | "held" | "cancelled",
+  string
+> = {
+  upcoming: "Upcoming",
+  held: "Held",
+  cancelled: "Cancelled",
+};
 ---
 <Base title="Home">
   <div class="eyebrow">Canyon Breeze Manor</div>
@@ -109,7 +126,9 @@ const openIssues = getIssues().filter((i) => i.status !== "resolved");
       <p>
         <strong>Next: {formatDate(upcoming.date)}</strong>,
         {upcoming.type === "annual-homeowners" ? " annual meeting for all homeowners" : " monthly board meeting"}
-        <span class={`tag ${statusTagClass(upcoming.status)}`}>{upcoming.status}</span>
+        <span class={`tag ${statusTagClass(upcoming.status)}`}>
+          {MEETING_STATUS_LABELS[upcoming.status] ?? upcoming.status}
+        </span>
       </p>
     ) : (
       <p>

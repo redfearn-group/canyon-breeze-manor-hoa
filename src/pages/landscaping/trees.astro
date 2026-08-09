@@ -66,10 +66,16 @@ const inventory = trees
 
 // The one dollar figure this page may carry, read from the adopted budget
 // rather than typed in, so it cannot drift from the PDF it links to.
+//
+// Newest adopted budget, chosen on periodStart. The water use page picks
+// the same budget the same way. Sorting on fiscalYear instead sorts a
+// label people write however they like: '2024-25' and 'FY25' name the
+// same year and do not compare, and the two pages could then quote
+// different budgets on the same day.
 const budget =
   getBudgets()
     .filter((b) => b.adopted)
-    .sort((a, b) => b.fiscalYear.localeCompare(a.fiscalYear))[0] ?? null;
+    .sort((a, b) => b.periodStart.localeCompare(a.periodStart))[0] ?? null;
 const treeLine =
   budget?.expenses.find((line) => line.category.trim().toLowerCase() === "trees") ??
   null;

@@ -51,6 +51,10 @@ const STATUS_LABELS: Record<"open" | "monitoring" | "resolved", string> = {
   resolved: "Resolved",
 };
 
+// "Open" means any issue not resolved, whether or not it names a zone.
+// An issue reported before its zone had a number is still an open
+// problem, so dropping it would undercount. The home page counts the same
+// way, and the two numbers carry the same label, so they have to agree.
 const active = issues
   .filter((i) => i.status !== "resolved")
   .slice()
@@ -92,17 +96,19 @@ for (const issue of active) {
   <p>
     Dry patches, sprinklers running at the wrong hour, broken heads, and water
     going where it does no good. Check here first: if a problem is already on
-    the list, it is already known, and the entry says where it stands.
+    the list, it is already known, and the entry says where it stands. The list
+    covers confirmed problems only, written in by hand, rather than every
+    report that comes in.
   </p>
 
   {issues.length === 0 && (
     <p class="notice">
       Nothing has been logged yet. The log starts once zone numbers are
       published, since an entry is only useful when it names the zone a
-      contractor can act on. From then on, every reported problem appears here
-      with the date it came in, the zone, what kind of problem it is, how bad
-      it is, and where it stands. Reports made before then still count: they
-      get logged and dated once the zone they belong to has a number.
+      contractor can act on. Each entry is added here by hand once a report has
+      been looked at and the problem confirmed, and it carries the date it was
+      opened, the zone, what kind of problem it is, how bad it is, and where it
+      stands. Nothing on this page fills itself in.
     </p>
   )}
 
@@ -220,11 +226,14 @@ for (const issue of active) {
     </div>
   )}
 
-  <h3>Add to this log</h3>
+  <h3>Something not on this list</h3>
   <p>
-    Seen something that is not here? <a href={withBase("/landscaping/report")}>Report a
-    problem</a> and it gets added, with the zone number if you have one and a
-    description of the spot if you do not. Reports are logged by location, never
-    by who sent them.
+    Seen something that is not here?{" "}
+    <a href={withBase("/landscaping/report")}>Report a problem</a>, with the
+    zone number if you have one and a description of the spot if you do not.
+    A report goes to the property manager, not to this page. It appears here
+    only if the problem is confirmed and someone writes it into the log, so a
+    report that is not listed yet has not been lost. Entries are recorded by
+    location, never by who sent them.
   </p>
 </Base>

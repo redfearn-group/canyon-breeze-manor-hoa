@@ -139,9 +139,11 @@ ul.agenda li { margin-bottom: 0.4rem; }
   padding: 0;
 }
 .site-footer__brand { display: block; line-height: 0; }
+/* Under 14px, so weight 500 is the floor brand.css sets. */
 .site-footer__meta {
   margin: 0;
   font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-muted);
 }
 .site-footer__meta a { color: var(--text-muted); text-decoration: underline; }
@@ -157,7 +159,9 @@ ul.agenda li { margin-bottom: 0.4rem; }
   flex-wrap: wrap;
   gap: 0.5rem;
   font-family: var(--font-mono);
+  /* 12px is the floor, and below 14px the weight floor is 500. */
   font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--text-muted);
 }
@@ -272,9 +276,11 @@ ul.agenda li { margin-bottom: 0.4rem; }
   display: inline-block;
 }
 
+/* 13.1px, under the 14px mark, so weight 500. */
 figcaption {
   margin-top: 0.6rem;
   font-size: 0.82rem;
+  font-weight: 500;
   color: var(--text-muted);
   max-width: 60ch;
 }
@@ -320,7 +326,17 @@ figcaption {
   body { background: #fff; color: #000; }
   .map-wrap { border: 1px solid #999; page-break-inside: avoid; }
   .neighborhood-map { min-width: 0; }
-  table { font-size: 0.75rem; page-break-inside: auto; }
+  /* 0.75rem is the 12px floor exactly, so the weight floor applies too:
+     anything under 14px carries 500 or heavier. Body text is 400, and at
+     12px on paper the difference is the gap between readable and squinted
+     at. */
+  table { font-size: 0.75rem; font-weight: 500; page-break-inside: auto; }
   tr { page-break-inside: avoid; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7rem; }
+  /* Was 0.7rem, which is 11.2px and under the 12px floor. The floor holds
+     in print too, and under 14px the weight floor is 500. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
 }
