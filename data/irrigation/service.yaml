@@ -1,0 +1,34 @@
+# Public: seasonal service, per controller.
+#
+# Due status matches an item's `itemType` against events carrying the SAME
+# `itemType`. An event with a good description but the wrong or missing
+# itemType is invisible to the calculation and the controller reads as
+# never serviced. This is the same join garage-log and home-log use.
+items:
+  - itemType: spring-startup
+    name: >-
+      Spring startup: open the system, inspect every head for damage and
+      blockage, run each zone and check spray direction and range, then
+      look for leaks (pooling water or soggy ground).
+    intervalMonths: 12
+  - itemType: mid-season-audit
+    name: >-
+      Mid-season audit: walk every zone while it runs, checking for
+      misaimed heads, overspray onto sidewalks and streets, and dry spots.
+    intervalMonths: 12
+  - itemType: fall-winterization
+    name: >-
+      Fall winterization: shut off the supply, blow the lines out with
+      compressed air so nothing freezes and cracks, and check that heads
+      sit level with the ground before snow season.
+    intervalMonths: 12
+
+# EMPTY ON PURPOSE. Log real service as it happens.
+#
+# Shape of an entry:
+#   - id: 2026-04-12-c1-spring
+#     itemType: spring-startup
+#     controllerId: c1
+#     date: '2026-04-12'
+#     performedBy: contractor    # association | contractor
+events: []

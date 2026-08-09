@@ -1,0 +1,85 @@
+---
+// Adopted policies and resident notices only, straight from
+// data/policies.yaml. Nothing is added here that was not adopted by the
+// board and sent to every homeowner.
+import Base from "../../layouts/Base.astro";
+import { getPolicies, getNotices } from "../../lib/data";
+import { formatDate } from "../../lib/kit/date";
+import { statusTagClass } from "../../lib/status-tag";
+
+const policies = getPolicies()
+  .slice()
+  .sort((a, b) => a.phase - b.phase);
+const notices = getNotices();
+
+// Notice history is prose carrying ISO dates embedded in sentences, not a
+// single date field. Finding them is this function's job; rendering one is
+// the kit's, so the month names live in exactly one place.
+function withReadableDates(text: string): string {
+  return text.replace(/\b\d{4}-\d{2}-\d{2}\b/g, (match) => formatDate(match));
+}
+---
+<Base title="Policies & Notices">
+  <div class="eyebrow">Policies</div>
+  <h2>Policies &amp; Notices</h2>
+  <p>
+    Everything on this page was adopted by the board and mailed or emailed to
+    every homeowner, which is why it can be published here. The text matches
+    what was sent.
+  </p>
+
+  <div class="notice">
+    Rules that were drafted but never adopted and never sent to owners are not
+    listed here. A rule is enforceable once it has been adopted and noticed, so
+    publishing anything earlier would work against enforcing it later.
+  </div>
+
+  <h3>Adopted policies</h3>
+  {policies.length === 0 && <p>No policies have been adopted yet.</p>}
+  {policies.map((p) => (
+    <div class="card">
+      <h4 style="margin-top:0">
+        Phase {p.phase}: {p.title}
+        {" "}
+        <span class={`tag ${statusTagClass(p.status)}`}>{p.status}</span>
+      </h4>
+
+      <p><strong>CC&amp;R basis</strong></p>
+      <ul>
+        {p.ccrBasis.map((basis) => <li>{basis}</li>)}
+      </ul>
+
+      <p><strong>Rules</strong></p>
+      <ul>
+        {p.rules.map((rule) => <li>{rule}</li>)}
+      </ul>
+
+      <p><strong>Enforcement</strong></p>
+      <p>{p.enforcement}</p>
+
+      {p.noticeHistory && (
+        <>
+          <p><strong>Notice history</strong></p>
+          <p>{withReadableDates(p.noticeHistory)}</p>
+        </>
+      )}
+    </div>
+  ))}
+
+  {notices.length > 0 && (
+    <>
+      <h3>Resident notices</h3>
+      <p>
+        Standalone communications the board issued to homeowners, separate
+        from the enforcement policy above. These are reproduced for
+        reference and carry no cure period or penalty of their own.
+      </p>
+      {notices.map((n) => (
+        <div class="card">
+          <h4 style="margin-top:0">{n.title}</h4>
+          <p>{withReadableDates(n.text)}</p>
+        </div>
+      ))}
+    </>
+  )}
+</Base>

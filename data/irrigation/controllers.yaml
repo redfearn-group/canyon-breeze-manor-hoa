@@ -1,0 +1,29 @@
+# Public: what each controller covers and whether it works. The physical
+# location of the enclosure, how to get into it, and any access code are
+# board records and belong in the private repo, not here.
+#
+# Four controllers is a confirmed fact. Everything else below is unknown
+# and deliberately left that way: fill it in from the real system, do not
+# guess. `x` and `y` are positions in the base map's viewBox space, added
+# once the Figma export lands.
+controllers:
+  - id: c1
+    label: Controller 1
+    areaServed: Not yet documented
+    zoneCount: 0
+    condition: unknown
+  - id: c2
+    label: Controller 2
+    areaServed: Not yet documented
+    zoneCount: 0
+    condition: unknown
+  - id: c3
+    label: Controller 3
+    areaServed: Not yet documented
+    zoneCount: 0
+    condition: unknown
+  - id: c4
+    label: Controller 4
+    areaServed: Not yet documented
+    zoneCount: 0
+    condition: unknown

@@ -1,0 +1,52 @@
+# Public. Every fact in this file is already published by the property
+# manager on its own public Canyon Breeze page. Nothing here is sourced
+# from board records.
+sourceUrl: https://www.tpmhoa.com/canyon-breeze/
+
+dues:
+  amount: 90
+  period: month
+  effective: '2025-05-01'
+  covers:
+    - Common area landscaping and park maintenance
+    - Sidewalk snow removal
+    - Liability insurance for the common areas
+
+ownerResponsibilities: >-
+  Owners maintain everything the Association does not, including doors,
+  windows, exterior paint, and everything inside the home.
+
+insurance:
+  masterPolicy: >-
+    The Association carries a master liability policy covering the common
+    areas.
+  carrier: Sentry West
+  carrierPhone: 801-225-5000
+  ownerRequirement: >-
+    Owners are responsible for their own HO-6 unit owner policy or
+    equivalent interior coverage. The Association's policy does not cover
+    the inside of a home or an owner's belongings. Confirm details
+    directly with the carrier.
+
+newOwnerFees:
+  - name: HOA reinvestment fee
+    amount: 200
+  - name: Management setup fee
+    amount: 75
+newOwnerNotes: >-
+  These are typically collected at closing. Title companies can request a
+  payoff statement directly from the property manager.
+
+documents:
+  - id: ccrs
+    title: Declaration of Covenants, Conditions & Restrictions (CC&Rs)
+    path: /documents/ccrs.pdf
+    note: The recorded governing document for the community.
+  - id: bylaws
+    title: Bylaws
+    path: /documents/bylaws.pdf
+    note: How the Association is governed, including the board and meetings.
+  - id: annual-budget-2025
+    title: Adopted annual budget, 2024-25
+    path: /documents/annual-budget-2025.pdf
+    note: Board-adopted budget for 2025-03-01 through 2026-02-28.

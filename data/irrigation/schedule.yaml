@@ -1,0 +1,14 @@
+# Public: when each zone waters. This is the single most requested fact
+# about the system and the reason residents call about "sprinklers running
+# at the wrong time."
+#
+# EMPTY ON PURPOSE. Read the real programmed times off the controllers.
+#
+# Shape of an entry:
+#   - zoneId: z1
+#     season: summer          # spring | summer | fall
+#     days: [Mon, Wed, Fri]
+#     startTime: '04:00'      # 24-hour, the controller's own clock
+#     runtimeMinutes: 20
+#     effectiveDate: '2026-06-01'
+schedule: []

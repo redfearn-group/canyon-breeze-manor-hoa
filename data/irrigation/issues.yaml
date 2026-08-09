@@ -1,0 +1,31 @@
+# Public: dated log of irrigation problems, tagged to a zone or an asset.
+# Zones recolour on the map by their worst open issue, so a problem area
+# shows up as a shape rather than only as a table row.
+#
+# Categories match home-log's sprinkler-system item exactly. Keeping the
+# vocabulary identical is what makes the cross-repo link meaningful:
+#   dead-spot | schedule-timing | equipment-failure | water-waste
+#
+# Never name the reporting resident or their unit. "A resident reported"
+# is the correct level of detail.
+#
+# The same rule binds `summary`, and that is the easier one to get wrong.
+# Canyon Breeze is roughly 35 units, so a dated entry describing a
+# specific patch of lawn identifies the household standing in front of it
+# just as surely as a unit number would. Describe the problem at zone
+# level. "Dry along the south edge of the zone" is publishable. "Dry in
+# front of the third unit from the corner" is not, and neither is anything
+# that reads as a complaint about a particular household's yard.
+#
+# EMPTY ON PURPOSE.
+#
+# Shape of an entry:
+#   - id: 2026-06-14-z3-dead-spot
+#     zoneId: z3
+#     category: dead-spot
+#     status: open              # open | monitoring | resolved
+#     severity: medium          # low | medium | high
+#     summary: Brown patch along the south edge, roughly 4 feet across.
+#     openedDate: '2026-06-14'
+#     resolvedDate: null
+issues: []

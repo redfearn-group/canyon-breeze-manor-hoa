@@ -1,0 +1,89 @@
+# Public: adopted policies only. Text mirrors what was mailed and emailed
+# to every homeowner. No resident names, unit numbers, or dollar figures.
+# Draft policies that have not been adopted and noticed to owners do not
+# belong here: publishing an unadopted rule undercuts enforcing it later.
+policies:
+  - id: phase-1-cleanliness
+    phase: 1
+    title: Community Cleanliness & Outdoor Storage
+    status: adopted
+    ccrBasis:
+      # Citations verified page by page against the recorded CC&Rs. Note
+      # the document's own section numbers run one ahead of their article
+      # heading from Article 7 onward, so "Article 8, section 9.4" is not
+      # a typo. Quiet Enjoyment and Animals are the document's real
+      # section titles.
+      # CORRECTED 2026-08-09 after reading the recorded Declaration rather
+      # than a summary of it. This line previously read "all land outside
+      # unit walls is Common Area owned by the Association." The recorded
+      # text does not say that, and says something close to the opposite:
+      #   1.4  "Specifically exempted from Common Area are Lots and
+      #         dedicated public streets, if any, that are identified on
+      #         the Plat."
+      #   1.10 defines a Lot as "a separately numbered and individually
+      #         described plot of land", so a Lot is ground, not a footprint.
+      #   1.9  defines Limited Common Area, so that category exists here.
+      #   8.4  refers to "the area of a Lot outside the walls of the Unit",
+      #         land the old claim said could not exist.
+      # Whether a given strip is Common Area or part of a Lot is answered by
+      # the recorded PLAT, which has not been read: it is a scan with no text
+      # layer. Until it is, do not restate the blanket claim. This policy is
+      # enforced with fines, and a citation that the Declaration contradicts
+      # is the weakest possible ground to stand on.
+      - 'Common Area (sections 1.4, 1.9, 1.10 and 2.1): the Association owns and maintains the Common Area shown on the recorded Plat, and it is for shared use rather than personal storage. Lots and dedicated public streets are specifically exempted from Common Area, so which ground outside a unit''s walls is Common Area is determined by the Plat.'
+      - 'Quiet Enjoyment (Article 8, section 9.4): no owner may permit anything that becomes an annoyance or nuisance.'
+      - 'Garbage Removal (Article 8, section 9.12): garbage must not accumulate, and must be kept in proper containers.'
+      # Verified word for word against the recorded Declaration, ENT
+      # 64661:2019 page 14. Section 9.5 sets the pet count, bars commercial
+      # breeding, bars animals that are an annoyance by noise or smell, and
+      # requires pets to be on their owner's Lot or leashed in Common Areas.
+      # It contains NO waste-removal clause. An earlier version of this line
+      # asserted one. Do not add it back: the authority for a cleanup rule is
+      # 9.5's own last sentence, which lets the Association make the provision
+      # more restrictive BY RULE, and no such rule is on file here yet.
+      - 'Animals (Article 8, section 9.5): two pets or fewer per household, not kept for commercial purposes, no animal that becomes an annoyance by noise or smell, and pets kept on the owner''s lot or leashed in Common Areas. The section allows the Association to make this more restrictive by Rule.'
+    rules:
+      - 'Allowed outdoors: one BBQ or smoker per household, and tidy municipal trash and recycling containers.'
+      - 'Not allowed: bikes, toys, furniture, equipment, or clutter stored outdoors in Common Areas.'
+      - 'No riding bikes on lawns, which damages the landscaping.'
+      - 'No removing rocks from rock beds or throwing them into the street.'
+    enforcement: >-
+      21-day grace period from the notice date, then items found in Common
+      Areas get a written tag with 72 hours to remove. If they are not
+      removed, the Board or an authorized representative removes them and
+      charges the removal, storage, and disposal costs to the Owner as an
+      assessment. Violations may draw fines under Article 15, section 16.1, including
+      daily fines for continuing violations.
+    noticeHistory: >-
+      Initial notice sent to all homeowners 2026-05-13. A final cleanup
+      notice followed 2026-07-21 by email and physical mail, moving the
+      deadline to 2026-08-03. Door tags follow, giving 72 hours to cure
+      before fines.
+
+# Resident notices: standalone communications the board issued to
+# homeowners. No resident names or unit references.
+#
+# No status field and no send dates on purpose. These went out through the
+# property manager and delivery to each owner was never individually
+# confirmed, so the site reproduces the text without asserting that every
+# homeowner received it.
+notices:
+  - id: notice-sprinklers
+    title: Sprinkler Watering
+    text: >-
+      Please help us make good use of the community sprinklers. If you see
+      a fountain of water instead of a working sprinkler head, contact the
+      property manager as soon as possible. If you notice sprinklers aimed
+      improperly or other malfunctions, send the property manager photos
+      so the problem can be addressed.
+  - id: notice-animal-waste
+    title: Animal Waste
+    text: >-
+      Uncollected animal waste is an ongoing problem in the common areas.
+      At the annual meeting the board reviewed a commercial DNA-matching
+      service that identifies responsible pet owners from waste samples,
+      and treated it as a last resort given its cost and administrative
+      burden. Hiring cleanup crews was also considered, and would require
+      raising dues. Owners are asked to clean up after their pets every
+      time. Concerns and photos can be sent to the property manager, who
+      handles any resulting enforcement.

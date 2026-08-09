@@ -1,0 +1,230 @@
+---
+// The irrigation issue log. Open and monitoring items lead, worst first,
+// because this page exists to answer "is the thing I noticed already
+// known" without anyone having to email the board. The log is empty until
+// problems are recorded against real zone numbers, so the empty state has
+// to explain itself and still show the four categories a report can use.
+//
+// Summaries describe the problem and the place. They never describe who
+// reported it.
+import Base from "../../layouts/Base.astro";
+import { getIssues, getZones } from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+import { formatDate } from "../../lib/kit/date";
+import { statusTagClass } from "../../lib/status-tag";
+import type { IssueCategory } from "../../lib/types";
+
+const issues = getIssues();
+const zoneById = new Map(getZones().map((z) => [z.id, z]));
+
+// Vocabulary matches home-log's sprinkler-system item exactly. Changing a
+// key here breaks that link, so only the display label is written twice.
+const CATEGORY_ORDER: IssueCategory[] = [
+  "dead-spot",
+  "schedule-timing",
+  "equipment-failure",
+  "water-waste",
+];
+
+const CATEGORY_LABELS: Record<IssueCategory, string> = {
+  "dead-spot": "Dead spots",
+  "schedule-timing": "Schedule and timing",
+  "equipment-failure": "Equipment failure",
+  "water-waste": "Water waste",
+};
+
+const SEVERITY_RANK: Record<"high" | "medium" | "low", number> = {
+  high: 0,
+  medium: 1,
+  low: 2,
+};
+
+const SEVERITY_LABELS: Record<"high" | "medium" | "low", string> = {
+  high: "High",
+  medium: "Medium",
+  low: "Low",
+};
+
+const STATUS_LABELS: Record<"open" | "monitoring" | "resolved", string> = {
+  open: "Open",
+  monitoring: "Monitoring",
+  resolved: "Resolved",
+};
+
+const active = issues
+  .filter((i) => i.status !== "resolved")
+  .slice()
+  .sort(
+    (a, b) =>
+      SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity] ||
+      b.openedDate.localeCompare(a.openedDate)
+  );
+
+const resolved = issues
+  .filter((i) => i.status === "resolved")
+  .slice()
+  .sort((a, b) =>
+    (b.resolvedDate ?? b.openedDate).localeCompare(a.resolvedDate ?? a.openedDate)
+  );
+
+const openCounts: Record<IssueCategory, number> = {
+  "dead-spot": 0,
+  "schedule-timing": 0,
+  "equipment-failure": 0,
+  "water-waste": 0,
+};
+for (const issue of active) {
+  if (issue.category in openCounts) openCounts[issue.category] += 1;
+}
+---
+<Base title="Irrigation issues">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")}>Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")} aria-current="page">Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Irrigation issue log</h2>
+  <p>
+    Dry patches, sprinklers running at the wrong hour, broken heads, and water
+    going where it does no good. Check here first: if a problem is already on
+    the list, it is already known, and the entry says where it stands.
+  </p>
+
+  {issues.length === 0 && (
+    <p class="notice">
+      Nothing has been logged yet. The log starts once zone numbers are
+      published, since an entry is only useful when it names the zone a
+      contractor can act on. From then on, every reported problem appears here
+      with the date it came in, the zone, what kind of problem it is, how bad
+      it is, and where it stands. Reports made before then still count: they
+      get logged and dated once the zone they belong to has a number.
+    </p>
+  )}
+
+  <p>
+    Counts below are problems still open or being monitored, split by the four
+    categories a report can use.
+  </p>
+  <div class="stat-row">
+    {CATEGORY_ORDER.map((category) => (
+      <div>
+        <span class="stat-value">{openCounts[category]}</span>
+        <span class="stat-label">{CATEGORY_LABELS[category]}</span>
+      </div>
+    ))}
+  </div>
+
+  <h3>Open and monitoring</h3>
+  <p>
+    Worst first, then most recent. "Monitoring" means the problem is understood
+    and being watched rather than waiting on a repair.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Opened</th>
+          <th>Zone</th>
+          <th>Category</th>
+          <th>Severity</th>
+          <th>Status</th>
+          <th>Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+        {active.length === 0 && (
+          <tr>
+            <td colspan="6">Nothing is open right now.</td>
+          </tr>
+        )}
+        {active.map((issue) => {
+          const zone = issue.zoneId ? zoneById.get(issue.zoneId) : undefined;
+          return (
+            <tr>
+              <td>{formatDate(issue.openedDate, { empty: "—" })}</td>
+              <td>
+                {zone ? (
+                  <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+                ) : (
+                  issue.zoneId ?? "—"
+                )}
+              </td>
+              <td>{CATEGORY_LABELS[issue.category] ?? issue.category}</td>
+              <td>
+                <span class={`tag ${statusTagClass(issue.severity)}`}>
+                  {SEVERITY_LABELS[issue.severity]}
+                </span>
+              </td>
+              <td>
+                <span class={`tag ${statusTagClass(issue.status)}`}>
+                  {STATUS_LABELS[issue.status]}
+                </span>
+              </td>
+              <td>{issue.summary}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Resolved</h3>
+  {resolved.length === 0 ? (
+    <p>Nothing has been closed out yet. Resolved problems stay on this page
+    rather than being deleted, so the same dry corner coming back two summers
+    running is visible.</p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Opened</th>
+            <th>Resolved</th>
+            <th>Zone</th>
+            <th>Category</th>
+            <th>Severity</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          {resolved.map((issue) => {
+            const zone = issue.zoneId ? zoneById.get(issue.zoneId) : undefined;
+            return (
+              <tr>
+                <td>{formatDate(issue.openedDate, { empty: "—" })}</td>
+                <td>{formatDate(issue.resolvedDate, { empty: "—" })}</td>
+                <td>
+                  {zone ? (
+                    <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+                  ) : (
+                    issue.zoneId ?? "—"
+                  )}
+                </td>
+                <td>{CATEGORY_LABELS[issue.category] ?? issue.category}</td>
+                <td>
+                  <span class={`tag ${statusTagClass(issue.severity)}`}>
+                    {SEVERITY_LABELS[issue.severity]}
+                  </span>
+                </td>
+                <td>{issue.summary}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <h3>Add to this log</h3>
+  <p>
+    Seen something that is not here? <a href={withBase("/landscaping/report")}>Report a
+    problem</a> and it gets added, with the zone number if you have one and a
+    description of the spot if you do not. Reports are logged by location, never
+    by who sent them.
+  </p>
+</Base>

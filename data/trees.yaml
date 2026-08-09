@@ -1,0 +1,22 @@
+# Public: common-area tree inventory and condition.
+#
+# The board has spent real money here (the adopted budget carries $4,500
+# for trees, and a spring 2026 maple fertilizer treatment happened), so
+# knowing which trees are struggling and which need replanting is the
+# point of this file.
+#
+# EMPTY ON PURPOSE. Fill from a walk of the property. Do not guess at
+# species: "unknown" is a legitimate value and a wrong species leads to
+# the wrong care.
+#
+# Shape of an entry:
+#   - id: t001
+#     species: Acer platanoides
+#     commonName: Norway maple
+#     zoneId: z3
+#     planted: '2019'
+#     health: stressed          # healthy | stressed | dead | needs-replant | removed
+#     braced: true
+#     replantPriority: 2        # 1 is most urgent; omit if no replant needed
+#     notes: Thin canopy on the street side.
+trees: []

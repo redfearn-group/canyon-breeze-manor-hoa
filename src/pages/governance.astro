@@ -1,0 +1,48 @@
+---
+// Entity status and board structure only. The board is published by role.
+// Officer identity, board deliberation, and compliance tracking are board
+// records and stay in the private board tracker.
+import Base from "../layouts/Base.astro";
+import { getGovernance } from "../lib/data";
+
+const gov = getGovernance();
+---
+<Base title="Governance">
+  <div class="eyebrow">Governance</div>
+  <h2>Governance</h2>
+  <p>
+    How the association is organised: the legal entity, the board structure,
+    and how exterior changes get reviewed.
+  </p>
+
+  {!gov && <p>Governance details are not available yet.</p>}
+
+  {gov && (
+    <>
+      <h3>The association</h3>
+      <div class="card">
+        <p><strong>Registered entity:</strong> {gov.entityName}</p>
+        <p><strong>Community name:</strong> {gov.communityName}</p>
+        <p><strong>Entity type:</strong> {gov.entityType}</p>
+        <p>{gov.entityStatusNotes}</p>
+      </div>
+
+      <h3>Board of directors</h3>
+      <div class="card">
+        <p>
+          The board roster is published by role. Residents who need to reach
+          the board can do so through the property manager.
+        </p>
+        <ul>
+          {gov.officers.map((o) => <li>{o.role}</li>)}
+        </ul>
+        <p>{gov.boardTermNotes}</p>
+      </div>
+
+      <h3>Architectural review</h3>
+      <div class="card">
+        <p>{gov.architecturalReview}</p>
+      </div>
+    </>
+  )}
+</Base>

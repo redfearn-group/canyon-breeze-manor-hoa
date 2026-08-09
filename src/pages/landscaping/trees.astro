@@ -1,0 +1,250 @@
+---
+// Common-area tree inventory, plus the replant queue that is the
+// actionable half of it. The inventory is empty until someone walks the
+// property, so the empty state has to say what will appear and why it is
+// not here yet rather than read as a broken page. Everything on it comes
+// from trees.yaml and the published annual budget: no other figure and no
+// name of any kind belongs here.
+import Base from "../../layouts/Base.astro";
+import { getTrees, getZones, getBudgets } from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+import { formatDate, formatMonth } from "../../lib/kit/date";
+import { statusTagClass } from "../../lib/status-tag";
+import type { TreeHealth } from "../../lib/types";
+
+const trees = getTrees();
+const zones = getZones();
+const zoneById = new Map(zones.map((z) => [z.id, z]));
+
+const HEALTH_ORDER: TreeHealth[] = [
+  "healthy",
+  "stressed",
+  "dead",
+  "needs-replant",
+  "removed",
+];
+
+const HEALTH_LABELS: Record<TreeHealth, string> = {
+  healthy: "Healthy",
+  stressed: "Stressed",
+  dead: "Dead",
+  "needs-replant": "Needs replant",
+  removed: "Removed",
+};
+
+const counts: Record<TreeHealth, number> = {
+  healthy: 0,
+  stressed: 0,
+  dead: 0,
+  "needs-replant": 0,
+  removed: 0,
+};
+for (const tree of trees) {
+  if (tree.health in counts) counts[tree.health] += 1;
+}
+
+// Most urgent first. A tree with no priority recorded sorts to the back of
+// the queue rather than the front, then ties break on zone so the queue
+// reads as a walking order.
+const replantQueue = trees
+  .filter((t) => t.health === "needs-replant" || t.health === "dead")
+  .slice()
+  .sort((a, b) => {
+    const pa = a.replantPriority ?? Number.MAX_SAFE_INTEGER;
+    const pb = b.replantPriority ?? Number.MAX_SAFE_INTEGER;
+    if (pa !== pb) return pa - pb;
+    return (a.zoneId ?? "~").localeCompare(b.zoneId ?? "~");
+  });
+
+const inventory = trees
+  .slice()
+  .sort(
+    (a, b) =>
+      (a.zoneId ?? "~").localeCompare(b.zoneId ?? "~") ||
+      a.commonName.localeCompare(b.commonName)
+  );
+
+// The one dollar figure this page may carry, read from the adopted budget
+// rather than typed in, so it cannot drift from the PDF it links to.
+const budget =
+  getBudgets()
+    .filter((b) => b.adopted)
+    .sort((a, b) => b.fiscalYear.localeCompare(a.fiscalYear))[0] ?? null;
+const treeLine =
+  budget?.expenses.find((line) => line.category.trim().toLowerCase() === "trees") ??
+  null;
+const treeBudgetLabel = treeLine ? `$${treeLine.amount.toLocaleString("en-US")}` : null;
+const budgetHref = budget?.documentPath ? withBase(budget.documentPath) : null;
+
+// Planted dates arrive as a full date, a month, or just a year. Render
+// whatever precision was actually recorded instead of inventing a day.
+// The month-precision test stays anchored on purpose: formatMonth would
+// happily turn a full YYYY-MM-DD into "MMM YYYY" and throw away a day
+// somebody took the trouble to record. A bare year matches neither and
+// falls through formatDate unchanged.
+function formatPlanted(value?: string): string {
+  if (/^\d{4}-\d{2}$/.test(value ?? "")) return formatMonth(value);
+  return formatDate(value, { empty: "—" });
+}
+---
+<Base title="Trees">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")}>Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")} aria-current="page">Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Common-area trees</h2>
+  <p>
+    Every tree the association maintains, what condition it is in, and which
+    ones are queued for replacement. Trees in private yards are the owner's,
+    not the association's, and are not listed here.
+  </p>
+
+  {treeBudgetLabel && budgetHref && (
+    <p>
+      The adopted {budget?.fiscalYear} budget sets aside {treeBudgetLabel} a year
+      for trees, which is what the replant queue below has to fit inside. The
+      line items are in the{" "}
+      <a href={budgetHref}> adopted annual budget (PDF)</a>.
+    </p>
+  )}
+
+  {trees.length === 0 && (
+    <p class="notice">
+      The inventory is not published yet. It comes from a walk of the property
+      with the map in hand, tree by tree, and that walk has not happened. When
+      it does, every common-area tree gets a row here: common name, species,
+      the zone it stands in, roughly when it was planted, its condition, and
+      whether it is braced. Trees recorded as dead or needing replacement then
+      appear in the replant queue in priority order. Nothing is filled in ahead
+      of the walk, because a guessed species leads to the wrong care and a
+      guessed count leads to the wrong bid.
+    </p>
+  )}
+
+  <div class="stat-row">
+    {HEALTH_ORDER.map((health) => (
+      <div>
+        <span class="stat-value">{counts[health]}</span>
+        <span class="stat-label">{HEALTH_LABELS[health]}</span>
+      </div>
+    ))}
+  </div>
+
+  <h3>Replant queue</h3>
+  {trees.length === 0 ? (
+    <p>
+      The queue is built from the inventory below. Any tree recorded as dead or
+      needing replacement will appear here, most urgent first.
+    </p>
+  ) : replantQueue.length === 0 ? (
+    <p>No tree is currently recorded as dead or needing replacement.</p>
+  ) : (
+    <>
+      <p>
+        Most urgent first. Priority 1 is the tree to replace next.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Tree</th>
+              <th>Species</th>
+              <th>Zone</th>
+              <th>Health</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {replantQueue.map((tree) => {
+              const zone = tree.zoneId ? zoneById.get(tree.zoneId) : undefined;
+              return (
+                <tr>
+                  <td>{tree.replantPriority ?? "—"}</td>
+                  <td>{tree.commonName}</td>
+                  <td>{tree.species}</td>
+                  <td>
+                    {zone ? (
+                      <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+                    ) : (
+                      tree.zoneId ?? "—"
+                    )}
+                  </td>
+                  <td>
+                    <span class={`tag ${statusTagClass(tree.health)}`}>
+                      {HEALTH_LABELS[tree.health]}
+                    </span>
+                  </td>
+                  <td>{tree.notes ?? "—"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <h3>Full inventory</h3>
+  <p>
+    The same trees in zone order, which is the order to walk them in.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tree</th>
+          <th>Species</th>
+          <th>Zone</th>
+          <th>Planted</th>
+          <th>Health</th>
+          <th>Braced</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {inventory.length === 0 && (
+          <tr>
+            <td colspan="7">No trees recorded yet.</td>
+          </tr>
+        )}
+        {inventory.map((tree) => {
+          const zone = tree.zoneId ? zoneById.get(tree.zoneId) : undefined;
+          return (
+            <tr>
+              <td>{tree.commonName}</td>
+              <td>{tree.species}</td>
+              <td>
+                {zone ? (
+                  <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+                ) : (
+                  tree.zoneId ?? "—"
+                )}
+              </td>
+              <td>{formatPlanted(tree.planted)}</td>
+              <td>
+                <span class={`tag ${statusTagClass(tree.health)}`}>
+                  {HEALTH_LABELS[tree.health]}
+                </span>
+              </td>
+              <td>{tree.braced ? "Yes" : "No"}</td>
+              <td>{tree.notes ?? "—"}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    A tree that is leaning, split, or dropping limbs over a walkway is worth
+    reporting before the next walk.{" "}
+    <a href={withBase("/landscaping/report")}>Report a problem</a>.
+  </p>
+</Base>

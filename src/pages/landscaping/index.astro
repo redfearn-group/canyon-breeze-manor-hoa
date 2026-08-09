@@ -1,0 +1,190 @@
+---
+// The landscaping map. This page is the reason the site exists: it turns
+// "the sprinkler by the mailboxes" into a zone number a contractor can act
+// on. The table below the map is not decoration. It is the accessible and
+// printable version of the same data, and it is the only view that works
+// when a zone has no shape in the base map yet.
+import Base from "../../layouts/Base.astro";
+import NeighborhoodMap from "../../components/NeighborhoodMap.astro";
+import {
+  getZones,
+  getControllers,
+  getIrrigationAssets,
+  getTrees,
+  getOpenIssuesByZone,
+} from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+import { statusTagClass } from "../../lib/status-tag";
+
+const zones = getZones();
+const controllers = getControllers();
+const assets = getIrrigationAssets();
+const trees = getTrees();
+const openIssuesByZone = getOpenIssuesByZone();
+
+const openIssueCount = [...openIssuesByZone.values()].reduce(
+  (total, list) => total + list.length,
+  0
+);
+
+const controllerLabel = (id: string): string =>
+  controllers.find((c) => c.id === id)?.label ?? "—";
+
+const humanize = (value: string): string => value.replace(/-/g, " ");
+
+// One sentence, and it has to hold true before the zone data lands.
+const caption =
+  zones.length > 0
+    ? "Each shape is one watering zone, colored by its condition, and the number on it is what to quote when you report a problem."
+    : "The map will show one shape per watering zone once the zone layout is recorded, and each shape will carry the number to quote when reporting a problem.";
+---
+<Base title="Landscaping map">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")} aria-current="page">Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Common-area irrigation map</h2>
+  <p>
+    Every sprinkler in the common areas belongs to a numbered watering zone,
+    and every zone belongs to one of the controllers. Find the zone here,
+    then use its number when you report a dry patch, a broken head, or water
+    running at the wrong time.
+  </p>
+
+  {zones.length === 0 && (
+    <p class="notice">
+      Zone numbers are not published yet. The zone layout is being traced
+      from the property irrigation map, so for now the only confirmed fact
+      is that the system runs on {controllers.length} controllers. When the
+      layout lands, each zone here gets a number, the area it covers, its
+      head type, what is planted in it, and a color for its condition.
+      Nothing on this page is invented ahead of that: a wrong zone number
+      sends a contractor to the wrong corner of the property.
+    </p>
+  )}
+
+  <div class="stat-row">
+    <div>
+      <span class="stat-value">{zones.length}</span>
+      <span class="stat-label">Zones</span>
+    </div>
+    <div>
+      <span class="stat-value">{controllers.length}</span>
+      <span class="stat-label">Controllers</span>
+    </div>
+    <div>
+      <span class="stat-value">{openIssueCount}</span>
+      <span class="stat-label">Open issues</span>
+    </div>
+    <div>
+      <span class="stat-value">{trees.length}</span>
+      <span class="stat-label">Trees tracked</span>
+    </div>
+  </div>
+
+  <NeighborhoodMap
+    zones={zones}
+    controllers={controllers}
+    assets={assets}
+    trees={trees}
+    openIssuesByZone={openIssuesByZone}
+    caption={caption}
+  />
+
+  <ul class="map-legend">
+    <li>
+      <span
+        class="swatch"
+        style="background: var(--status-ok-bg); color: var(--status-ok-fg);"
+        aria-hidden="true"
+      ></span>
+      Working
+    </li>
+    <li>
+      <span
+        class="swatch"
+        style="background: var(--status-due-soon-bg); color: var(--status-due-soon-fg);"
+        aria-hidden="true"
+      ></span>
+      Needs attention
+    </li>
+    <li>
+      <span
+        class="swatch"
+        style="background: var(--status-overdue-bg); color: var(--status-overdue-fg);"
+        aria-hidden="true"
+      ></span>
+      Open problem
+    </li>
+    <li>
+      <span
+        class="swatch"
+        style="background: var(--status-never-bg); color: var(--status-never-fg);"
+        aria-hidden="true"
+      ></span>
+      Not yet assessed
+    </li>
+  </ul>
+
+  <h3>Every zone</h3>
+  <p>
+    The same information as the map, in a form that reads aloud, prints, and
+    still works for a zone the map has no shape for yet.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Controller</th>
+          <th>Area</th>
+          <th>Head type</th>
+          <th>Planting</th>
+          <th>Condition</th>
+          <th>Open issues</th>
+        </tr>
+      </thead>
+      <tbody>
+        {zones.length === 0 && (
+          <tr>
+            <td colspan="7">No zones recorded yet.</td>
+          </tr>
+        )}
+        {zones.map((zone) => {
+          const open = openIssuesByZone.get(zone.id) ?? [];
+          return (
+            <tr>
+              <td>
+                <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+              </td>
+              <td>{controllerLabel(zone.controllerId)}</td>
+              <td>{zone.area}</td>
+              <td>{humanize(zone.headType)}</td>
+              <td>{humanize(zone.plantType)}</td>
+              <td>
+                <span class={`tag ${statusTagClass(zone.condition)}`}>
+                  {humanize(zone.condition)}
+                </span>
+              </td>
+              <td>
+                {open.length === 0 ? (
+                  "—"
+                ) : (
+                  <span class={`tag ${statusTagClass(open[0].severity)}`}>
+                    {open.length} open, worst {open[0].severity}
+                  </span>
+                )}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</Base>

@@ -1,0 +1,357 @@
+---
+// Watering times, grouped by controller and then by zone, plus the
+// seasonal service calendar.
+//
+// The zone and schedule data is empty on purpose: the zone layout comes
+// off the property irrigation map and has not been recorded yet. This
+// page has to read as "not recorded yet" rather than as "broken", and it
+// has to grow into a full schedule with no edits once the data lands.
+//
+// Service due status matches a service item's `itemType` against events
+// carrying the SAME `itemType` for the same controller. An event with
+// good prose but the wrong itemType is invisible here and the controller
+// correctly reads as never recorded.
+import Base from "../../layouts/Base.astro";
+import {
+  getSchedule,
+  getZones,
+  getControllers,
+  getServiceSchedule,
+  getServiceEvents,
+} from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+import { addMonths, daysBetween, formatDate, today } from "../../lib/kit/date";
+import { statusTagClass } from "../../lib/status-tag";
+import type { ServiceItemType } from "../../lib/types";
+
+const schedule = getSchedule();
+const zones = getZones();
+const controllers = getControllers();
+const serviceItems = getServiceSchedule();
+const serviceEvents = getServiceEvents();
+
+// Controller clocks are programmed in 24-hour time. Residents read the
+// times in 12-hour, so that is what renders.
+function formatTime(value?: string): string {
+  if (!value) return "—";
+  const parts = /^(\d{1,2}):(\d{2})/.exec(value);
+  if (!parts) return value;
+  const hour24 = Number(parts[1]);
+  const suffix = hour24 < 12 ? "am" : "pm";
+  const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
+  return `${hour12}:${parts[2]} ${suffix}`;
+}
+
+const SEASON_ORDER: Record<string, number> = { spring: 0, summer: 1, fall: 2 };
+const titleCase = (value: string): string =>
+  value.charAt(0).toUpperCase() + value.slice(1);
+const humanize = (value: string): string => titleCase(value.replace(/-/g, " "));
+
+// Zones for a controller, each with its schedule rows in season order. A
+// zone with no programmed times still gets a row, so a gap in the data
+// shows up as a gap rather than as a missing zone.
+const groups = controllers.map((controller) => ({
+  controller,
+  zones: zones
+    .filter((zone) => zone.controllerId === controller.id)
+    .sort((a, b) => a.label.localeCompare(b.label, "en", { numeric: true }))
+    .map((zone) => ({
+      zone,
+      entries: schedule
+        .filter((entry) => entry.zoneId === zone.id)
+        .sort(
+          (a, b) =>
+            (SEASON_ORDER[a.season] ?? 9) - (SEASON_ORDER[b.season] ?? 9)
+        ),
+    })),
+}));
+
+// Zones whose controllerId matches nothing in controllers.yaml would
+// otherwise vanish from this page entirely.
+const orphanZones = zones.filter(
+  (zone) => !controllers.some((c) => c.id === zone.controllerId)
+);
+
+// --- Seasonal service --------------------------------------------------
+
+type DueState = {
+  key: "ok" | "needs-repair" | "failed" | "unknown";
+  label: string;
+};
+
+// Everything below compares YYYY-MM-DD strings and never builds a Date.
+// The version this replaced subtracted a local-midnight due date from a
+// `new Date()` carrying the time of day, then rounded: at 2pm a service
+// due TODAY came out at round(-0.58), which is -1, which rendered as
+// "Overdue". A calendar date has no time component and should never
+// acquire one.
+const DUE_SOON_DAYS = 45;
+
+// Read once, so every row on the page is judged against the same day even
+// if the build crosses midnight.
+const todayIso = today();
+
+// The itemType join. Both the itemType and the controller have to match,
+// and the newest matching event is the one that counts.
+function lastEventDate(
+  itemType: ServiceItemType,
+  controllerId: string
+): string | null {
+  const dates = serviceEvents
+    .filter((e) => e.itemType === itemType && e.controllerId === controllerId)
+    .map((e) => e.date)
+    .sort((a, b) => b.localeCompare(a));
+  return dates[0] ?? null;
+}
+
+// `nextDue` is null both when nothing was ever logged and when the logged
+// date does not parse, and both read as never recorded.
+function dueState(nextDue: string | null): DueState {
+  if (!nextDue) return { key: "unknown", label: "Never recorded" };
+  const daysOut = daysBetween(todayIso, nextDue);
+  if (daysOut === null) return { key: "unknown", label: "Never recorded" };
+  if (daysOut < 0) return { key: "failed", label: "Overdue" };
+  if (daysOut <= DUE_SOON_DAYS) return { key: "needs-repair", label: "Due soon" };
+  return { key: "ok", label: "Up to date" };
+}
+
+// Service names are written as "Short label: what the visit covers". The
+// short label is the heading and the rest is the description, so the
+// label is not repeated twice on screen. A name without that colon falls
+// back to the itemType.
+function splitServiceName(name: string, itemType: string): [string, string] {
+  const at = name.indexOf(": ");
+  if (at < 0) return [humanize(itemType), name];
+  const detail = name.slice(at + 2);
+  return [name.slice(0, at), detail.charAt(0).toUpperCase() + detail.slice(1)];
+}
+
+const serviceSections = serviceItems.map((item) => ({
+  item,
+  label: splitServiceName(item.name, item.itemType)[0],
+  detail: splitServiceName(item.name, item.itemType)[1],
+  rows: controllers.map((controller) => {
+    const last = lastEventDate(item.itemType, controller.id);
+    const nextDue = addMonths(last, item.intervalMonths);
+    return {
+      controller,
+      last,
+      nextDue,
+      state: dueState(nextDue),
+    };
+  }),
+}));
+
+const hasSchedule = schedule.length > 0;
+const recordedServiceCount = serviceEvents.length;
+---
+<Base title="Watering times">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")}>Map</a>
+    <a href={withBase("/landscaping/watering")} aria-current="page">Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Watering times</h2>
+  <p>
+    When each common-area zone waters, grouped by the controller that runs
+    it. Times are the ones programmed into the controller clocks, which run
+    in 24-hour time and are shown here in the ordinary 12-hour form.
+  </p>
+
+  <p class="notice">
+    Watering times are the thing residents ask about most, and a report only
+    reaches the right valve when it carries a zone number. Find the zone on
+    the <a href={withBase("/landscaping")}>map</a> first, then{" "}
+    <a href={withBase("/landscaping/report")}>report the problem</a> with that
+    number.
+  </p>
+
+  <div class="stat-row">
+    <div>
+      <span class="stat-value">{controllers.length}</span>
+      <span class="stat-label">Controllers</span>
+    </div>
+    <div>
+      <span class="stat-value">{zones.length}</span>
+      <span class="stat-label">Zones</span>
+    </div>
+    <div>
+      <span class="stat-value">{schedule.length}</span>
+      <span class="stat-label">Programmed times</span>
+    </div>
+    <div>
+      <span class="stat-value">{recordedServiceCount}</span>
+      <span class="stat-label">Service visits logged</span>
+    </div>
+  </div>
+
+  <h3>Schedule by controller</h3>
+
+  {!hasSchedule && (
+    <p class="notice">
+      No watering times are published yet. The system runs on
+      {" "}{controllers.length} controllers, which is confirmed, but the zone
+      layout and the programmed times have to be read off the property
+      irrigation map and the controller clocks themselves. Once they are
+      recorded, every zone below gets its days, its start time, its run time
+      in minutes, and the date that schedule took effect, listed separately
+      for spring, summer, and fall. Nothing is estimated in the meantime,
+      because a wrong time sends a resident to look at the wrong sprinkler at
+      the wrong hour.
+    </p>
+  )}
+
+  {groups.map((group) => (
+    <div class="card">
+      <h4 style="margin-top:0">{group.controller.label}</h4>
+      <p>
+        {group.controller.areaServed}.
+        {" "}
+        <span class={`tag ${statusTagClass(group.controller.condition)}`}>
+          {humanize(group.controller.condition)}
+        </span>
+      </p>
+      {group.zones.length === 0 ? (
+        <p>No zones are recorded on this controller yet.</p>
+      ) : (
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Zone</th>
+                <th>Area</th>
+                <th>Days</th>
+                <th>Start time</th>
+                <th>Run time</th>
+                <th>Season</th>
+                <th>Effective</th>
+              </tr>
+            </thead>
+            <tbody>
+              {group.zones.map(({ zone, entries }) =>
+                entries.length === 0 ? (
+                  <tr>
+                    <td>
+                      <a href={withBase(`/landscaping/zones/${zone.id}`)}>
+                        {zone.label}
+                      </a>
+                    </td>
+                    <td>{zone.area}</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                  </tr>
+                ) : (
+                  entries.map((entry) => (
+                    <tr>
+                      <td>
+                        <a href={withBase(`/landscaping/zones/${zone.id}`)}>
+                          {zone.label}
+                        </a>
+                      </td>
+                      <td>{zone.area}</td>
+                      <td>{entry.days.length > 0 ? entry.days.join(", ") : "—"}</td>
+                      <td>{formatTime(entry.startTime)}</td>
+                      <td>{entry.runtimeMinutes} min</td>
+                      <td>{titleCase(entry.season)}</td>
+                      <td>{formatDate(entry.effectiveDate, { empty: "—" })}</td>
+                    </tr>
+                  ))
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  ))}
+
+  {orphanZones.length > 0 && (
+    <div class="card">
+      <h4 style="margin-top:0">Zones with no controller recorded</h4>
+      <p>
+        These zones name a controller that is not in the controller list, so
+        they are shown here rather than dropped.
+      </p>
+      <ul>
+        {orphanZones.map((zone) => (
+          <li>
+            <a href={withBase(`/landscaping/zones/${zone.id}`)}>{zone.label}</a>
+            {": "}{zone.area}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <h3>Seasonal service calendar</h3>
+  <p>
+    Three visits carry the system through the year. Each one is tracked per
+    controller, so a controller that was skipped shows up on its own rather
+    than hiding behind the others.
+  </p>
+
+  {recordedServiceCount === 0 && (
+    <p class="notice">
+      No service visits have been logged yet, so every controller reads
+      "never recorded" below. That is the accurate state of the record, not a
+      claim that the work was skipped: visits made before this site existed
+      were never written down anywhere that could be published. Each visit
+      logged from here on fills in a date and moves the controller onto the
+      {" "}{serviceItems[0]?.intervalMonths ?? 12}-month cycle.
+    </p>
+  )}
+
+  {serviceSections.map(({ item, label, detail, rows }) => (
+    <div class="card">
+      <h4 style="margin-top:0">{label}</h4>
+      <p>{detail}</p>
+      <p>Expected every {item.intervalMonths} months.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Controller</th>
+              <th>Last done</th>
+              <th>Next due</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.length === 0 && (
+              <tr>
+                <td colspan="4">No controllers recorded.</td>
+              </tr>
+            )}
+            {rows.map((row) => (
+              <tr>
+                <td>{row.controller.label}</td>
+                <td>{formatDate(row.last, { empty: "—" })}</td>
+                <td>{formatDate(row.nextDue, { empty: "—" })}</td>
+                <td>
+                  <span class={`tag ${statusTagClass(row.state.key)}`}>
+                    {row.state.label}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  ))}
+
+  {serviceItems.length === 0 && (
+    <p class="notice">
+      No seasonal service items are defined yet, so there is nothing to check
+      controllers against.
+    </p>
+  )}
+</Base>

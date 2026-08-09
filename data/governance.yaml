@@ -1,0 +1,30 @@
+# Public: entity status and board structure only. Officer names, board
+# deliberation, election detail, and open compliance items are board
+# records and live in the private board tracker, never here.
+# entityName follows the Declaration (CC&Rs, Utah County Recorder Entry
+# 64661:2019), which names the association this way in sections 1.1, 1.2,
+# 1.3, and 10.3. The recorded Bylaws (Entry 97687:2019) use a different
+# string, and the Bylaws' own Article XIII section 2 says the Declaration
+# controls over the Bylaws, so this is the operative name. The variance is
+# a live governance item tracked privately. Do not "fix" this either way
+# without checking both recorded documents.
+entityName: Canyon Breeze Manor Owners Association
+communityName: Canyon Breeze Manor
+entityType: Non-profit corporation (Utah)
+entityStatusNotes: >-
+  The Association is registered as a Utah non-profit corporation with the
+  State Department of Corporations.
+officers:
+  - role: President
+  - role: Vice President
+  - role: Treasurer
+  - role: Secretary
+boardTermNotes: >-
+  The board is elected by the homeowners at the annual meeting. Board
+  seats and officer roles are handled separately: seats are filled by
+  homeowner election, and the board assigns officer roles among its own
+  members afterward.
+architecturalReview: >-
+  Exterior alterations require board approval before work begins. A
+  written architectural review procedure is being drafted. Until it is
+  adopted, send requests to the property manager.

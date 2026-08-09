@@ -1,0 +1,51 @@
+---
+// Date, type, and status only. Agendas, notes, and minutes are board
+// records, so there is nothing to link a meeting row to.
+import Base from "../../layouts/Base.astro";
+import { getMeetings } from "../../lib/data";
+import { formatDate } from "../../lib/kit/date";
+import { statusTagClass } from "../../lib/status-tag";
+
+const meetings = getMeetings()
+  .slice()
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const MEETING_TYPE: Record<string, string> = {
+  "monthly-board": "Monthly board",
+  "annual-homeowners": "Annual, all homeowners",
+};
+---
+<Base title="Meetings">
+  <div class="eyebrow">Meetings</div>
+  <h2>Meetings</h2>
+  <p>
+    The board meets monthly and holds one annual meeting for all homeowners.
+    Agendas and minutes are board records, distributed through the property
+    manager rather than published here.
+  </p>
+
+  {meetings.length === 0 && <p>No meetings are on record yet.</p>}
+
+  {meetings.length > 0 && (
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {meetings.map((m) => (
+            <tr>
+              <td>{formatDate(m.date)}</td>
+              <td>{MEETING_TYPE[m.type] ?? m.type}</td>
+              <td><span class={`tag ${statusTagClass(m.status)}`}>{m.status}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</Base>

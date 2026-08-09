@@ -1,0 +1,44 @@
+# Public. Figures here come from the board-adopted annual budget that the
+# property manager publishes, and that this site hosts a copy of at
+# /documents/annual-budget-2025.pdf. Nothing here comes from the monthly
+# owner statement, which is a private report.
+budgets:
+  - fiscalYear: '2024-25'
+    periodStart: '2025-03-01'
+    periodEnd: '2026-02-28'
+    adopted: true
+    documentPath: /documents/annual-budget-2025.pdf
+    income:
+      - category: Dues
+        amount: 37800
+      - category: Transfer Fees
+        amount: 200
+      - category: Late Fees
+        amount: 100
+    expenses:
+      - category: Lawn Care
+        amount: 12000
+      - category: Capital Repair Reserves Funding
+        amount: 7590
+      - category: Water
+        amount: 5500
+      - category: Management Fees
+        amount: 4800
+      - category: Trees
+        amount: 4500
+      - category: Insurance
+        amount: 1900
+      - category: Sprinkler Repair
+        amount: 1000
+      - category: Snow Removal
+        amount: 500
+      - category: Misc. Fees / Software Charges
+        amount: 250
+      - category: Maintenance
+        amount: 60
+    notes: >-
+      A breakeven budget at $90 per month in dues, including a dedicated
+      capital repair reserve contribution of $632.50 per month. Landscaping
+      and water together are the largest commitment in the budget: lawn
+      care, water, trees, and sprinkler repair account for $23,000 of
+      $38,100 in planned spending.

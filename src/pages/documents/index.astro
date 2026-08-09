@@ -1,0 +1,105 @@
+---
+// Governing documents. Files are served from public/documents/, so the
+// path on each record is a site path and needs withBase() to survive the
+// base-path deploy.
+//
+// The two notes at the bottom came out of actually reading the PDFs. They
+// are recorded here because a resident comparing two documents will hit
+// the same thing and should not have to guess what it means.
+import Base from "../../layouts/Base.astro";
+import { getAssociation } from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+
+const association = getAssociation();
+const documents = association?.documents ?? [];
+const sourceUrl = association?.sourceUrl;
+
+const fileType = (p: string): string => {
+  const ext = p.split(".").pop() ?? "";
+  return ext ? ext.toUpperCase() : "File";
+};
+---
+<Base title="Documents">
+  <div class="eyebrow">Documents</div>
+  <h2>Governing documents</h2>
+  <p>
+    Copies of the documents that govern the community, hosted here so an
+    owner can open one without asking anybody for it first. These are copies
+    for reference. The recorded originals are what carry legal weight.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Document</th>
+          <th>What it is</th>
+          <th>File</th>
+        </tr>
+      </thead>
+      <tbody>
+        {documents.length === 0 && (
+          <tr>
+            <td colspan="3">No documents are hosted here yet.</td>
+          </tr>
+        )}
+        {documents.map((doc) => (
+          <tr>
+            <td>
+              <a href={withBase(doc.path)}>{doc.title}</a>
+            </td>
+            <td>{doc.note ?? "—"}</td>
+            <td><span class="tag tag-neutral">{fileType(doc.path)}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">The other place to get these</h3>
+    <p>
+      The property manager publishes its own copies on its Canyon Breeze
+      page, along with the current dues, fees, and contact details. If a
+      document here looks out of date, or you need something this site does
+      not host, that page is the place to start.
+    </p>
+    {sourceUrl ? (
+      <p style="margin-bottom:0">
+        <a href={sourceUrl} target="_blank" rel="noopener">
+          Open the property manager's Canyon Breeze page
+        </a>
+      </p>
+    ) : (
+      <p style="margin-bottom:0">
+        The property manager's page is not linked here yet.
+      </p>
+    )}
+  </div>
+
+  <h3>Notes on these documents</h3>
+  <p>
+    Two things worth knowing before you read them, both noted from the
+    documents themselves.
+  </p>
+
+  <h4>The recorded plat is not hosted here yet</h4>
+  <p>
+    The plat is the recorded drawing of the lots and the common areas, and it
+    is the document to check for a boundary question. It is not published on
+    this site. The copy on hand is a scan with no readable text layer and it
+    has not been reviewed, so posting it would mean publishing a document
+    nobody has confirmed the contents of. Ask the property manager for a copy
+    in the meantime.
+  </p>
+
+  <h4>The CC&amp;Rs and the Bylaws name the association differently</h4>
+  <p>
+    The two documents refer to the association by slightly different names.
+    The Bylaws' own amendment article addresses this directly: where the
+    Bylaws and the Declaration conflict, the Declaration controls. That
+    resolves which document to read first on any point where the two differ.
+    It is recorded here as a documentation note so a reader comparing the two
+    is not left wondering.
+  </p>
+</Base>

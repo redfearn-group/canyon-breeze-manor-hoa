@@ -1,0 +1,47 @@
+# Public: date, type, and status only. Agendas, notes, and minutes are
+# board records and live in the private board tracker, never here.
+meetings:
+  - id: 2025-03-25-board
+    date: '2025-03-25'
+    type: monthly-board
+    status: held
+  - id: 2025-04-29-board
+    date: '2025-04-29'
+    type: monthly-board
+    status: held
+  - id: 2025-05-27-board
+    date: '2025-05-27'
+    type: monthly-board
+    status: held
+  - id: 2025-06-24-board
+    date: '2025-06-24'
+    type: monthly-board
+    status: held
+  - id: 2025-08-26-board
+    date: '2025-08-26'
+    type: monthly-board
+    status: cancelled
+  - id: 2025-09-30-board
+    date: '2025-09-30'
+    type: monthly-board
+    status: held
+  - id: 2025-10-28-board
+    date: '2025-10-28'
+    type: monthly-board
+    status: held
+  - id: 2026-03-31-annual
+    date: '2026-03-31'
+    type: annual-homeowners
+    status: held
+  - id: 2026-05-26-board
+    date: '2026-05-26'
+    type: monthly-board
+    status: held
+  - id: 2026-06-30-board
+    date: '2026-06-30'
+    type: monthly-board
+    status: held
+  - id: 2026-07-28-board
+    date: '2026-07-28'
+    type: monthly-board
+    status: held

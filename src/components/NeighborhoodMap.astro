@@ -1,0 +1,161 @@
+---
+// Inlines the base map SVG at build time and draws data on top of it.
+//
+// Zone SHAPES come from the SVG (exported from Figma, each carrying
+// id="zone-<id>"). Pins come from YAML, positioned in the SVG's viewBox
+// space. These are not geographic coordinates and must not become them.
+//
+// Layer visibility is CSS-driven off classes on a wrapper element. With
+// JavaScript disabled every layer renders, which is the point: the map is
+// progressive enhancement over the tables below it, not a replacement.
+import fs from "node:fs";
+import path from "node:path";
+import type { Controller, Zone, IrrigationAsset, Tree, Issue } from "../lib/types";
+import { zoneStatusClass } from "../lib/status-tag";
+
+interface Props {
+  zones: Zone[];
+  controllers: Controller[];
+  assets?: IrrigationAsset[];
+  trees?: Tree[];
+  openIssuesByZone?: Map<string, Issue[]>;
+  caption: string;
+}
+
+const {
+  zones,
+  controllers,
+  assets = [],
+  trees = [],
+  openIssuesByZone = new Map<string, Issue[]>(),
+  caption,
+} = Astro.props;
+
+// Deliberately under src/, not public/. The artwork is inlined at build
+// time, so serving it as a standalone asset adds nothing and would publish
+// the file's authoring comments at a fetchable URL.
+const BASE_MAP = path.resolve(process.cwd(), "src/map/base.svg");
+let baseSvg = fs.existsSync(BASE_MAP) ? fs.readFileSync(BASE_MAP, "utf-8") : "";
+
+// Strip the XML prolog and the outer <svg> wrapper: we re-open our own so
+// we control the viewBox, role, and aria-label, and so the pin layers sit
+// inside the same coordinate space as the artwork.
+const viewBoxMatch = baseSvg.match(/viewBox="([^"]+)"/);
+const viewBox = viewBoxMatch ? viewBoxMatch[1] : "0 0 1000 700";
+baseSvg = baseSvg
+  .replace(/<\?xml[\s\S]*?\?>/g, "")
+  // Comments too. Authoring notes in the source SVG (which Figma file it
+  // came from, what must never be exported into it) would otherwise ship
+  // verbatim into page source, publishing the guardrail to the people it
+  // guards against.
+  .replace(/<!--[\s\S]*?-->/g, "")
+  .replace(/<svg[^>]*>/, "")
+  .replace(/<\/svg>\s*$/, "");
+
+// Apply a status class to each zone group the export gave us an id for.
+// A zone in the YAML with no matching shape simply has no shape: it still
+// appears in the table below, which is why the table is not optional.
+for (const zone of zones) {
+  const worst = openIssuesByZone.get(zone.id)?.[0]?.severity;
+  const cls = zoneStatusClass(zone.condition, worst);
+  baseSvg = baseSvg.replace(
+    new RegExp(`(<(?:g|path)\\b[^>]*\\bid="zone-${zone.id}")`),
+    `$1 class="zone ${cls}" tabindex="0" role="listitem" aria-label="${zone.label}, ${zone.area}"`
+  );
+}
+
+const placedControllers = controllers.filter((c) => c.x != null && c.y != null);
+const placedAssets = assets.filter((a) => a.x != null && a.y != null);
+const placedTrees = trees.filter((t) => t.x != null && t.y != null);
+
+const hasBaseMap = !baseSvg.includes("Neighborhood map not loaded yet");
+const ariaLabel = hasBaseMap
+  ? `Map of Canyon Breeze Manor common areas showing ${zones.length} watering zones, ${placedControllers.length} irrigation controllers, and ${placedTrees.length} trees. The same information is listed in the tables below this map.`
+  : "Placeholder for the neighborhood map. The base map has not been loaded yet. All zone, controller, and tree information is listed in the tables below.";
+---
+
+<figure class="map-figure">
+  {!hasBaseMap && (
+    <p class="notice map-notice">
+      The base map artwork has not been loaded yet, so the diagram below is a
+      placeholder. Everything recorded so far is in the tables on this page.
+    </p>
+  )}
+
+  <div class="map-controls no-print" hidden>
+    <fieldset>
+      <legend>Map layers</legend>
+      <label><input type="checkbox" data-layer="zones" checked /> Watering zones</label>
+      <label><input type="checkbox" data-layer="controllers" checked /> Controllers</label>
+      <label><input type="checkbox" data-layer="assets" checked /> Valves and backflow</label>
+      <label><input type="checkbox" data-layer="trees" checked /> Trees</label>
+    </fieldset>
+  </div>
+
+  <div class="map-wrap" id="map-wrap">
+    <svg
+      viewBox={viewBox}
+      class="neighborhood-map"
+      role="img"
+      aria-label={ariaLabel}
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g class="layer layer--base" set:html={baseSvg} />
+
+      {placedControllers.length > 0 && (
+        <g class="layer layer--controllers">
+          {placedControllers.map((c) => (
+            <g class="pin pin--controller" transform={`translate(${c.x} ${c.y})`}>
+              <rect x="-11" y="-11" width="22" height="22" rx="4" />
+              <text y="5" text-anchor="middle">{c.label.replace(/[^0-9]/g, "") || "C"}</text>
+              <title>{`${c.label}: ${c.areaServed}`}</title>
+            </g>
+          ))}
+        </g>
+      )}
+
+      {placedAssets.length > 0 && (
+        <g class="layer layer--assets">
+          {placedAssets.map((a) => (
+            <g class="pin pin--asset" transform={`translate(${a.x} ${a.y})`}>
+              <path d="M0,-9 L9,0 L0,9 L-9,0 Z" />
+              <title>{`${a.label} (${a.type.replace(/-/g, " ")})`}</title>
+            </g>
+          ))}
+        </g>
+      )}
+
+      {placedTrees.length > 0 && (
+        <g class="layer layer--trees">
+          {placedTrees.map((t) => (
+            <circle
+              class={`pin pin--tree tree--${t.health}`}
+              cx={t.x}
+              cy={t.y}
+              r="6"
+            >
+              <title>{`${t.commonName}: ${t.health.replace(/-/g, " ")}`}</title>
+            </circle>
+          ))}
+        </g>
+      )}
+    </svg>
+  </div>
+
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<script>
+  // Progressive enhancement only. The controls start hidden and are
+  // revealed here, so a no-JS reader never sees toggles that do nothing.
+  const controls = document.querySelector<HTMLElement>(".map-controls");
+  const wrap = document.getElementById("map-wrap");
+  if (controls && wrap) {
+    controls.hidden = false;
+    controls.addEventListener("change", (event) => {
+      const input = event.target as HTMLInputElement;
+      if (!input.dataset.layer) return;
+      wrap.classList.toggle(`hide-${input.dataset.layer}`, !input.checked);
+    });
+  }
+</script>

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+
+# There is deliberately no data/private/ in this repo. Board records live
+# in canyon-breeze-manor-hoa-private, a separate private repository, and
+# are never checked out here. A gitignored private file inside a public
+# repo is one `git add -f` away from being published, which is roughly how
+# this repo leaked the first time.
+data/private/

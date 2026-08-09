@@ -1,0 +1,18 @@
+# Public: one entry per watering zone. `id` must match a shape id in
+# public/map/base.svg, written there as id="zone-<id>".
+#
+# EMPTY ON PURPOSE. Zone layout comes from the Figma map and the
+# handwritten system notes. Do not invent zones: a wrong zone number is
+# worse than no zone number, because residents and contractors will act
+# on it.
+#
+# Shape of an entry:
+#   - id: z1                  # matches id="zone-z1" in base.svg
+#     controllerId: c1
+#     label: Zone 1
+#     area: North park lawn
+#     headType: rotor         # rotor | spray | drip | bubbler | mixed | unknown
+#     plantType: lawn         # lawn | shrub-bed | rock-bed | tree-ring | park | mixed
+#     condition: ok           # ok | needs-repair | failed | unknown
+#     sunExposure: full-sun   # full-sun | partial-shade | shade
+zones: []

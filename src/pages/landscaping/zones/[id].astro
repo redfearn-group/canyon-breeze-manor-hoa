@@ -1,0 +1,239 @@
+---
+// One page per watering zone, generated at build time from zones.yaml.
+// With the zone list empty this returns no paths and no pages are built,
+// which is correct: there is nothing yet to link to from the map table.
+import Base from "../../../layouts/Base.astro";
+import { withBase } from "../../../lib/kit/base";
+import { formatDate } from "../../../lib/kit/date";
+import { statusTagClass } from "../../../lib/status-tag";
+import {
+  getZones,
+  getControllers,
+  getSchedule,
+  getIssues,
+  getTrees,
+} from "../../../lib/data";
+
+export async function getStaticPaths() {
+  const controllers = getControllers();
+  const schedule = getSchedule();
+  const issues = getIssues();
+  const trees = getTrees();
+
+  return getZones().map((zone) => ({
+    params: { id: zone.id },
+    props: {
+      zone,
+      controller: controllers.find((c) => c.id === zone.controllerId) ?? null,
+      schedule: schedule
+        .filter((s) => s.zoneId === zone.id)
+        .sort((a, b) => a.season.localeCompare(b.season)),
+      openIssues: issues.filter(
+        (i) => i.zoneId === zone.id && i.status !== "resolved"
+      ),
+      resolvedIssues: issues.filter(
+        (i) => i.zoneId === zone.id && i.status === "resolved"
+      ),
+      zoneTrees: trees.filter((t) => t.zoneId === zone.id),
+    },
+  }));
+}
+
+const { zone, controller, schedule, openIssues, resolvedIssues, zoneTrees } =
+  Astro.props;
+
+const humanize = (value: string): string => value.replace(/-/g, " ");
+
+// Dates in these tables were rendered raw, so this page was the one place
+// on the site showing ISO strings. A missing date keeps the placeholder.
+const dateCell = (value?: string | null): string =>
+  value ? formatDate(value) : "—";
+---
+<Base title={zone.label}>
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")} aria-current="page">Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping zone</div>
+  <h2>{zone.label}</h2>
+  <p>
+    {zone.area}. Quote this zone number when you report a problem here, so the
+    contractor knows which valve to open. <a href={withBase("/landscaping")}>Back to the map</a>.
+  </p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Zone detail</h3>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr>
+            <th scope="row">Controller</th>
+            <td>{controller ? `${controller.label}: ${controller.areaServed}` : "—"}</td>
+          </tr>
+          <tr>
+            <th scope="row">Area</th>
+            <td>{zone.area}</td>
+          </tr>
+          <tr>
+            <th scope="row">Head type</th>
+            <td>{humanize(zone.headType)}</td>
+          </tr>
+          <tr>
+            <th scope="row">Planting</th>
+            <td>{humanize(zone.plantType)}</td>
+          </tr>
+          <tr>
+            <th scope="row">Sun exposure</th>
+            <td>{zone.sunExposure ? humanize(zone.sunExposure) : "—"}</td>
+          </tr>
+          <tr>
+            <th scope="row">Condition</th>
+            <td>
+              <span class={`tag ${statusTagClass(zone.condition)}`}>
+                {humanize(zone.condition)}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {zone.notes && <p>{zone.notes}</p>}
+  </div>
+
+  <h3>Watering times</h3>
+  {schedule.length === 0 ? (
+    <p class="notice">
+      No programmed times are recorded for this zone yet. They come off the
+      controller itself rather than from an estimate, so the row stays empty
+      until someone reads the clock.
+    </p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Days</th>
+            <th>Start</th>
+            <th>Runtime</th>
+            <th>Effective</th>
+          </tr>
+        </thead>
+        <tbody>
+          {schedule.map((entry) => (
+            <tr>
+              <td>{entry.season}</td>
+              <td>{entry.days.join(", ")}</td>
+              <td>{entry.startTime}</td>
+              <td>{entry.runtimeMinutes} min</td>
+              <td>{dateCell(entry.effectiveDate)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <h3>Open issues</h3>
+  {openIssues.length === 0 ? (
+    <p>Nothing is currently open against this zone.</p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Opened</th>
+            <th>Category</th>
+            <th>Severity</th>
+            <th>Status</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          {openIssues.map((issue) => (
+            <tr>
+              <td>{dateCell(issue.openedDate)}</td>
+              <td>{humanize(issue.category)}</td>
+              <td>
+                <span class={`tag ${statusTagClass(issue.severity)}`}>{issue.severity}</span>
+              </td>
+              <td>
+                <span class={`tag ${statusTagClass(issue.status)}`}>{issue.status}</span>
+              </td>
+              <td>{issue.summary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  {resolvedIssues.length > 0 && (
+    <>
+      <h3>Resolved</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Opened</th>
+              <th>Resolved</th>
+              <th>Category</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            {resolvedIssues.map((issue) => (
+              <tr>
+                <td>{dateCell(issue.openedDate)}</td>
+                <td>{dateCell(issue.resolvedDate)}</td>
+                <td>{humanize(issue.category)}</td>
+                <td>{issue.summary}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <h3>Trees in this zone</h3>
+  {zoneTrees.length === 0 ? (
+    <p>No trees are recorded in this zone.</p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tree</th>
+            <th>Species</th>
+            <th>Planted</th>
+            <th>Health</th>
+            <th>Braced</th>
+            <th>Replant priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {zoneTrees.map((tree) => (
+            <tr>
+              <td>{tree.commonName}</td>
+              <td>{tree.species}</td>
+              <td>{dateCell(tree.planted)}</td>
+              <td>
+                <span class={`tag ${statusTagClass(tree.health)}`}>
+                  {humanize(tree.health)}
+                </span>
+              </td>
+              <td>{tree.braced ? "Yes" : "No"}</td>
+              <td>{tree.replantPriority ?? "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</Base>

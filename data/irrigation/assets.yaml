@@ -1,0 +1,16 @@
+# Public: type and condition of fixed irrigation equipment.
+#
+# Deliberately NOT public, and belongs in the private repo instead: where
+# the backflow preventers and mainline shutoffs physically sit. A public
+# map of every shutoff on a property is a vandalism aid, and it helps no
+# resident.
+#
+# EMPTY ON PURPOSE.
+#
+# Shape of an entry:
+#   - id: bf1
+#     type: backflow-preventer   # backflow-preventer | master-valve | mainline-shutoff | valve-box
+#     controllerId: c1
+#     label: Backflow preventer, north park
+#     condition: ok
+assets: []

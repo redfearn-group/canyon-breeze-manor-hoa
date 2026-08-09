@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import { getAssociation, getMeetings, getUpcomingMeeting, getZones, getControllers, getIssues } from "../lib/data";
+import { withBase } from "../lib/kit/base";
+import { formatDate } from "../lib/kit/date";
+import { statusTagClass } from "../lib/status-tag";
+
+const assoc = getAssociation();
+const upcoming = getUpcomingMeeting();
+const recent = getMeetings()
+  .filter((m) => m.status === "held")
+  .sort((a, b) => b.date.localeCompare(a.date))[0];
+
+const zones = getZones();
+const controllers = getControllers();
+const openIssues = getIssues().filter((i) => i.status !== "resolved");
+---
+<Base title="Home">
+  <div class="eyebrow">Canyon Breeze Manor</div>
+  <h2>Resident information</h2>
+  <p>
+    Spanish Fork, Utah. This site covers the things owners ask about most:
+    what dues cover, how the common area sprinklers are laid out and when
+    they run, and how to report a problem so it actually gets fixed.
+  </p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Something wrong with a sprinkler?</h3>
+    <p>
+      Report it with a zone number rather than a landmark. A contractor can
+      act on "Zone 7". Nobody can act on "the one by the mailboxes".
+    </p>
+    <p>
+      <a href={withBase("/landscaping")}>Find the zone on the map</a>, then{" "}
+      <a href={withBase("/landscaping/report")}>report the problem</a>.
+    </p>
+    {(zones.length > 0 || openIssues.length > 0) && (
+      <div class="stat-row">
+        <div>
+          <span class="stat-value">{controllers.length}</span>
+          <span class="stat-label">Controllers</span>
+        </div>
+        <div>
+          <span class="stat-value">{zones.length}</span>
+          <span class="stat-label">Watering zones</span>
+        </div>
+        <div>
+          <span class="stat-value">{openIssues.length}</span>
+          <span class="stat-label">Open issues</span>
+        </div>
+      </div>
+    )}
+  </div>
+
+  {assoc && (
+    <div class="card">
+      <h3 style="margin-top:0">Dues</h3>
+      <div class="stat-row">
+        <div>
+          <span class="stat-value">${assoc.dues.amount}</span>
+          <span class="stat-label">Per {assoc.dues.period}</span>
+        </div>
+        <div>
+          <span class="stat-value">{formatDate(assoc.dues.effective)}</span>
+          <span class="stat-label">Effective</span>
+        </div>
+      </div>
+      <h4>What dues cover</h4>
+      <ul class="agenda">
+        {assoc.dues.covers.map((c) => <li>{c}</li>)}
+      </ul>
+      <h4>What owners maintain</h4>
+      <p>{assoc.ownerResponsibilities}</p>
+    </div>
+  )}
+
+  {assoc && (
+    <div class="card">
+      <h3 style="margin-top:0">Insurance</h3>
+      <p>{assoc.insurance.masterPolicy}</p>
+      <p>{assoc.insurance.ownerRequirement}</p>
+      <p>
+        Master policy carrier: {assoc.insurance.carrier},{" "}
+        <a href={`tel:${assoc.insurance.carrierPhone.replace(/[^0-9+]/g, "")}`}>
+          {assoc.insurance.carrierPhone}
+        </a>.
+      </p>
+    </div>
+  )}
+
+  {assoc && (
+    <div class="card">
+      <h3 style="margin-top:0">Buying or selling a unit</h3>
+      <div class="stat-row">
+        {assoc.newOwnerFees.map((f) => (
+          <div>
+            <span class="stat-value">${f.amount}</span>
+            <span class="stat-label">{f.name}</span>
+          </div>
+        ))}
+      </div>
+      <p>{assoc.newOwnerNotes}</p>
+    </div>
+  )}
+
+  <div class="card">
+    <h3 style="margin-top:0">Meetings</h3>
+    {upcoming ? (
+      <p>
+        <strong>Next: {formatDate(upcoming.date)}</strong>,
+        {upcoming.type === "annual-homeowners" ? " annual meeting for all homeowners" : " monthly board meeting"}
+        <span class={`tag ${statusTagClass(upcoming.status)}`}>{upcoming.status}</span>
+      </p>
+    ) : (
+      <p>
+        The board meets monthly, and holds one annual meeting for all
+        homeowners. No upcoming date is posted right now.
+        {recent && ` The most recent meeting on record was ${formatDate(recent.date)}.`}
+      </p>
+    )}
+    <p><a href={withBase("/meetings")}>All meeting dates</a></p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Governing documents</h3>
+    <p>
+      The recorded CC&amp;Rs and Bylaws, and the board-adopted annual budget,
+      are hosted here as PDFs.
+    </p>
+    <p><a href={withBase("/documents")}>Open the documents</a></p>
+  </div>
+</Base>

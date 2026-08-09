@@ -1,0 +1,224 @@
+---
+// Common-area water use, volume only, with the published budget as
+// context for what that water is worth against everything else the
+// association pays for.
+//
+// The only dollar figures on this page come from the adopted annual
+// budget, which the property manager publishes and this site hosts a copy
+// of. Every figure is read out of budget.yaml rather than typed in here,
+// so a re-adopted budget changes the page by itself. Monthly water bills
+// are a private record and no per-month cost appears anywhere below.
+import Base from "../../layouts/Base.astro";
+import { getWaterUsage, getBudgets } from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+import { formatDate, formatMonth } from "../../lib/kit/date";
+
+const usage = getWaterUsage();
+const budgets = getBudgets();
+
+// Newest adopted budget. Anything not adopted is a draft and drafts are
+// board records.
+const budget =
+  budgets
+    .filter((b) => b.adopted)
+    .sort((a, b) => b.periodStart.localeCompare(a.periodStart))[0] ?? null;
+
+const money = (n: number): string =>
+  `$${n.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+const gallons = (n: number): string => n.toLocaleString("en-US");
+const share = (part: number, whole: number): string =>
+  whole > 0 ? `${((part / whole) * 100).toFixed(1)}%` : "—";
+
+const expenses = budget?.expenses ?? [];
+const totalPlanned = expenses.reduce((sum, line) => sum + line.amount, 0);
+
+// Which expense lines are landscaping. Names, not amounts: the figures
+// still come from the file.
+const LANDSCAPING_LINES = ["lawn care", "water", "trees", "sprinkler repair"];
+const landscapingExpenses = expenses.filter((line) =>
+  LANDSCAPING_LINES.includes(line.category.trim().toLowerCase())
+);
+const landscapingTotal = landscapingExpenses.reduce(
+  (sum, line) => sum + line.amount,
+  0
+);
+const waterLine =
+  expenses.find((line) => line.category.trim().toLowerCase() === "water") ??
+  null;
+
+const usageByMonth = usage
+  .slice()
+  .sort((a, b) => b.month.localeCompare(a.month));
+const totalGallons = usage.reduce((sum, row) => sum + row.gallons, 0);
+const meters = [...new Set(usage.map((row) => row.meterLabel))];
+---
+<Base title="Water use">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")}>Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")} aria-current="page">Water use</a>
+    <a href={withBase("/landscaping/report")}>Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Water use</h2>
+  <p>
+    How much water the common areas draw, month by month, and what the
+    association plans to spend keeping them green. Volumes are meter
+    readings. The dollar figures are the adopted budget's own line items and
+    nothing else.
+  </p>
+
+  {budget ? (
+    <>
+      <h3>What the budget plans for landscaping</h3>
+      <p>
+        Figures below are from the adopted {budget.fiscalYear} budget, which
+        covers {formatDate(budget.periodStart, { empty: "—" })} through
+        {" "}{formatDate(budget.periodEnd, { empty: "—" })}.
+        {budget.documentPath && (
+          <>
+            {" "}Read the full document:
+            {" "}<a href={withBase(budget.documentPath)}>adopted annual budget</a>.
+          </>
+        )}
+      </p>
+
+      <div class="stat-row">
+        {waterLine && (
+          <div>
+            <span class="stat-value">{money(waterLine.amount)}</span>
+            <span class="stat-label">Water, planned</span>
+          </div>
+        )}
+        {waterLine && (
+          <div>
+            <span class="stat-value">{share(waterLine.amount, totalPlanned)}</span>
+            <span class="stat-label">Water share of spending</span>
+          </div>
+        )}
+        <div>
+          <span class="stat-value">{money(landscapingTotal)}</span>
+          <span class="stat-label">Landscaping and water</span>
+        </div>
+        <div>
+          <span class="stat-value">{share(landscapingTotal, totalPlanned)}</span>
+          <span class="stat-label">Share of spending</span>
+        </div>
+        <div>
+          <span class="stat-value">{money(totalPlanned)}</span>
+          <span class="stat-label">Total planned spending</span>
+        </div>
+      </div>
+
+      <p>
+        Keeping the grass, the trees, and the sprinklers alive is the largest
+        single commitment in the budget. That is the context for the meter
+        readings further down: water that runs onto a sidewalk is money the
+        association planned to spend on something else.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Budget line</th>
+              <th>Planned</th>
+              <th>Share of total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {landscapingExpenses.length === 0 && (
+              <tr>
+                <td colspan="3">No landscaping lines in this budget.</td>
+              </tr>
+            )}
+            {landscapingExpenses.map((line) => (
+              <tr>
+                <td>{line.category}</td>
+                <td>{money(line.amount)}</td>
+                <td>{share(line.amount, totalPlanned)}</td>
+              </tr>
+            ))}
+            <tr>
+              <th scope="row">Landscaping and water together</th>
+              <td>{money(landscapingTotal)}</td>
+              <td>{share(landscapingTotal, totalPlanned)}</td>
+            </tr>
+            <tr>
+              <th scope="row">All planned spending</th>
+              <td>{money(totalPlanned)}</td>
+              <td>100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </>
+  ) : (
+    <p class="notice">
+      No adopted budget is published here yet. Only a budget the board has
+      adopted and the property manager publishes belongs on this site, so
+      this section stays empty until one is on file.
+    </p>
+  )}
+
+  <h3>Metered use by month</h3>
+
+  {usageByMonth.length === 0 ? (
+    <p class="notice">
+      No meter readings are published yet. Common-area consumption is read
+      off the water bills one month at a time, and none of them have been
+      entered. Once they are, this table lists each month, the meter it came
+      from, and the gallons used, which is what makes a leak or a stuck valve
+      visible as a jump against the same month a year earlier. Volumes are
+      the only figures that will appear here. What the water costs month to
+      month is a private record and stays off this site.
+    </p>
+  ) : (
+    <>
+      <div class="stat-row">
+        <div>
+          <span class="stat-value">{gallons(totalGallons)}</span>
+          <span class="stat-label">Gallons recorded</span>
+        </div>
+        <div>
+          <span class="stat-value">{usageByMonth.length}</span>
+          <span class="stat-label">Months on record</span>
+        </div>
+        <div>
+          <span class="stat-value">{meters.length}</span>
+          <span class="stat-label">Meters</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Meter</th>
+              <th>Gallons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {usageByMonth.map((row) => (
+              <tr>
+                <td>{formatMonth(row.month, { empty: "—" })}</td>
+                <td>{row.meterLabel}</td>
+                <td>{gallons(row.gallons)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <p>
+    Water running at the wrong time, or onto pavement, is worth reporting.
+    Note the zone number from the
+    {" "}<a href={withBase("/landscaping")}>map</a>, then
+    {" "}<a href={withBase("/landscaping/report")}>report it</a>.
+  </p>
+</Base>

@@ -1,0 +1,14 @@
+# Public: common-area water consumption by month. Volume only.
+#
+# The dollar cost sits in the private repo. The adopted annual budget
+# carries $5,500 for water against $38,100 total, and that budget is
+# published, so the annual figure is fair to reference. Individual monthly
+# bills are not.
+#
+# EMPTY ON PURPOSE. Fill from the water bills.
+#
+# Shape of an entry:
+#   - month: '2026-06'
+#     meterLabel: Common area meter
+#     gallons: 184000
+usage: []

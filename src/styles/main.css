@@ -1,0 +1,326 @@
+/* App-specific styles for this tracker.
+   Design tokens and shared primitives come from brand.css, which is
+   vendored from redfearn-group/redfearn-brand and checked for drift in
+   CI. Do not redefine --rg-* or --status-* values here. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+header.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+}
+
+header.site-header .container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+header.site-header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: inherit;
+  text-decoration: none;
+}
+.site-brand img { display: block; flex: 0 0 auto; }
+.site-brand__app {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--border);
+}
+
+nav.site-nav a {
+  position: relative;
+  margin-left: 1.1rem;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid transparent;
+}
+nav.site-nav a:hover, nav.site-nav a[aria-current="page"] {
+  color: var(--text);
+  border-bottom-color: var(--rg-red);
+}
+
+@media (max-width: 480px) {
+  header.site-header .container { row-gap: 0.5rem; }
+  nav.site-nav a { margin-left: 0; margin-right: 1rem; }
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+}
+/* h1 is the header brand wrapper (styled above). Page content starts at
+   h2 (the page title), h3 for card/section headers, h4 for anything
+   nested deeper (e.g. governance's phase/notice cards) — matching the
+   heading depth garage-log/home-log use for the same shell pattern. */
+h2 { margin: 0 0 0.3rem; letter-spacing: -0.015em; }
+h3 { margin: 2rem 0 0.75rem; }
+h4 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.02em; font-family: var(--font-mono); }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-wrap table { min-width: 420px; }
+
+.notice {
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+ul.agenda { padding-left: 1.2rem; }
+ul.agenda li { margin-bottom: 0.4rem; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.25rem;
+}
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+}
+.site-footer__brand { display: block; line-height: 0; }
+.site-footer__meta {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.site-footer__meta a { color: var(--text-muted); text-decoration: underline; }
+.site-footer__meta a:hover { color: var(--text); }
+
+.site-footer__bottom {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+@media print {
+  header.site-header, .no-print, .skip-link { display: none !important; }
+  body { background: white; color: black; }
+  .card { border: none; padding: 0; }
+  .table-wrap { overflow-x: visible; }
+  .table-wrap table { min-width: 0; }
+}
+
+/* --- Landscaping map -------------------------------------------------
+   Zone fills and pin colours use the --status-* tokens brand.css already
+   vetted for contrast in this layer. Do not hardcode hex values here: the
+   palette is a closed set and off-system colours are not allowed. */
+
+.map-figure { margin: 0 0 1.5rem; }
+.map-notice { margin-bottom: 1rem; }
+
+.map-controls fieldset {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem 0.75rem;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+}
+.map-controls legend {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 0 0.4rem;
+}
+.map-controls label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.map-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+.neighborhood-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 320px;
+  color: var(--text-muted);
+}
+
+/* Zone shapes come from the exported base map; only their fill and stroke
+   are set here, so re-exporting the artwork cannot break the styling. */
+.neighborhood-map .zone { stroke-width: 1.5; transition: fill-opacity 0.12s ease; }
+.neighborhood-map .zone:hover,
+.neighborhood-map .zone:focus-visible { fill-opacity: 0.9; outline: none; stroke-width: 2.5; }
+.zone--ok       { fill: var(--status-ok-bg);       stroke: var(--status-ok-fg); }
+.zone--due-soon { fill: var(--status-due-soon-bg); stroke: var(--status-due-soon-fg); }
+.zone--overdue  { fill: var(--status-overdue-bg);  stroke: var(--status-overdue-fg); }
+.zone--never    { fill: var(--status-never-bg);    stroke: var(--status-never-fg); }
+
+.pin--controller rect { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+/* 12px floor, weight 500 floor: the brand type rules apply inside SVG too. */
+.pin--controller text {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+.pin--asset path { fill: var(--surface); stroke: var(--text-muted); stroke-width: 2; }
+
+.pin--tree { stroke: var(--surface); stroke-width: 1.5; }
+.tree--healthy       { fill: var(--status-ok-fg); }
+.tree--stressed      { fill: var(--status-due-soon-fg); }
+.tree--dead          { fill: var(--status-overdue-fg); }
+.tree--needs-replant { fill: var(--status-due-soon-fg); }
+.tree--removed       { fill: var(--status-never-fg); }
+
+.hide-zones .layer--base .zone { display: none; }
+.hide-controllers .layer--controllers { display: none; }
+.hide-assets .layer--assets { display: none; }
+.hide-trees .layer--trees { display: none; }
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.map-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.map-legend .swatch {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+  display: inline-block;
+}
+
+figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.subnav a[aria-current="page"] { color: var(--text); text-decoration-thickness: 2px; }
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin: 0 0 1.25rem;
+}
+.stat-row .stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.stat-row .stat-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* --- Print: the map plus its tables as a field sheet ----------------- */
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  .map-wrap { border: 1px solid #999; page-break-inside: avoid; }
+  .neighborhood-map { min-width: 0; }
+  table { font-size: 0.75rem; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7rem; }
+}

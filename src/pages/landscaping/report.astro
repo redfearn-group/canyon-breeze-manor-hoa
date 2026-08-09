@@ -1,0 +1,200 @@
+---
+// Reporting a sprinkler problem. The whole point of the map is that a
+// resident can write "Zone 7" instead of "the one by the mailboxes", so
+// this page's job is to turn a sighting into a report a contractor can
+// act on without a second visit to ask where it was.
+//
+// The four categories below are hardcoded on purpose. They are the same
+// vocabulary as IssueCategory in types.ts and they change only when that
+// type changes, so there is no YAML file behind them.
+//
+// Routing: reports go to the property manager's support ticket form,
+// reached from the property manager's own public page. No individual
+// contact route is published here.
+import Base from "../../layouts/Base.astro";
+import { getAssociation, getNotices } from "../../lib/data";
+import { withBase } from "../../lib/kit/base";
+
+const association = getAssociation();
+const sourceUrl = association?.sourceUrl;
+const sprinklerNotice = getNotices().find((n) => n.id === "notice-sprinklers");
+
+const categories = [
+  {
+    name: "Dead spots",
+    covers: "Grass or plants drying out while everything around them stays green.",
+    examples: "A brown patch that keeps growing, a strip along a sidewalk that never recovers, a shrub bed that looks dry after a watering night.",
+  },
+  {
+    name: "Schedule and timing",
+    covers: "Water running at the wrong time, for too long, or not at all.",
+    examples: "Sprinklers on in the middle of a hot afternoon, running during rain, a zone that never seems to come on.",
+  },
+  {
+    name: "Equipment failure",
+    covers: "A broken or misaimed part anywhere in the system.",
+    examples: "A snapped head, a head buried below the grass line, a head watering the sidewalk or a fence instead of the lawn, a leaking valve box.",
+  },
+  {
+    name: "Water waste",
+    covers: "Water leaving the property instead of soaking in.",
+    examples: "Water fountaining from a broken head, runoff down the gutter, a soggy area that stays wet between watering nights.",
+  },
+];
+---
+<Base title="Report a landscaping problem">
+  <nav class="subnav" aria-label="Landscaping sections">
+    <a href={withBase("/landscaping")}>Map</a>
+    <a href={withBase("/landscaping/watering")}>Watering times</a>
+    <a href={withBase("/landscaping/trees")}>Trees</a>
+    <a href={withBase("/landscaping/issues")}>Issues</a>
+    <a href={withBase("/landscaping/water")}>Water use</a>
+    <a href={withBase("/landscaping/report")} aria-current="page">Report a problem</a>
+  </nav>
+
+  <div class="eyebrow">Landscaping</div>
+  <h2>Report a problem</h2>
+  <p>
+    A report gets fixed faster when it says where the problem is in terms the
+    crew can find. "The sprinkler by the mailboxes" means nothing to someone
+    who has never stood at your mailbox. "Zone 7" sends them to the right
+    valve on the first trip.
+  </p>
+
+  <p class="notice">
+    <strong>Water fountaining from a broken head is the urgent case.</strong>{" "}
+    A snapped head pushes far more water in one cycle than the zone would use
+    watering normally, and the association pays for every gallon of it. Report
+    it the same day you see it rather than holding it until you have something
+    else to report alongside it.
+  </p>
+
+  <h3>What to include</h3>
+  <p>
+    Four things. Miss one and someone has to come back out to collect it.
+  </p>
+  <ul class="agenda">
+    <li>
+      <strong>The zone number.</strong> Find it on the{" "}
+      <a href={withBase("/landscaping")}>irrigation map</a>. If the shape you
+      need is not on the map yet, name the nearest fixed feature you can
+      point to on the map instead, and say so.
+    </li>
+    <li>
+      <strong>A photo.</strong> One wide shot showing where it is, and one
+      close shot of the head or the patch itself. A photo settles most
+      questions a work order would otherwise generate.
+    </li>
+    <li>
+      <strong>The time of day it was running.</strong> Watering runs on a
+      timed schedule, so the clock time is what identifies which program and
+      which zone was active. "Around 6:15 in the morning" is enough.
+    </li>
+    <li>
+      <strong>What it was doing.</strong> Fountaining, not turning on,
+      spraying the sidewalk, or a brown patch that is not recovering. Plain
+      description beats a diagnosis.
+    </li>
+  </ul>
+
+  <h3>The four categories the association tracks</h3>
+  <p>
+    Every confirmed problem gets filed under one of these. Using the same
+    words in your report keeps it from being logged twice or filed under the
+    wrong heading.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>What it covers</th>
+          <th>Examples</th>
+        </tr>
+      </thead>
+      <tbody>
+        {categories.map((c) => (
+          <tr>
+            <td><strong>{c.name}</strong></td>
+            <td>{c.covers}</td>
+            <td>{c.examples}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Where to send it</h3>
+  <div class="card">
+    <p style="margin-top:0">
+      Reports go to the property manager through their support ticket form.
+      The form is linked from the property manager's Canyon Breeze page,
+      along with their office hours and phone number. Submitting a ticket
+      rather than sending a message to someone directly is what puts the
+      report in a queue that can be tracked and followed up on.
+    </p>
+    {sourceUrl ? (
+      <p style="margin-bottom:0">
+        <a href={sourceUrl} target="_blank" rel="noopener">
+          Open the property manager's Canyon Breeze page
+        </a>
+      </p>
+    ) : (
+      <p style="margin-bottom:0">
+        The property manager's page is not linked here yet. Ask a board
+        member for the current support ticket address.
+      </p>
+    )}
+  </div>
+
+  {sprinklerNotice && (
+    <>
+      <h3>The association's own notice</h3>
+      <p>
+        Sent to all homeowners. It asks for the same two things this page
+        does: report the fountaining heads quickly, and send photos.
+      </p>
+      <div class="card">
+        <blockquote class="report-quote">
+          <p style="margin-top:0">{sprinklerNotice.text}</p>
+          <footer class="report-quote__source">
+            Homeowner notice: {sprinklerNotice.title}
+          </footer>
+        </blockquote>
+      </div>
+    </>
+  )}
+
+  <h3>What happens next</h3>
+  <p>
+    A report goes to the property manager,
+    who decides whether it needs a contractor visit, a schedule change, or
+    nothing at all. There is no automatic ticket status on this site, and no
+    promised response time.
+  </p>
+  <p>
+    Once a problem is confirmed, it gets logged against its zone and shows up
+    on the <a href={withBase("/landscaping/issues")}>issues page</a> with its
+    category, its severity, and the date it was opened. That page is the only
+    place this site tracks progress, and it only lists confirmed problems, not
+    every report received.
+  </p>
+</Base>
+
+<style>
+  /* The quoted notice needs to read as somebody else's words rather than
+     site copy. Border and muted source line only, no new colours. */
+  .report-quote {
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent-border);
+  }
+  .report-quote__source {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+</style>
