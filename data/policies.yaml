@@ -13,24 +13,22 @@ policies:
       # heading from Article 7 onward, so "Article 8, section 9.4" is not
       # a typo. Quiet Enjoyment and Animals are the document's real
       # section titles.
-      # CORRECTED 2026-08-09 after reading the recorded Declaration rather
-      # than a summary of it. This line previously read "all land outside
-      # unit walls is Common Area owned by the Association." The recorded
-      # text does not say that, and says something close to the opposite:
-      #   1.4  "Specifically exempted from Common Area are Lots and
-      #         dedicated public streets, if any, that are identified on
-      #         the Plat."
-      #   1.10 defines a Lot as "a separately numbered and individually
-      #         described plot of land", so a Lot is ground, not a footprint.
-      #   1.9  defines Limited Common Area, so that category exists here.
-      #   8.4  refers to "the area of a Lot outside the walls of the Unit",
-      #         land the old claim said could not exist.
-      # Whether a given strip is Common Area or part of a Lot is answered by
-      # the recorded PLAT, which has not been read: it is a scan with no text
-      # layer. Until it is, do not restate the blanket claim. This policy is
-      # enforced with fines, and a citation that the Declaration contradicts
-      # is the weakest possible ground to stand on.
-      - 'Common Area (sections 1.4, 1.9, 1.10 and 2.1): the Association owns and maintains the Common Area shown on the recorded Plat, and it is for shared use rather than personal storage. Lots and dedicated public streets are specifically exempted from Common Area, so which ground outside a unit''s walls is Common Area is determined by the Plat.'
+      # Settled 2026-08-09 by reading the recorded PLAT, which CC&R 1.4
+      # defers to and which nobody had read (it is a scan with no text
+      # layer). It answers the question the Declaration alone leaves open.
+      #
+      # PLAT NOTE 3: "ALL AREAS ARE COMMON AREAS AND FACILITIES EXCEPT AS
+      # OTHERWISE SPECIFICALLY DESIGNATED." Units are drawn as building
+      # footprints, 26.00 x 44.50 feet, 1157 sf, marked "ALL UNITS TYPICAL"
+      # and hatched "Private Ownership" in the legend. Ground beyond those
+      # footprints is therefore Common Area by default.
+      #
+      # The plat legend also designates "Limited Common", so that category
+      # DOES exist here. Limited Common Area is still owned by the
+      # Association (CC&R 1.9) but reserved to the adjacent owner's
+      # exclusive use, so it is not a free-for-all storage area either.
+      # Which specific strips carry that hatch has not been mapped yet.
+      - 'Common Area (CC&Rs 1.4 and 2.1, and the recorded Plat): a Unit is the building footprint the Plat designates for private ownership. Plat Note 3 makes every area outside those footprints Common Area unless it carries another designation, and the Association owns and maintains it for shared use rather than personal storage.'
       - 'Quiet Enjoyment (Article 8, section 9.4): no owner may permit anything that becomes an annoyance or nuisance.'
       - 'Garbage Removal (Article 8, section 9.12): garbage must not accumulate, and must be kept in proper containers.'
       # Verified word for word against the recorded Declaration, ENT
