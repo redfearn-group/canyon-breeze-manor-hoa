@@ -1,8 +1,11 @@
 ---
-// Reporting a sprinkler problem. The whole point of the map is that a
-// resident can write "Zone 7" instead of "the one by the mailboxes", so
-// this page's job is to turn a sighting into a report a contractor can
-// act on without a second visit to ask where it was.
+// Reporting a sprinkler problem. This page's job is to turn a sighting
+// into a report a contractor can act on without a second visit to ask
+// where it was.
+//
+// Zones are NOT numbered yet and nothing is queued that would number them,
+// so this page must not tell residents to quote a zone number. Restore that
+// wording only when data/irrigation/zones.yaml actually has zones in it.
 //
 // The four categories below are hardcoded on purpose. They are the same
 // vocabulary as IssueCategory in types.ts and they change only when that
@@ -57,8 +60,9 @@ const categories = [
   <p>
     A report gets fixed faster when it says where the problem is in terms the
     crew can find. "The sprinkler by the mailboxes" means nothing to someone
-    who has never stood at your mailbox. "Zone 7" sends them to the right
-    valve on the first trip.
+    who has never stood at your mailbox. Something fixed and specific, like
+    the third head north of the park bench, sends them to the right spot on
+    the first trip.
   </p>
 
   <p class="notice">
@@ -75,10 +79,12 @@ const categories = [
   </p>
   <ul class="agenda">
     <li>
-      <strong>The zone number.</strong> Find it on the{" "}
-      <a href={withBase("/landscaping")}>irrigation map</a>. If the shape you
-      need is not on the map yet, name the nearest fixed feature you can
-      point to on the map instead, and say so.
+      <strong>Where it is.</strong> The sprinkler zones have not been
+      numbered yet, so name the nearest thing that does not move: a mailbox
+      cluster, the park, a building corner, or the address you are standing
+      in front of. Counting helps, as in the third head north of the park
+      bench. When the zones are eventually traced and numbered, a zone
+      number will be the one thing worth quoting.
     </li>
     <li>
       <strong>A photo.</strong> One wide shot showing where it is, and one
@@ -173,8 +179,8 @@ const categories = [
     promised response time.
   </p>
   <p>
-    Once a problem is confirmed, it gets logged against its zone and shows up
-    on the <a href={withBase("/landscaping/issues")}>issues page</a> with its
+    Once a problem is confirmed, it gets logged by location and shows up on
+    the <a href={withBase("/landscaping/issues")}>issues page</a> with its
     category, its severity, and the date it was opened. That page is the only
     place this site tracks progress, and it only lists confirmed problems, not
     every report received.

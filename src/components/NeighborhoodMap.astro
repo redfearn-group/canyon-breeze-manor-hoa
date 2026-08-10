@@ -103,7 +103,7 @@ const placedControllers = controllers.filter((c) => c.x != null && c.y != null);
 const placedAssets = assets.filter((a) => a.x != null && a.y != null);
 const placedTrees = trees.filter((t) => t.x != null && t.y != null);
 
-const hasBaseMap = !baseSvg.includes("Neighborhood map not loaded yet");
+const hasBaseMap = !baseSvg.includes("Zone map not drawn yet");
 
 // The label describes what this SVG actually draws, counted rather than
 // asserted, so it stays true in the empty state and once the data lands.
@@ -127,14 +127,15 @@ const tablesNote =
 
 const ariaLabel = hasBaseMap
   ? `Map of Canyon Breeze Manor common areas, drawing ${drawn}. ${tablesNote}`
-  : `Placeholder for the neighborhood map. The base map artwork has not been loaded yet, so the diagram draws ${drawn}. ${tablesNote}`;
+  : `Placeholder for the neighborhood map. The sprinkler zones have not been traced on the ground yet, so the diagram draws ${drawn}. ${tablesNote}`;
 ---
 
 <figure class="map-figure">
   {!hasBaseMap && (
     <p class="notice map-notice">
-      The base map artwork has not been loaded yet, so the diagram below is a
-      placeholder. Everything recorded so far is in the tables on this page.
+      The sprinkler zones have not been traced on the ground yet, so the
+      diagram below is a placeholder. Everything recorded so far is in the
+      tables on this page.
     </p>
   )}
 

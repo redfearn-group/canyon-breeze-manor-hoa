@@ -2,8 +2,16 @@
   <!--
     PLACEHOLDER BASE MAP.
 
-    Replace this file with the SVG exported from the Canyon Breeze Manor
-    frames of Brady's Figma file. Two requirements for the export, and
+    There is no zone map yet, and nothing is queued that would produce one.
+    The board's own map covers trees, not irrigation: it has no watering
+    zones, no controllers and no valves on it. Establishing the zone layout
+    means someone tracing each controller's circuits on the ground, which
+    has not been done.
+
+    So this placeholder is not a "waiting for a file" state. Do not restore
+    copy that implies an export is imminent.
+
+    When a real base map does exist, two requirements for the export and
     nothing else about it matters:
 
       1. Every watering zone shape is a <path> or <g> carrying
@@ -12,14 +20,16 @@
       2. Keep a viewBox. Pin x/y coordinates in the YAML are expressed in
          this coordinate space, so changing the viewBox moves every pin.
 
-    Do NOT put unit numbers, addresses, lot lines, or resident names in
-    the export. Common-area assets only.
+    Do NOT put unit numbers, addresses, lot lines, or resident names in the
+    export, and do not use a satellite capture from a commercial mapping
+    service. Both rule out most of the obvious sources. Common-area assets
+    only, drawn rather than photographed.
   -->
   <rect x="0" y="0" width="1000" height="700" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="10 8"/>
   <text x="500" y="330" text-anchor="middle" font-family="'Space Grotesk', system-ui, sans-serif" font-size="26" font-weight="600" fill="currentColor" fill-opacity="0.75">
-    Neighborhood map not loaded yet
+    Zone map not drawn yet
   </text>
   <text x="500" y="368" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" fill-opacity="0.55">
-    Waiting on the Figma export of the Canyon Breeze Manor common areas.
+    The sprinkler zones have not been traced on the ground yet.
   </text>
 </svg>
